@@ -1,4 +1,5 @@
 {
+  "grammar": ">=1",
   "stages": ["parser"],
   "exit": "nonzero"
 }
