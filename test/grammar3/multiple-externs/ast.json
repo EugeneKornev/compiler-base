@@ -1,6 +1,6 @@
 {
-  "line": 2,
-  "column": 21,
+  "line": 6,
+  "column": 1,
   "kind": "Program",
   "body": [
 {
@@ -31,5 +31,29 @@
   "kind": "Ident",
   "name": "z"
 }]
+  },
+{
+  "line": 6,
+  "column": 1,
+    "kind": "FuncDecl",
+    "name": "main",
+    "params": [],
+    "body": {
+  "line": 6,
+  "column": 1,
+      "kind": "Block",
+      "body": [
+{
+  "line": 5,
+  "column": 13,
+        "kind": "Return",
+        "value": {
+  "line": 5,
+  "column": 12,
+          "kind": "IntLiteral",
+          "value": 0
+        }
+      }
+    ]}
   }
 ]}

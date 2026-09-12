@@ -6,3 +6,8 @@ target triple = "x86_64-unknown-linux-gnu"
 declare i64 @foo(i64)
 
 declare i64 @bar(i64, i64)
+
+define i64 @main() {
+entry:
+  ret i64 0
+}

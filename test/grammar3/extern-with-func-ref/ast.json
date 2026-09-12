@@ -1,6 +1,6 @@
 {
-  "line": 7,
-  "column": 20,
+  "line": 10,
+  "column": 1,
   "kind": "Program",
   "body": [
 {
@@ -40,33 +40,57 @@
 }]
   },
 {
-  "line": 7,
-  "column": 20,
-    "kind": "Declare",
-    "mut": "var",
-    "name": "a",
-    "init": {
-  "line": 7,
-  "column": 19,
-      "kind": "Call",
-      "callee": {
-  "line": 7,
-  "column": 9,
-        "kind": "Ident",
-        "name": "foo"
-      },
-      "args": [{
-  "line": 7,
-  "column": 18,
+  "line": 10,
+  "column": 1,
+    "kind": "FuncDecl",
+    "name": "main",
+    "params": [],
+    "body": {
+  "line": 10,
+  "column": 1,
+      "kind": "Block",
+      "body": [
+{
+  "line": 8,
+  "column": 24,
+        "kind": "Declare",
+        "mut": "var",
+        "name": "a",
+        "init": {
+  "line": 8,
+  "column": 23,
+          "kind": "Call",
+          "callee": {
+  "line": 8,
+  "column": 13,
+            "kind": "Ident",
+            "name": "foo"
+          },
+          "args": [{
+  "line": 8,
+  "column": 22,
   "kind": "Call",
   "callee": {
-  "line": 7,
-  "column": 13,
+  "line": 8,
+  "column": 17,
     "kind": "Ident",
     "name": "noop"
   },
   "args": []
 }]
-    }
+        }
+      },
+{
+  "line": 9,
+  "column": 13,
+        "kind": "Return",
+        "value": {
+  "line": 9,
+  "column": 12,
+          "kind": "IntLiteral",
+          "value": 0
+        }
+      }
+    ]}
   }
 ]}

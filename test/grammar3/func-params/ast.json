@@ -1,5 +1,5 @@
 {
-  "line": 4,
+  "line": 8,
   "column": 1,
   "kind": "Program",
   "body": [
@@ -58,6 +58,30 @@
   "column": 12,
           "kind": "Ident",
           "name": "result"
+        }
+      }
+    ]}
+  },
+{
+  "line": 8,
+  "column": 1,
+    "kind": "FuncDecl",
+    "name": "main",
+    "params": [],
+    "body": {
+  "line": 8,
+  "column": 1,
+      "kind": "Block",
+      "body": [
+{
+  "line": 7,
+  "column": 13,
+        "kind": "Return",
+        "value": {
+  "line": 7,
+  "column": 12,
+          "kind": "IntLiteral",
+          "value": 0
         }
       }
     ]}

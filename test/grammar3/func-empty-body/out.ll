@@ -7,3 +7,8 @@ define i64 @foo() {
 entry:
   ret i64 0
 }
+
+define i64 @main() {
+entry:
+  ret i64 0
+}

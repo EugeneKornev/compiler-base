@@ -1,6 +1,6 @@
 {
-  "line": 9,
-  "column": 9,
+  "line": 12,
+  "column": 1,
   "kind": "Program",
   "body": [
 {
@@ -87,44 +87,58 @@
     ]}
   },
 {
-  "line": 8,
-  "column": 26,
-    "kind": "Declare",
-    "mut": "val",
-    "type": "Int64",
-    "name": "m",
-    "init": {
-  "line": 8,
-  "column": 25,
-      "kind": "Call",
-      "callee": {
-  "line": 8,
-  "column": 16,
-        "kind": "Ident",
-        "name": "max"
-      },
-      "args": [{
-  "line": 8,
+  "line": 12,
+  "column": 1,
+    "kind": "FuncDecl",
+    "name": "main",
+    "returnType": "Int64",
+    "params": [],
+    "body": {
+  "line": 12,
+  "column": 1,
+      "kind": "Block",
+      "body": [
+{
+  "line": 10,
+  "column": 30,
+        "kind": "Declare",
+        "mut": "val",
+        "type": "Int64",
+        "name": "m",
+        "init": {
+  "line": 10,
+  "column": 29,
+          "kind": "Call",
+          "callee": {
+  "line": 10,
   "column": 20,
+            "kind": "Ident",
+            "name": "max"
+          },
+          "args": [{
+  "line": 10,
+  "column": 24,
   "kind": "IntLiteral",
   "value": 7
 }, {
-  "line": 8,
-  "column": 23,
+  "line": 10,
+  "column": 27,
   "kind": "IntLiteral",
   "value": 12
 }]
-    }
-  },
+        }
+      },
 {
-  "line": 9,
-  "column": 9,
-    "kind": "Return",
-    "value": {
-  "line": 9,
-  "column": 8,
-      "kind": "Ident",
-      "name": "m"
-    }
+  "line": 11,
+  "column": 13,
+        "kind": "Return",
+        "value": {
+  "line": 11,
+  "column": 12,
+          "kind": "Ident",
+          "name": "m"
+        }
+      }
+    ]}
   }
 ]}

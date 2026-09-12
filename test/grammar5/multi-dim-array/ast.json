@@ -1,364 +1,378 @@
 {
-  "line": 9,
-  "column": 11,
+  "line": 11,
+  "column": 1,
   "kind": "Program",
   "body": [
 {
-  "line": 1,
-  "column": 24,
-    "kind": "Declare",
-    "mut": "var",
-    "type": "Array[2](Array[2](Int64))",
-    "name": "matrix",
-    "init": null
-  },
+  "line": 11,
+  "column": 1,
+    "kind": "FuncDecl",
+    "name": "main",
+    "returnType": "Int64",
+    "params": [],
+    "body": {
+  "line": 11,
+  "column": 1,
+      "kind": "Block",
+      "body": [
 {
   "line": 2,
-  "column": 17,
-    "kind": "Assign",
-    "target": {
-  "line": 2,
-  "column": 12,
-      "kind": "Subscript",
-      "base": {
-  "line": 2,
-  "column": 9,
-        "kind": "Subscript",
-        "base": {
-  "line": 2,
-  "column": 1,
-          "kind": "Ident",
-          "name": "matrix"
-        },
-        "index": {
-  "line": 2,
-  "column": 8,
-          "kind": "IntLiteral",
-          "value": 0
-        }
+  "column": 28,
+        "kind": "Declare",
+        "mut": "var",
+        "type": "Array[2](Array[2](Int64))",
+        "name": "matrix",
+        "init": null
       },
-      "index": {
-  "line": 2,
-  "column": 11,
-        "kind": "IntLiteral",
-        "value": 0
-      }
-    },
-    "value": {
-  "line": 2,
-  "column": 16,
-      "kind": "IntLiteral",
-      "value": 1
-    }
-  },
 {
   "line": 3,
-  "column": 17,
-    "kind": "Assign",
-    "target": {
-  "line": 3,
-  "column": 12,
-      "kind": "Subscript",
-      "base": {
-  "line": 3,
-  "column": 9,
-        "kind": "Subscript",
-        "base": {
-  "line": 3,
-  "column": 1,
-          "kind": "Ident",
-          "name": "matrix"
-        },
-        "index": {
-  "line": 3,
-  "column": 8,
-          "kind": "IntLiteral",
-          "value": 0
-        }
-      },
-      "index": {
-  "line": 3,
-  "column": 11,
-        "kind": "IntLiteral",
-        "value": 1
-      }
-    },
-    "value": {
+  "column": 21,
+        "kind": "Assign",
+        "target": {
   "line": 3,
   "column": 16,
-      "kind": "IntLiteral",
-      "value": 2
-    }
-  },
-{
-  "line": 4,
-  "column": 17,
-    "kind": "Assign",
-    "target": {
-  "line": 4,
-  "column": 12,
-      "kind": "Subscript",
-      "base": {
-  "line": 4,
-  "column": 9,
-        "kind": "Subscript",
-        "base": {
-  "line": 4,
-  "column": 1,
-          "kind": "Ident",
-          "name": "matrix"
-        },
-        "index": {
-  "line": 4,
-  "column": 8,
-          "kind": "IntLiteral",
-          "value": 0
-        }
-      },
-      "index": {
-  "line": 4,
-  "column": 11,
-        "kind": "IntLiteral",
-        "value": 2
-      }
-    },
-    "value": {
-  "line": 4,
-  "column": 16,
-      "kind": "IntLiteral",
-      "value": 3
-    }
-  },
-{
-  "line": 5,
-  "column": 17,
-    "kind": "Assign",
-    "target": {
-  "line": 5,
-  "column": 12,
-      "kind": "Subscript",
-      "base": {
-  "line": 5,
-  "column": 9,
-        "kind": "Subscript",
-        "base": {
-  "line": 5,
-  "column": 1,
-          "kind": "Ident",
-          "name": "matrix"
-        },
-        "index": {
-  "line": 5,
-  "column": 8,
-          "kind": "IntLiteral",
-          "value": 1
-        }
-      },
-      "index": {
-  "line": 5,
-  "column": 11,
-        "kind": "IntLiteral",
-        "value": 0
-      }
-    },
-    "value": {
-  "line": 5,
-  "column": 16,
-      "kind": "IntLiteral",
-      "value": 4
-    }
-  },
-{
-  "line": 6,
-  "column": 17,
-    "kind": "Assign",
-    "target": {
-  "line": 6,
-  "column": 12,
-      "kind": "Subscript",
-      "base": {
-  "line": 6,
-  "column": 9,
-        "kind": "Subscript",
-        "base": {
-  "line": 6,
-  "column": 1,
-          "kind": "Ident",
-          "name": "matrix"
-        },
-        "index": {
-  "line": 6,
-  "column": 8,
-          "kind": "IntLiteral",
-          "value": 1
-        }
-      },
-      "index": {
-  "line": 6,
-  "column": 11,
-        "kind": "IntLiteral",
-        "value": 1
-      }
-    },
-    "value": {
-  "line": 6,
-  "column": 16,
-      "kind": "IntLiteral",
-      "value": 5
-    }
-  },
-{
-  "line": 7,
-  "column": 17,
-    "kind": "Assign",
-    "target": {
-  "line": 7,
-  "column": 12,
-      "kind": "Subscript",
-      "base": {
-  "line": 7,
-  "column": 9,
-        "kind": "Subscript",
-        "base": {
-  "line": 7,
-  "column": 1,
-          "kind": "Ident",
-          "name": "matrix"
-        },
-        "index": {
-  "line": 7,
-  "column": 8,
-          "kind": "IntLiteral",
-          "value": 1
-        }
-      },
-      "index": {
-  "line": 7,
-  "column": 11,
-        "kind": "IntLiteral",
-        "value": 2
-      }
-    },
-    "value": {
-  "line": 7,
-  "column": 16,
-      "kind": "IntLiteral",
-      "value": 6
-    }
-  },
-{
-  "line": 8,
-  "column": 60,
-    "kind": "Declare",
-    "mut": "val",
-    "type": "Int64",
-    "name": "sum",
-    "init": {
-  "line": 8,
-  "column": 59,
-      "kind": "BinOp",
-      "op": "+",
-      "left": {
-  "line": 8,
-  "column": 44,
-        "kind": "BinOp",
-        "op": "+",
-        "left": {
-  "line": 8,
-  "column": 29,
           "kind": "Subscript",
           "base": {
-  "line": 8,
-  "column": 26,
+  "line": 3,
+  "column": 13,
             "kind": "Subscript",
             "base": {
-  "line": 8,
-  "column": 18,
+  "line": 3,
+  "column": 5,
               "kind": "Ident",
               "name": "matrix"
             },
             "index": {
-  "line": 8,
-  "column": 25,
+  "line": 3,
+  "column": 12,
               "kind": "IntLiteral",
               "value": 0
             }
           },
           "index": {
-  "line": 8,
-  "column": 28,
+  "line": 3,
+  "column": 15,
             "kind": "IntLiteral",
             "value": 0
           }
         },
-        "right": {
-  "line": 8,
-  "column": 44,
+        "value": {
+  "line": 3,
+  "column": 20,
+          "kind": "IntLiteral",
+          "value": 1
+        }
+      },
+{
+  "line": 4,
+  "column": 21,
+        "kind": "Assign",
+        "target": {
+  "line": 4,
+  "column": 16,
           "kind": "Subscript",
           "base": {
-  "line": 8,
-  "column": 41,
+  "line": 4,
+  "column": 13,
             "kind": "Subscript",
             "base": {
-  "line": 8,
-  "column": 33,
+  "line": 4,
+  "column": 5,
               "kind": "Ident",
               "name": "matrix"
             },
             "index": {
-  "line": 8,
-  "column": 40,
+  "line": 4,
+  "column": 12,
               "kind": "IntLiteral",
               "value": 0
             }
           },
           "index": {
-  "line": 8,
-  "column": 43,
-            "kind": "IntLiteral",
-            "value": 1
-          }
-        }
-      },
-      "right": {
-  "line": 8,
-  "column": 59,
-        "kind": "Subscript",
-        "base": {
-  "line": 8,
-  "column": 56,
-          "kind": "Subscript",
-          "base": {
-  "line": 8,
-  "column": 48,
-            "kind": "Ident",
-            "name": "matrix"
-          },
-          "index": {
-  "line": 8,
-  "column": 55,
+  "line": 4,
+  "column": 15,
             "kind": "IntLiteral",
             "value": 1
           }
         },
-        "index": {
-  "line": 8,
-  "column": 58,
+        "value": {
+  "line": 4,
+  "column": 20,
           "kind": "IntLiteral",
           "value": 2
         }
-      }
-    }
-  },
+      },
+{
+  "line": 5,
+  "column": 21,
+        "kind": "Assign",
+        "target": {
+  "line": 5,
+  "column": 16,
+          "kind": "Subscript",
+          "base": {
+  "line": 5,
+  "column": 13,
+            "kind": "Subscript",
+            "base": {
+  "line": 5,
+  "column": 5,
+              "kind": "Ident",
+              "name": "matrix"
+            },
+            "index": {
+  "line": 5,
+  "column": 12,
+              "kind": "IntLiteral",
+              "value": 0
+            }
+          },
+          "index": {
+  "line": 5,
+  "column": 15,
+            "kind": "IntLiteral",
+            "value": 2
+          }
+        },
+        "value": {
+  "line": 5,
+  "column": 20,
+          "kind": "IntLiteral",
+          "value": 3
+        }
+      },
+{
+  "line": 6,
+  "column": 21,
+        "kind": "Assign",
+        "target": {
+  "line": 6,
+  "column": 16,
+          "kind": "Subscript",
+          "base": {
+  "line": 6,
+  "column": 13,
+            "kind": "Subscript",
+            "base": {
+  "line": 6,
+  "column": 5,
+              "kind": "Ident",
+              "name": "matrix"
+            },
+            "index": {
+  "line": 6,
+  "column": 12,
+              "kind": "IntLiteral",
+              "value": 1
+            }
+          },
+          "index": {
+  "line": 6,
+  "column": 15,
+            "kind": "IntLiteral",
+            "value": 0
+          }
+        },
+        "value": {
+  "line": 6,
+  "column": 20,
+          "kind": "IntLiteral",
+          "value": 4
+        }
+      },
+{
+  "line": 7,
+  "column": 21,
+        "kind": "Assign",
+        "target": {
+  "line": 7,
+  "column": 16,
+          "kind": "Subscript",
+          "base": {
+  "line": 7,
+  "column": 13,
+            "kind": "Subscript",
+            "base": {
+  "line": 7,
+  "column": 5,
+              "kind": "Ident",
+              "name": "matrix"
+            },
+            "index": {
+  "line": 7,
+  "column": 12,
+              "kind": "IntLiteral",
+              "value": 1
+            }
+          },
+          "index": {
+  "line": 7,
+  "column": 15,
+            "kind": "IntLiteral",
+            "value": 1
+          }
+        },
+        "value": {
+  "line": 7,
+  "column": 20,
+          "kind": "IntLiteral",
+          "value": 5
+        }
+      },
+{
+  "line": 8,
+  "column": 21,
+        "kind": "Assign",
+        "target": {
+  "line": 8,
+  "column": 16,
+          "kind": "Subscript",
+          "base": {
+  "line": 8,
+  "column": 13,
+            "kind": "Subscript",
+            "base": {
+  "line": 8,
+  "column": 5,
+              "kind": "Ident",
+              "name": "matrix"
+            },
+            "index": {
+  "line": 8,
+  "column": 12,
+              "kind": "IntLiteral",
+              "value": 1
+            }
+          },
+          "index": {
+  "line": 8,
+  "column": 15,
+            "kind": "IntLiteral",
+            "value": 2
+          }
+        },
+        "value": {
+  "line": 8,
+  "column": 20,
+          "kind": "IntLiteral",
+          "value": 6
+        }
+      },
 {
   "line": 9,
-  "column": 11,
-    "kind": "Return",
-    "value": {
+  "column": 64,
+        "kind": "Declare",
+        "mut": "val",
+        "type": "Int64",
+        "name": "sum",
+        "init": {
   "line": 9,
-  "column": 8,
-      "kind": "Ident",
-      "name": "sum"
-    }
+  "column": 63,
+          "kind": "BinOp",
+          "op": "+",
+          "left": {
+  "line": 9,
+  "column": 48,
+            "kind": "BinOp",
+            "op": "+",
+            "left": {
+  "line": 9,
+  "column": 33,
+              "kind": "Subscript",
+              "base": {
+  "line": 9,
+  "column": 30,
+                "kind": "Subscript",
+                "base": {
+  "line": 9,
+  "column": 22,
+                  "kind": "Ident",
+                  "name": "matrix"
+                },
+                "index": {
+  "line": 9,
+  "column": 29,
+                  "kind": "IntLiteral",
+                  "value": 0
+                }
+              },
+              "index": {
+  "line": 9,
+  "column": 32,
+                "kind": "IntLiteral",
+                "value": 0
+              }
+            },
+            "right": {
+  "line": 9,
+  "column": 48,
+              "kind": "Subscript",
+              "base": {
+  "line": 9,
+  "column": 45,
+                "kind": "Subscript",
+                "base": {
+  "line": 9,
+  "column": 37,
+                  "kind": "Ident",
+                  "name": "matrix"
+                },
+                "index": {
+  "line": 9,
+  "column": 44,
+                  "kind": "IntLiteral",
+                  "value": 0
+                }
+              },
+              "index": {
+  "line": 9,
+  "column": 47,
+                "kind": "IntLiteral",
+                "value": 1
+              }
+            }
+          },
+          "right": {
+  "line": 9,
+  "column": 63,
+            "kind": "Subscript",
+            "base": {
+  "line": 9,
+  "column": 60,
+              "kind": "Subscript",
+              "base": {
+  "line": 9,
+  "column": 52,
+                "kind": "Ident",
+                "name": "matrix"
+              },
+              "index": {
+  "line": 9,
+  "column": 59,
+                "kind": "IntLiteral",
+                "value": 1
+              }
+            },
+            "index": {
+  "line": 9,
+  "column": 62,
+              "kind": "IntLiteral",
+              "value": 2
+            }
+          }
+        }
+      },
+{
+  "line": 10,
+  "column": 15,
+        "kind": "Return",
+        "value": {
+  "line": 10,
+  "column": 12,
+          "kind": "Ident",
+          "name": "sum"
+        }
+      }
+    ]}
   }
 ]}

@@ -1,6 +1,6 @@
 {
-  "line": 4,
-  "column": 10,
+  "line": 7,
+  "column": 1,
   "kind": "Program",
   "body": [
 {
@@ -30,14 +30,27 @@
     ]}
   },
 {
-  "line": 4,
+  "line": 7,
+  "column": 1,
+    "kind": "FuncDecl",
+    "name": "main",
+    "params": [],
+    "body": {
+  "line": 7,
+  "column": 1,
+      "kind": "Block",
+      "body": [
+{
+  "line": 6,
+  "column": 12,
+        "kind": "Return",
+        "value": {
+  "line": 6,
   "column": 10,
-    "kind": "Return",
-    "value": {
-  "line": 4,
-  "column": 8,
-      "kind": "IntLiteral",
-      "value": 42
-    }
+          "kind": "IntLiteral",
+          "value": 42
+        }
+      }
+    ]}
   }
 ]}

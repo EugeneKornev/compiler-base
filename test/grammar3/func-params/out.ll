@@ -17,3 +17,8 @@ entry:
   %result3 = load i64, ptr %result, align 8
   ret i64 %result3
 }
+
+define i64 @main() {
+entry:
+  ret i64 0
+}

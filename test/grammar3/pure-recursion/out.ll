@@ -25,3 +25,8 @@ ifmerge:                                          ; preds = %then, %entry
   %multmp = mul i64 %n2, %calltmp
   ret i64 %multmp
 }
+
+define i64 @main() {
+entry:
+  ret i64 0
+}
