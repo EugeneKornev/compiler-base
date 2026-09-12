@@ -1,11 +1,17 @@
 {
+  "line": 11,
+  "column": 31,
   "kind": "Program",
   "body": [
 {
+  "line": 3,
+  "column": 1,
     "kind": "StructDecl",
     "name": "Inner",
     "fields": [
 {
+  "line": 2,
+  "column": 17,
       "kind": "Declare",
       "mut": "val",
       "type": "Int64",
@@ -14,10 +20,14 @@
     }
   ]},
 {
+  "line": 7,
+  "column": 1,
     "kind": "StructDecl",
     "name": "Outer",
     "fields": [
 {
+  "line": 5,
+  "column": 17,
       "kind": "Declare",
       "mut": "val",
       "type": "Inner",
@@ -25,6 +35,8 @@
       "init": null
     },
 {
+  "line": 6,
+  "column": 17,
       "kind": "Declare",
       "mut": "val",
       "type": "Int64",
@@ -33,6 +45,8 @@
     }
   ]},
 {
+  "line": 8,
+  "column": 13,
     "kind": "Declare",
     "mut": "var",
     "type": "Outer",
@@ -40,12 +54,20 @@
     "init": null
   },
 {
+  "line": 9,
+  "column": 19,
     "kind": "Assign",
     "target": {
+  "line": 9,
+  "column": 9,
       "kind": "FieldAccess",
       "base": {
+  "line": 9,
+  "column": 3,
         "kind": "FieldAccess",
         "base": {
+  "line": 9,
+  "column": 1,
           "kind": "Ident",
           "name": "o"
         },
@@ -54,35 +76,55 @@
       "field": "value"
     },
     "value": {
+  "line": 9,
+  "column": 17,
       "kind": "IntLiteral",
       "value": 42
     }
   },
 {
+  "line": 10,
+  "column": 12,
     "kind": "Assign",
     "target": {
+  "line": 10,
+  "column": 3,
       "kind": "FieldAccess",
       "base": {
+  "line": 10,
+  "column": 1,
         "kind": "Ident",
         "name": "o"
       },
       "field": "extra"
     },
     "value": {
+  "line": 10,
+  "column": 11,
       "kind": "IntLiteral",
       "value": 7
     }
   },
 {
+  "line": 11,
+  "column": 31,
     "kind": "Return",
     "value": {
+  "line": 11,
+  "column": 26,
       "kind": "BinOp",
       "op": "+",
       "left": {
+  "line": 11,
+  "column": 16,
         "kind": "FieldAccess",
         "base": {
+  "line": 11,
+  "column": 10,
           "kind": "FieldAccess",
           "base": {
+  "line": 11,
+  "column": 8,
             "kind": "Ident",
             "name": "o"
           },
@@ -91,8 +133,12 @@
         "field": "value"
       },
       "right": {
+  "line": 11,
+  "column": 26,
         "kind": "FieldAccess",
         "base": {
+  "line": 11,
+  "column": 24,
           "kind": "Ident",
           "name": "o"
         },

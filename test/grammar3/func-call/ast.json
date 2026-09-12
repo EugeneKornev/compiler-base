@@ -1,26 +1,42 @@
 {
+  "line": 6,
+  "column": 9,
   "kind": "Program",
   "body": [
 {
+  "line": 3,
+  "column": 1,
     "kind": "FuncDecl",
     "name": "double",
     "params": [{
+  "line": 1,
+  "column": 12,
   "kind": "Ident",
   "name": "x"
 }],
     "body": {
+  "line": 3,
+  "column": 1,
       "kind": "Block",
       "body": [
 {
+  "line": 2,
+  "column": 17,
         "kind": "Return",
         "value": {
+  "line": 2,
+  "column": 16,
           "kind": "BinOp",
           "op": "*",
           "left": {
+  "line": 2,
+  "column": 12,
             "kind": "Ident",
             "name": "x"
           },
           "right": {
+  "line": 2,
+  "column": 16,
             "kind": "IntLiteral",
             "value": 2
           }
@@ -29,24 +45,36 @@
     ]}
   },
 {
+  "line": 5,
+  "column": 19,
     "kind": "Declare",
     "mut": "var",
     "name": "y",
     "init": {
+  "line": 5,
+  "column": 18,
       "kind": "Call",
       "callee": {
+  "line": 5,
+  "column": 9,
         "kind": "Ident",
         "name": "double"
       },
       "args": [{
+  "line": 5,
+  "column": 16,
   "kind": "IntLiteral",
   "value": 21
 }]
     }
   },
 {
+  "line": 6,
+  "column": 9,
     "kind": "Return",
     "value": {
+  "line": 6,
+  "column": 8,
       "kind": "Ident",
       "name": "y"
     }

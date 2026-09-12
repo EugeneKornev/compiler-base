@@ -1,39 +1,57 @@
 {
+  "line": 4,
+  "column": 9,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 34,
     "kind": "Declare",
     "mut": "val",
     "type": "String",
     "name": "s",
     "init": {
+  "line": 1,
+  "column": 17,
       "kind": "StringLiteral",
       "value": "hello\nworld\t!"
     }
   },
 {
+  "line": 2,
+  "column": 32,
     "kind": "Declare",
     "mut": "val",
     "type": "String",
     "name": "t",
     "init": {
+  "line": 2,
+  "column": 17,
       "kind": "StringLiteral",
       "value": "quote \" here"
     }
   },
 {
+  "line": 3,
+  "column": 30,
     "kind": "Declare",
     "mut": "val",
     "type": "String",
     "name": "u",
     "init": {
+  "line": 3,
+  "column": 17,
       "kind": "StringLiteral",
       "value": "back\\slash"
     }
   },
 {
+  "line": 4,
+  "column": 9,
     "kind": "Return",
     "value": {
+  "line": 4,
+  "column": 8,
       "kind": "IntLiteral",
       "value": 0
     }

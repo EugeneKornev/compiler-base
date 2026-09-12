@@ -1,11 +1,17 @@
 {
+  "line": 9,
+  "column": 11,
   "kind": "Program",
   "body": [
 {
+  "line": 4,
+  "column": 1,
     "kind": "StructDecl",
     "name": "Point",
     "fields": [
 {
+  "line": 2,
+  "column": 13,
       "kind": "Declare",
       "mut": "val",
       "type": "Int64",
@@ -13,6 +19,8 @@
       "init": null
     },
 {
+  "line": 3,
+  "column": 13,
       "kind": "Declare",
       "mut": "val",
       "type": "Int64",
@@ -21,6 +29,8 @@
     }
   ]},
 {
+  "line": 5,
+  "column": 13,
     "kind": "Declare",
     "mut": "var",
     "type": "Point",
@@ -28,54 +38,82 @@
     "init": null
   },
 {
+  "line": 6,
+  "column": 9,
     "kind": "Assign",
     "target": {
+  "line": 6,
+  "column": 3,
       "kind": "FieldAccess",
       "base": {
+  "line": 6,
+  "column": 1,
         "kind": "Ident",
         "name": "p"
       },
       "field": "x"
     },
     "value": {
+  "line": 6,
+  "column": 7,
       "kind": "IntLiteral",
       "value": 10
     }
   },
 {
+  "line": 7,
+  "column": 9,
     "kind": "Assign",
     "target": {
+  "line": 7,
+  "column": 3,
       "kind": "FieldAccess",
       "base": {
+  "line": 7,
+  "column": 1,
         "kind": "Ident",
         "name": "p"
       },
       "field": "y"
     },
     "value": {
+  "line": 7,
+  "column": 7,
       "kind": "IntLiteral",
       "value": 20
     }
   },
 {
+  "line": 8,
+  "column": 27,
     "kind": "Declare",
     "mut": "val",
     "type": "Int64",
     "name": "sum",
     "init": {
+  "line": 8,
+  "column": 26,
       "kind": "BinOp",
       "op": "+",
       "left": {
+  "line": 8,
+  "column": 20,
         "kind": "FieldAccess",
         "base": {
+  "line": 8,
+  "column": 18,
           "kind": "Ident",
           "name": "p"
         },
         "field": "x"
       },
       "right": {
+  "line": 8,
+  "column": 26,
         "kind": "FieldAccess",
         "base": {
+  "line": 8,
+  "column": 24,
           "kind": "Ident",
           "name": "p"
         },
@@ -84,8 +122,12 @@
     }
   },
 {
+  "line": 9,
+  "column": 11,
     "kind": "Return",
     "value": {
+  "line": 9,
+  "column": 8,
       "kind": "Ident",
       "name": "sum"
     }

@@ -1,33 +1,49 @@
 {
+  "line": 3,
+  "column": 9,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 19,
     "kind": "Declare",
     "mut": "var",
     "type": "Bool",
     "name": "x",
     "init": {
+  "line": 1,
+  "column": 15,
       "kind": "BoolLiteral",
       "value": true
     }
   },
 {
+  "line": 2,
+  "column": 30,
     "kind": "Declare",
     "mut": "var",
     "type": "Int64",
     "name": "y",
     "init": {
+  "line": 2,
+  "column": 29,
       "kind": "Cast",
       "type": "Int64",
       "value": {
+  "line": 2,
+  "column": 28,
         "kind": "Ident",
         "name": "x"
       }
     }
   },
 {
+  "line": 3,
+  "column": 9,
     "kind": "Return",
     "value": {
+  "line": 3,
+  "column": 8,
       "kind": "Ident",
       "name": "y"
     }

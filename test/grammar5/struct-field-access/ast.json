@@ -1,11 +1,17 @@
 {
+  "line": 9,
+  "column": 12,
   "kind": "Program",
   "body": [
 {
+  "line": 4,
+  "column": 1,
     "kind": "StructDecl",
     "name": "Rectangle",
     "fields": [
 {
+  "line": 2,
+  "column": 17,
       "kind": "Declare",
       "mut": "val",
       "type": "Int64",
@@ -13,6 +19,8 @@
       "init": null
     },
 {
+  "line": 3,
+  "column": 18,
       "kind": "Declare",
       "mut": "val",
       "type": "Int64",
@@ -21,6 +29,8 @@
     }
   ]},
 {
+  "line": 5,
+  "column": 17,
     "kind": "Declare",
     "mut": "var",
     "type": "Rectangle",
@@ -28,54 +38,82 @@
     "init": null
   },
 {
+  "line": 6,
+  "column": 13,
     "kind": "Assign",
     "target": {
+  "line": 6,
+  "column": 3,
       "kind": "FieldAccess",
       "base": {
+  "line": 6,
+  "column": 1,
         "kind": "Ident",
         "name": "r"
       },
       "field": "width"
     },
     "value": {
+  "line": 6,
+  "column": 11,
       "kind": "IntLiteral",
       "value": 30
     }
   },
 {
+  "line": 7,
+  "column": 14,
     "kind": "Assign",
     "target": {
+  "line": 7,
+  "column": 3,
       "kind": "FieldAccess",
       "base": {
+  "line": 7,
+  "column": 1,
         "kind": "Ident",
         "name": "r"
       },
       "field": "height"
     },
     "value": {
+  "line": 7,
+  "column": 12,
       "kind": "IntLiteral",
       "value": 15
     }
   },
 {
+  "line": 8,
+  "column": 37,
     "kind": "Declare",
     "mut": "val",
     "type": "Int64",
     "name": "area",
     "init": {
+  "line": 8,
+  "column": 31,
       "kind": "BinOp",
       "op": "*",
       "left": {
+  "line": 8,
+  "column": 21,
         "kind": "FieldAccess",
         "base": {
+  "line": 8,
+  "column": 19,
           "kind": "Ident",
           "name": "r"
         },
         "field": "width"
       },
       "right": {
+  "line": 8,
+  "column": 31,
         "kind": "FieldAccess",
         "base": {
+  "line": 8,
+  "column": 29,
           "kind": "Ident",
           "name": "r"
         },
@@ -84,8 +122,12 @@
     }
   },
 {
+  "line": 9,
+  "column": 12,
     "kind": "Return",
     "value": {
+  "line": 9,
+  "column": 8,
       "kind": "Ident",
       "name": "area"
     }

@@ -1,15 +1,23 @@
 {
+  "line": 2,
+  "column": 9,
   "kind": "Program",
   "body": [
 {
+  "line": 2,
+  "column": 9,
     "kind": "Declare",
     "mut": "val",
     "type": "Int64",
     "name": "x",
     "init": {
+  "line": 2,
+  "column": 1,
       "kind": "Cast",
       "type": "Int64",
       "value": {
+  "line": 1,
+  "column": 24,
         "kind": "Error",
         "message": "unexpected token 'SEMI'"
       }

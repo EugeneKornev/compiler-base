@@ -1,16 +1,26 @@
 {
+  "line": 1,
+  "column": 24,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 24,
     "kind": "ExternDecl",
     "name": "foo",
     "params": [{
+  "line": 1,
+  "column": 16,
   "kind": "Ident",
   "name": "a"
 }, {
+  "line": 1,
+  "column": 19,
   "kind": "Ident",
   "name": "b"
 }, {
+  "line": 1,
+  "column": 22,
   "kind": "Ident",
   "name": "c"
 }]

@@ -1,41 +1,61 @@
 {
+  "line": 5,
+  "column": 12,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 35,
     "kind": "ExternDecl",
     "name": "putchar",
     "returnType": "Int64",
     "params": [{
+  "line": 1,
+  "column": 23,
   "kind": "Param",
   "name": "c",
   "type": "Int8"
 }]
   },
 {
+  "line": 2,
+  "column": 36,
     "kind": "ExternDecl",
     "name": "exit",
     "returnType": "Int64",
     "params": [{
+  "line": 2,
+  "column": 23,
   "kind": "Param",
   "name": "code",
   "type": "Int64"
 }]
   },
 {
+  "line": 3,
+  "column": 39,
     "kind": "Declare",
     "mut": "val",
     "type": "Int64",
     "name": "r",
     "init": {
+  "line": 3,
+  "column": 38,
       "kind": "Call",
       "callee": {
+  "line": 3,
+  "column": 16,
         "kind": "Ident",
         "name": "putchar"
       },
       "args": [{
+  "line": 3,
+  "column": 37,
   "kind": "Cast",
   "type": "Int8",
   "value": {
+  "line": 3,
+  "column": 35,
     "kind": "IntLiteral",
     "value": 65
   }
@@ -43,18 +63,26 @@
     }
   },
 {
+  "line": 4,
+  "column": 20,
     "kind": "Declare",
     "mut": "var",
     "type": "Int64",
     "name": "code",
     "init": {
+  "line": 4,
+  "column": 19,
       "kind": "IntLiteral",
       "value": 0
     }
   },
 {
+  "line": 5,
+  "column": 12,
     "kind": "Return",
     "value": {
+  "line": 5,
+  "column": 8,
       "kind": "Ident",
       "name": "code"
     }

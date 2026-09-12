@@ -1,41 +1,63 @@
 {
+  "line": 3,
+  "column": 21,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 22,
     "kind": "ExternDecl",
     "name": "putchar",
     "params": [{
+  "line": 1,
+  "column": 20,
   "kind": "Ident",
   "name": "x"
 }]
   },
 {
+  "line": 2,
+  "column": 20,
     "kind": "Declare",
     "mut": "var",
     "name": "a",
     "init": {
+  "line": 2,
+  "column": 19,
       "kind": "Call",
       "callee": {
+  "line": 2,
+  "column": 9,
         "kind": "Ident",
         "name": "putchar"
       },
       "args": [{
+  "line": 2,
+  "column": 17,
   "kind": "IntLiteral",
   "value": 72
 }]
     }
   },
 {
+  "line": 3,
+  "column": 21,
     "kind": "Declare",
     "mut": "var",
     "name": "b",
     "init": {
+  "line": 3,
+  "column": 20,
       "kind": "Call",
       "callee": {
+  "line": 3,
+  "column": 9,
         "kind": "Ident",
         "name": "putchar"
       },
       "args": [{
+  "line": 3,
+  "column": 17,
   "kind": "IntLiteral",
   "value": 105
 }]

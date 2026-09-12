@@ -1,72 +1,104 @@
 {
+  "line": 7,
+  "column": 22,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 16,
     "kind": "Declare",
     "mut": "val",
     "type": "Int8",
     "name": "a",
     "init": {
+  "line": 1,
+  "column": 15,
       "kind": "IntLiteral",
       "value": 1
     }
   },
 {
+  "line": 2,
+  "column": 17,
     "kind": "Declare",
     "mut": "val",
     "type": "Int16",
     "name": "b",
     "init": {
+  "line": 2,
+  "column": 16,
       "kind": "IntLiteral",
       "value": 2
     }
   },
 {
+  "line": 3,
+  "column": 17,
     "kind": "Declare",
     "mut": "val",
     "type": "Int32",
     "name": "c",
     "init": {
+  "line": 3,
+  "column": 16,
       "kind": "IntLiteral",
       "value": 3
     }
   },
 {
+  "line": 4,
+  "column": 17,
     "kind": "Declare",
     "mut": "val",
     "type": "Int64",
     "name": "d",
     "init": {
+  "line": 4,
+  "column": 16,
       "kind": "IntLiteral",
       "value": 4
     }
   },
 {
+  "line": 5,
+  "column": 19,
     "kind": "Declare",
     "mut": "val",
     "type": "Bool",
     "name": "e",
     "init": {
+  "line": 5,
+  "column": 15,
       "kind": "BoolLiteral",
       "value": true
     }
   },
 {
+  "line": 6,
+  "column": 21,
     "kind": "Declare",
     "mut": "val",
     "type": "String",
     "name": "f",
     "init": {
+  "line": 6,
+  "column": 17,
       "kind": "StringLiteral",
       "value": "hi"
     }
   },
 {
+  "line": 7,
+  "column": 22,
     "kind": "Return",
     "value": {
+  "line": 7,
+  "column": 21,
       "kind": "Cast",
       "type": "Int64",
       "value": {
+  "line": 7,
+  "column": 20,
         "kind": "Ident",
         "name": "d"
       }

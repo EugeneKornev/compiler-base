@@ -1,10 +1,16 @@
 {
+  "line": 1,
+  "column": 22,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 22,
     "kind": "ExternDecl",
     "name": "putchar",
     "params": [{
+  "line": 1,
+  "column": 20,
   "kind": "Ident",
   "name": "c"
 }]

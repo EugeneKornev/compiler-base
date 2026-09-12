@@ -1,11 +1,17 @@
 {
+  "line": 13,
+  "column": 11,
   "kind": "Program",
   "body": [
 {
+  "line": 4,
+  "column": 1,
     "kind": "StructDecl",
     "name": "Point",
     "fields": [
 {
+  "line": 2,
+  "column": 13,
       "kind": "Declare",
       "mut": "val",
       "type": "Int64",
@@ -13,6 +19,8 @@
       "init": null
     },
 {
+  "line": 3,
+  "column": 13,
       "kind": "Declare",
       "mut": "val",
       "type": "Int64",
@@ -21,6 +29,8 @@
     }
   ]},
 {
+  "line": 5,
+  "column": 21,
     "kind": "Declare",
     "mut": "var",
     "type": "Array[3](Point)",
@@ -28,16 +38,26 @@
     "init": null
   },
 {
+  "line": 6,
+  "column": 16,
     "kind": "Assign",
     "target": {
+  "line": 6,
+  "column": 11,
       "kind": "FieldAccess",
       "base": {
+  "line": 6,
+  "column": 9,
         "kind": "Subscript",
         "base": {
+  "line": 6,
+  "column": 1,
           "kind": "Ident",
           "name": "points"
         },
         "index": {
+  "line": 6,
+  "column": 8,
           "kind": "IntLiteral",
           "value": 0
         }
@@ -45,21 +65,33 @@
       "field": "x"
     },
     "value": {
+  "line": 6,
+  "column": 15,
       "kind": "IntLiteral",
       "value": 1
     }
   },
 {
+  "line": 7,
+  "column": 16,
     "kind": "Assign",
     "target": {
+  "line": 7,
+  "column": 11,
       "kind": "FieldAccess",
       "base": {
+  "line": 7,
+  "column": 9,
         "kind": "Subscript",
         "base": {
+  "line": 7,
+  "column": 1,
           "kind": "Ident",
           "name": "points"
         },
         "index": {
+  "line": 7,
+  "column": 8,
           "kind": "IntLiteral",
           "value": 0
         }
@@ -67,21 +99,33 @@
       "field": "y"
     },
     "value": {
+  "line": 7,
+  "column": 15,
       "kind": "IntLiteral",
       "value": 2
     }
   },
 {
+  "line": 8,
+  "column": 16,
     "kind": "Assign",
     "target": {
+  "line": 8,
+  "column": 11,
       "kind": "FieldAccess",
       "base": {
+  "line": 8,
+  "column": 9,
         "kind": "Subscript",
         "base": {
+  "line": 8,
+  "column": 1,
           "kind": "Ident",
           "name": "points"
         },
         "index": {
+  "line": 8,
+  "column": 8,
           "kind": "IntLiteral",
           "value": 1
         }
@@ -89,21 +133,33 @@
       "field": "x"
     },
     "value": {
+  "line": 8,
+  "column": 15,
       "kind": "IntLiteral",
       "value": 3
     }
   },
 {
+  "line": 9,
+  "column": 16,
     "kind": "Assign",
     "target": {
+  "line": 9,
+  "column": 11,
       "kind": "FieldAccess",
       "base": {
+  "line": 9,
+  "column": 9,
         "kind": "Subscript",
         "base": {
+  "line": 9,
+  "column": 1,
           "kind": "Ident",
           "name": "points"
         },
         "index": {
+  "line": 9,
+  "column": 8,
           "kind": "IntLiteral",
           "value": 1
         }
@@ -111,21 +167,33 @@
       "field": "y"
     },
     "value": {
+  "line": 9,
+  "column": 15,
       "kind": "IntLiteral",
       "value": 4
     }
   },
 {
+  "line": 10,
+  "column": 16,
     "kind": "Assign",
     "target": {
+  "line": 10,
+  "column": 11,
       "kind": "FieldAccess",
       "base": {
+  "line": 10,
+  "column": 9,
         "kind": "Subscript",
         "base": {
+  "line": 10,
+  "column": 1,
           "kind": "Ident",
           "name": "points"
         },
         "index": {
+  "line": 10,
+  "column": 8,
           "kind": "IntLiteral",
           "value": 2
         }
@@ -133,21 +201,33 @@
       "field": "x"
     },
     "value": {
+  "line": 10,
+  "column": 15,
       "kind": "IntLiteral",
       "value": 5
     }
   },
 {
+  "line": 11,
+  "column": 16,
     "kind": "Assign",
     "target": {
+  "line": 11,
+  "column": 11,
       "kind": "FieldAccess",
       "base": {
+  "line": 11,
+  "column": 9,
         "kind": "Subscript",
         "base": {
+  "line": 11,
+  "column": 1,
           "kind": "Ident",
           "name": "points"
         },
         "index": {
+  "line": 11,
+  "column": 8,
           "kind": "IntLiteral",
           "value": 2
         }
@@ -155,30 +235,46 @@
       "field": "y"
     },
     "value": {
+  "line": 11,
+  "column": 15,
       "kind": "IntLiteral",
       "value": 6
     }
   },
 {
+  "line": 12,
+  "column": 57,
     "kind": "Declare",
     "mut": "val",
     "type": "Int64",
     "name": "sum",
     "init": {
+  "line": 12,
+  "column": 56,
       "kind": "BinOp",
       "op": "+",
       "left": {
+  "line": 12,
+  "column": 42,
         "kind": "BinOp",
         "op": "+",
         "left": {
+  "line": 12,
+  "column": 28,
           "kind": "FieldAccess",
           "base": {
+  "line": 12,
+  "column": 26,
             "kind": "Subscript",
             "base": {
+  "line": 12,
+  "column": 18,
               "kind": "Ident",
               "name": "points"
             },
             "index": {
+  "line": 12,
+  "column": 25,
               "kind": "IntLiteral",
               "value": 0
             }
@@ -186,14 +282,22 @@
           "field": "x"
         },
         "right": {
+  "line": 12,
+  "column": 42,
           "kind": "FieldAccess",
           "base": {
+  "line": 12,
+  "column": 40,
             "kind": "Subscript",
             "base": {
+  "line": 12,
+  "column": 32,
               "kind": "Ident",
               "name": "points"
             },
             "index": {
+  "line": 12,
+  "column": 39,
               "kind": "IntLiteral",
               "value": 0
             }
@@ -202,14 +306,22 @@
         }
       },
       "right": {
+  "line": 12,
+  "column": 56,
         "kind": "FieldAccess",
         "base": {
+  "line": 12,
+  "column": 54,
           "kind": "Subscript",
           "base": {
+  "line": 12,
+  "column": 46,
             "kind": "Ident",
             "name": "points"
           },
           "index": {
+  "line": 12,
+  "column": 53,
             "kind": "IntLiteral",
             "value": 1
           }
@@ -219,8 +331,12 @@
     }
   },
 {
+  "line": 13,
+  "column": 11,
     "kind": "Return",
     "value": {
+  "line": 13,
+  "column": 8,
       "kind": "Ident",
       "name": "sum"
     }

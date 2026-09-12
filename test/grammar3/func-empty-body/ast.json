@@ -1,11 +1,17 @@
 {
+  "line": 1,
+  "column": 12,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 12,
     "kind": "FuncDecl",
     "name": "foo",
     "params": [],
     "body": {
+  "line": 1,
+  "column": 12,
       "kind": "Block",
       "body": [
     ]}

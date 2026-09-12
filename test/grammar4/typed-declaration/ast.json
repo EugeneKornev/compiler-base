@@ -1,47 +1,69 @@
 {
+  "line": 4,
+  "column": 11,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 18,
     "kind": "Declare",
     "mut": "val",
     "type": "Int64",
     "name": "x",
     "init": {
+  "line": 1,
+  "column": 16,
       "kind": "IntLiteral",
       "value": 42
     }
   },
 {
+  "line": 2,
+  "column": 18,
     "kind": "Declare",
     "mut": "val",
     "type": "Int64",
     "name": "y",
     "init": {
+  "line": 2,
+  "column": 16,
       "kind": "IntLiteral",
       "value": 10
     }
   },
 {
+  "line": 3,
+  "column": 23,
     "kind": "Declare",
     "mut": "var",
     "type": "Int64",
     "name": "sum",
     "init": {
+  "line": 3,
+  "column": 22,
       "kind": "BinOp",
       "op": "+",
       "left": {
+  "line": 3,
+  "column": 18,
         "kind": "Ident",
         "name": "x"
       },
       "right": {
+  "line": 3,
+  "column": 22,
         "kind": "Ident",
         "name": "y"
       }
     }
   },
 {
+  "line": 4,
+  "column": 11,
     "kind": "Return",
     "value": {
+  "line": 4,
+  "column": 8,
       "kind": "Ident",
       "name": "sum"
     }

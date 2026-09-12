@@ -1,47 +1,69 @@
 {
+  "line": 4,
+  "column": 9,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 19,
     "kind": "Declare",
     "mut": "val",
     "type": "Bool",
     "name": "a",
     "init": {
+  "line": 1,
+  "column": 15,
       "kind": "BoolLiteral",
       "value": true
     }
   },
 {
+  "line": 2,
+  "column": 20,
     "kind": "Declare",
     "mut": "val",
     "type": "Bool",
     "name": "b",
     "init": {
+  "line": 2,
+  "column": 15,
       "kind": "BoolLiteral",
       "value": false
     }
   },
 {
+  "line": 3,
+  "column": 23,
     "kind": "Declare",
     "mut": "val",
     "type": "Bool",
     "name": "cmp",
     "init": {
+  "line": 3,
+  "column": 22,
       "kind": "BinOp",
       "op": "==",
       "left": {
+  "line": 3,
+  "column": 17,
         "kind": "IntLiteral",
         "value": 1
       },
       "right": {
+  "line": 3,
+  "column": 22,
         "kind": "IntLiteral",
         "value": 1
       }
     }
   },
 {
+  "line": 4,
+  "column": 9,
     "kind": "Return",
     "value": {
+  "line": 4,
+  "column": 8,
       "kind": "IntLiteral",
       "value": 0
     }

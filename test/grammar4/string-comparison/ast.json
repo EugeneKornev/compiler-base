@@ -1,57 +1,87 @@
 {
+  "line": 7,
+  "column": 1,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 24,
     "kind": "Declare",
     "mut": "var",
     "type": "String",
     "name": "a",
     "init": {
+  "line": 1,
+  "column": 17,
       "kind": "StringLiteral",
       "value": "hello"
     }
   },
 {
+  "line": 2,
+  "column": 24,
     "kind": "Declare",
     "mut": "var",
     "type": "String",
     "name": "b",
     "init": {
+  "line": 2,
+  "column": 17,
       "kind": "StringLiteral",
       "value": "hello"
     }
   },
 {
+  "line": 7,
+  "column": 1,
     "kind": "If",
     "cond": {
+  "line": 3,
+  "column": 10,
       "kind": "BinOp",
       "op": "==",
       "left": {
+  "line": 3,
+  "column": 5,
         "kind": "Ident",
         "name": "a"
       },
       "right": {
+  "line": 3,
+  "column": 10,
         "kind": "Ident",
         "name": "b"
       }
     },
     "then": {
+  "line": 5,
+  "column": 1,
       "kind": "Block",
       "body": [
 {
+  "line": 4,
+  "column": 11,
         "kind": "Return",
         "value": {
+  "line": 4,
+  "column": 10,
           "kind": "IntLiteral",
           "value": 1
         }
       }
     ]},
     "else": {
+  "line": 7,
+  "column": 1,
       "kind": "Block",
       "body": [
 {
+  "line": 6,
+  "column": 11,
         "kind": "Return",
         "value": {
+  "line": 6,
+  "column": 10,
           "kind": "IntLiteral",
           "value": 0
         }

@@ -1,29 +1,43 @@
 {
+  "line": 3,
+  "column": 9,
   "kind": "Program",
   "body": [
 {
+  "line": 1,
+  "column": 24,
     "kind": "Declare",
     "mut": "val",
     "type": "String",
     "name": "s",
     "init": {
+  "line": 1,
+  "column": 17,
       "kind": "StringLiteral",
       "value": "hello"
     }
   },
 {
+  "line": 2,
+  "column": 26,
     "kind": "Declare",
     "mut": "val",
     "type": "String",
     "name": "msg",
     "init": {
+  "line": 2,
+  "column": 19,
       "kind": "StringLiteral",
       "value": "world"
     }
   },
 {
+  "line": 3,
+  "column": 9,
     "kind": "Return",
     "value": {
+  "line": 3,
+  "column": 8,
       "kind": "IntLiteral",
       "value": 0
     }
