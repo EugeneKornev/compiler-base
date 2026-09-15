@@ -5,6 +5,11 @@
   "description": "Schema for test case metadata (meta.json) in the SysProLang compiler test suite.",
   "type": "object",
   "properties": {
+    "$schema": {
+      "description": "JSON schema reference for editor LSP support.",
+      "type": "string",
+      "format": "uri"
+    },
     "grammar": {
       "description": "Grammar version constraint(s) for this test case.\n\n- A string like \"1\", \">=4\", \"<=2\", \"==3\" applies to all stages.\n- A list of strings like [\"1\", \"2\"] applies to all stages.\n- A dict mapping stage names to constraints allows per-stage rules.",
       "oneOf": [
