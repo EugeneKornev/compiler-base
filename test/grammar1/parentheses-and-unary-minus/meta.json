@@ -1,13 +1,16 @@
 {
-  "grammar": {
-    "lexer": "<=2",
-    "parser": [
-      "1",
-      "2"
-    ],
-    "llvm": [
-      "1",
-      "2"
-    ]
+  "grammar": [
+    "1",
+    "2"
+  ],
+  "stages": [
+    "lexer",
+    "parser",
+    "llvm",
+    "compiler",
+    "run"
+  ],
+  "exit": {
+    "run": 2
   }
 }

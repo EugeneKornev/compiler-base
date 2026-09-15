@@ -1,4 +1,12 @@
 {
-  "grammar": "<=2",
-  "exit": "nonzero"
+  "grammar": [
+    "1",
+    "2"
+  ],
+  "stages": [
+    "lexer"
+  ],
+  "exit": {
+    "lexer": "nonzero"
+  }
 }

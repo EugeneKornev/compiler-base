@@ -7,9 +7,10 @@
     "lexer",
     "parser",
     "llvm",
-    "compiler"
+    "compiler",
+    "run"
   ],
   "exit": {
-    "compiler": 6
+    "run": 6
   }
 }

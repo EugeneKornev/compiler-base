@@ -1,7 +1,13 @@
 {
-  "grammar": "<=2",
+  "grammar": [
+    "1",
+    "2"
+  ],
   "stages": [
+    "lexer",
     "parser"
   ],
-  "exit": "nonzero"
+  "exit": {
+    "parser": "nonzero"
+  }
 }
