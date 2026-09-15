@@ -4,12 +4,12 @@
   "kind": "Program",
   "body": [
 {
-  "line": 3,
-  "column": 10,
+    "line": 3,
+    "column": 10,
     "kind": "Return",
     "value": {
-  "line": 3,
-  "column": 8,
+      "line": 3,
+      "column": 8,
       "kind": "IntLiteral",
       "value": 42
     }

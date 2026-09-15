@@ -4,90 +4,90 @@
   "kind": "Program",
   "body": [
 {
-  "line": 1,
-  "column": 39,
+    "line": 1,
+    "column": 39,
     "kind": "Declare",
     "mut": "var",
     "name": "result",
     "init": {
-  "line": 1,
-  "column": 38,
+      "line": 1,
+      "column": 38,
       "kind": "BinOp",
       "op": "/",
       "left": {
-  "line": 1,
-  "column": 34,
+        "line": 1,
+        "column": 34,
         "kind": "BinOp",
         "op": "*",
         "left": {
-  "line": 1,
-  "column": 24,
+          "line": 1,
+          "column": 24,
           "kind": "BinOp",
           "op": "*",
           "left": {
-  "line": 1,
-  "column": 14,
+            "line": 1,
+            "column": 14,
             "kind": "IntLiteral",
             "value": 2
           },
           "right": {
-  "line": 1,
-  "column": 23,
+            "line": 1,
+            "column": 23,
             "kind": "BinOp",
             "op": "+",
             "left": {
-  "line": 1,
-  "column": 19,
+              "line": 1,
+              "column": 19,
               "kind": "IntLiteral",
               "value": 2
             },
             "right": {
-  "line": 1,
-  "column": 23,
+              "line": 1,
+              "column": 23,
               "kind": "IntLiteral",
               "value": 3
             }
           }
         },
         "right": {
-  "line": 1,
-  "column": 33,
+          "line": 1,
+          "column": 33,
           "kind": "BinOp",
           "op": "-",
           "left": {
-  "line": 1,
-  "column": 29,
+            "line": 1,
+            "column": 29,
             "kind": "IntLiteral",
             "value": 3
           },
           "right": {
-  "line": 1,
-  "column": 33,
+            "line": 1,
+            "column": 33,
             "kind": "IntLiteral",
             "value": 4
           }
         }
       },
       "right": {
-  "line": 1,
-  "column": 38,
+        "line": 1,
+        "column": 38,
         "kind": "IntLiteral",
         "value": 5
       }
     }
   },
 {
-  "line": 2,
-  "column": 15,
+    "line": 2,
+    "column": 15,
     "kind": "Return",
     "value": {
-  "line": 2,
-  "column": 9,
+      "line": 2,
+      "column": 9,
       "kind": "Unary",
       "op": "-",
       "operand": {
-  "line": 2,
-  "column": 9,
+        "line": 2,
+        "column": 9,
         "kind": "Ident",
         "name": "result"
       }
