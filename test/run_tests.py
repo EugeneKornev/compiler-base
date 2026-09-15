@@ -68,6 +68,9 @@ GOLDEN_TO_STAGE["stdout"] = "run"
 DEFAULT_TIMEOUT = 30.0
 DIFF_MAX_LINES = 30
 
+# Canonical stage order for discovery sorting and output grouping
+STAGE_ORDER = ["lexer", "parser", "llvm", "compiler", "run"]
+
 
 class StepError(Exception):
     pass
@@ -390,8 +393,6 @@ def discover_tests(test_root, grammar, stage_filter, name_filter, skip_dir=None,
             continue
 
         for stage in sorted(found_stages):
-            if not check_ir and stage == "llvm":
-                continue
             if not stage_selected(meta, stage, grammar):
                 continue
             if stage_filter and stage != stage_filter:
@@ -403,7 +404,7 @@ def discover_tests(test_root, grammar, stage_filter, name_filter, skip_dir=None,
                         meta=meta, meta_error=meta_error)
             tests.append(test)
 
-    tests.sort(key=lambda t: (t.stage, t.name))
+    tests.sort(key=lambda t: (STAGE_ORDER.index(t.stage) if t.stage in STAGE_ORDER else len(STAGE_ORDER), t.name))
     return tests, excluded
 
 
@@ -765,7 +766,7 @@ class Result:
         return f"{self.stage}/{self.name}"
 
 
-def run_plain(config, test, workdir, update, grammar):
+def run_plain(config, test, workdir, update, grammar, check_ir=False):
     stage = test.stage
     cfg = config.stage_cfg(stage)
     cmd = cfg.get("cmd")
@@ -821,6 +822,10 @@ def run_plain(config, test, workdir, update, grammar):
 
     if exit_bad:
         result.status = "FAIL"
+
+    # For llvm stage, skip golden comparison unless --check-ir was passed
+    if stage == "llvm" and not check_ir:
+        return result
 
     golden = golden_variants(config, test)
     if golden is None:
@@ -998,7 +1003,7 @@ def run_exec(config, test, workdir, update, grammar):
     return result
 
 
-def run_test(config, test, workdir_root, update, grammar):
+def run_test(config, test, workdir_root, update, grammar, check_ir=False):
     if test.meta_error:
         result = Result("FAIL", test.stage, test.name)
         result.lines.append(test.meta_error)
@@ -1012,7 +1017,7 @@ def run_test(config, test, workdir_root, update, grammar):
         elif test.stage == "run":
             result = run_exec(config, test, workdir, update, grammar)
         else:
-            result = run_plain(config, test, workdir, update, grammar)
+            result = run_plain(config, test, workdir, update, grammar, check_ir=check_ir)
     except subprocess.TimeoutExpired:
         result = Result("FAIL", test.stage, test.name)
         result.lines.append("timed out")
@@ -1042,7 +1047,7 @@ def print_result(result, verbose, no_color=False):
         return COLOR[status] + text + COLOR["RESET"]
 
     head = paint(result.status, result.status)
-    print(f"{head}  {result.key}  ({result.elapsed:.2f}s)")
+    print(f"{head}  {result.name}  ({result.elapsed:.2f}s)")
     if result.status != "PASS" or verbose:
         if result.command:
             print(f"    command: {result.command}")
@@ -1050,15 +1055,15 @@ def print_result(result, verbose, no_color=False):
             print(f"    {line}")
 
 
-def run_batch(config, batch, workdir_root, update, jobs, grammar):
+def run_batch(config, batch, workdir_root, update, jobs, grammar, check_ir=False):
     """Run a set of tests (serial or parallel) preserving their input order."""
     if not batch:
         return []
     if jobs == 1:
-        return [run_test(config, t, workdir_root, update, grammar) for t in batch]
+        return [run_test(config, t, workdir_root, update, grammar, check_ir=check_ir) for t in batch]
     ordered_index = {id(t): i for i, t in enumerate(batch)}
     with ThreadPoolExecutor(max_workers=jobs) as pool:
-        futures = {id(t): pool.submit(run_test, config, t, workdir_root, update, grammar)
+        futures = {id(t): pool.submit(run_test, config, t, workdir_root, update, grammar, check_ir=check_ir)
                    for t in batch}
         return [futures[tid].result()
                 for tid in sorted(futures, key=lambda tid: ordered_index[tid])]
@@ -1228,9 +1233,10 @@ def main(argv=None):
             print("build failed", file=sys.stderr)
             return 1
 
+    check_ir = args.check_ir
     committed, excluded = discover_tests(SCRIPT_DIR, effective_grammar, args.stage, args.name_filter,
                                             os.path.abspath(config.out_dir),
-                                            check_ir=args.check_ir)
+                                            check_ir=check_ir)
 
     workdir_root = config.out_dir
 
@@ -1278,8 +1284,21 @@ def main(argv=None):
             gen_thread.join()
             if gen_error:
                 raise gen_error[0]
-        for test in committed + fuzz_tests:
-            print(f"{test.stage}/{test.name}")
+        # Group by stage in canonical order
+        stage_tests = {}
+        for test in committed:
+            stage_tests.setdefault(test.stage, []).append(test)
+        for stage in STAGE_ORDER:
+            tests_s = stage_tests.get(stage)
+            if not tests_s:
+                continue
+            print(f"=== {stage.upper()} ===")
+            for test in tests_s:
+                print(f"  {test.name}")
+        if fuzz_tests:
+            print("=== FUZZ ===")
+            for test in fuzz_tests:
+                print(f"  {test.stage}/{test.name}")
         return 0
 
     if args.command == "list-matrix":
@@ -1293,10 +1312,26 @@ def main(argv=None):
     # Run and print committed tests immediately.
     committed_results = run_batch(config, committed, workdir_root,
                                   args.command == "update", args.jobs,
-                                  effective_grammar)
+                                  effective_grammar, check_ir=check_ir)
     print()
+    # Group results by stage in canonical order
+    stage_results = {}
     for result in committed_results:
-        print_result(result, args.verbose, no_color)
+        stage_results.setdefault(result.stage, []).append(result)
+    for stage in STAGE_ORDER:
+        results_stage = stage_results.get(stage)
+        if not results_stage:
+            continue
+        stage_upper = stage.upper()
+        print(f"=== {stage_upper} ===")
+        for result in results_stage:
+            # Strip stage prefix from name when showing under grouped header
+            orig_name = result.name
+            short_name = orig_name.removeprefix(result.stage + "/")
+            result.name = short_name
+            print_result(result, args.verbose, no_color)
+            result.name = orig_name
+        print()
 
     # Now wait for fuzz generation and run the fuzz tests.
     fuzz_results = []
@@ -1319,11 +1354,18 @@ def main(argv=None):
             else:
                 fuzz_results = run_batch(config, fuzz_tests, workdir_root,
                                          args.command == "update", args.jobs,
-                                         effective_grammar)
+                                         effective_grammar, check_ir=check_ir)
                 print("---- fuzz tests ----")
                 print(fuzz_seed_line)
+                stage_results_fuzz = {}
                 for result in fuzz_results:
-                    print_result(result, args.verbose, no_color)
+                    stage_results_fuzz.setdefault(result.stage, []).append(result)
+                for stage in STAGE_ORDER:
+                    results_s = stage_results_fuzz.get(stage)
+                    if not results_s:
+                        continue
+                    for result in results_s:
+                        print_result(result, args.verbose, no_color)
                 print(fuzz_seed_line)
 
     results = committed_results + fuzz_results
