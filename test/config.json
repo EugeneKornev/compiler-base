@@ -25,7 +25,7 @@
         {"type": "llvm"}
       ]
     },
-    "compile": {
+    "compiler": {
       "cmd": ["{root}/build/splc", "-g", "{grammar}", "-o", "{exe}", "{input}"]
     },
     "run": {
