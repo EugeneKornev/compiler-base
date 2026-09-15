@@ -29,6 +29,11 @@ jobs:
       - name: Set up sbt
         uses: sbt/setup-sbt@v1
 
+      - name: Validate JSON schemas
+        run: |
+          pip install jsonschema
+          python test/validate_schemas.py
+
       - name: Install test harness dependency
         run: pip install pytest
 
@@ -36,4 +41,4 @@ jobs:
         run: sbt compile
 
       - name: Run tests for grammar ${{ matrix.grammar }}
-        run: python3 test/run_tests.py --stage lexer --grammar ${{ matrix.grammar }} --no-build
+        run: python3 test/run_tests.py --stage parser --grammar ${{ matrix.grammar }} --test grammar${{ matrix.grammar }} --no-build
