@@ -3,12 +3,12 @@
   "column": 9,
   "kind": "Program",
   "body": [
-{
+  {
     "line": 1,
     "column": 6,
     "kind": "Break"
   },
-{
+  {
     "line": 2,
     "column": 9,
     "kind": "Return",
@@ -19,4 +19,5 @@
       "value": 0
     }
   }
-]}
+  ]
+}

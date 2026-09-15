@@ -3,7 +3,7 @@
   "column": 18,
   "kind": "Program",
   "body": [
-{
+  {
     "line": 1,
     "column": 18,
     "kind": "Return",
@@ -38,4 +38,5 @@
       }
     }
   }
-]}
+  ]
+}

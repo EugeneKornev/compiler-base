@@ -3,7 +3,7 @@
   "column": 9,
   "kind": "Program",
   "body": [
-{
+  {
     "line": 2,
     "column": 9,
     "kind": "Declare",
@@ -16,4 +16,5 @@
       "message": "unexpected token 'RETURN'"
     }
   }
-]}
+  ]
+}

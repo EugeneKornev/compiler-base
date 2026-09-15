@@ -3,7 +3,7 @@
   "column": 2,
   "kind": "Program",
   "body": [
-{
+  {
     "line": 4,
     "column": 2,
     "kind": "ExprStmt",
@@ -38,4 +38,5 @@
       }
     }
   }
-]}
+  ]
+}

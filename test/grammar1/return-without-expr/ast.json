@@ -3,7 +3,7 @@
   "column": 7,
   "kind": "Program",
   "body": [
-{
+  {
     "line": 1,
     "column": 7,
     "kind": "Return",
@@ -14,4 +14,5 @@
       "message": "unexpected token 'SEMI'"
     }
   }
-]}
+  ]
+}

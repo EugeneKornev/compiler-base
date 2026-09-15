@@ -3,7 +3,7 @@
   "column": 15,
   "kind": "Program",
   "body": [
-{
+  {
     "line": 1,
     "column": 39,
     "kind": "Declare",
@@ -76,7 +76,7 @@
       }
     }
   },
-{
+  {
     "line": 2,
     "column": 15,
     "kind": "Return",
@@ -93,4 +93,5 @@
       }
     }
   }
-]}
+  ]
+}

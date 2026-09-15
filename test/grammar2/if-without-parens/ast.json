@@ -3,7 +3,7 @@
   "column": 1,
   "kind": "Program",
   "body": [
-{
+  {
     "line": 3,
     "column": 1,
     "kind": "If",
@@ -18,7 +18,7 @@
       "column": 1,
       "kind": "Block",
       "body": [
-{
+      {
         "line": 2,
         "column": 14,
         "kind": "Return",
@@ -29,6 +29,8 @@
           "value": 42
         }
       }
-    ]}
+      ]
+    }
   }
-]}
+  ]
+}
