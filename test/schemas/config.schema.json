@@ -6,9 +6,8 @@
   "type": "object",
   "properties": {
     "$schema": {
-      "description": "JSON schema reference for editor LSP support.",
-      "type": "string",
-      "format": "uri"
+      "description": "JSON schema reference for editor LSP support (relative path to config.schema.json).",
+      "type": "string"
     },
     "build": {
       "description": "Shell command to build the compiler before running tests.\nSupports {root} placeholder.",
