@@ -6,28 +6,28 @@
   "out_dir": "{root}/test/build",
   "stages": {
     "lexer": {
-      "cmd": ["{root}/build/splc", "-g", "{grammar}", "-t", "{tokens_in}", "{input}"],
+      "cmd": ["sbt", "--batch", "--error", "run --lex {input} -o {tokens_out}"],
       "out": "{tokens_out}",
       "preprocess": [
         {"type": "json", "keep": ["kind", "line", "column"]}
       ]
     },
     "parser": {
-      "cmd": ["{root}/build/splc", "-g", "{grammar}", "-a", "{ast_in}", "{input}"],
+      "cmd": ["sbt", "--batch", "--error", "run --parse {input} -o {ast_out}"],
       "out": "{ast_out}",
       "preprocess": [
         {"type": "json", "keep": ["kind", "line", "column"]}
       ]
     },
     "llvm": {
-      "cmd": ["{root}/build/splc", "-g", "{grammar}", "-o", "{llvm_out}", "{input}"],
+      "cmd": ["sbt", "--batch", "--error", "run --llvm {input} -o {llvm_out}"],
       "out": "{llvm_out}",
       "preprocess": [
         {"type": "llvm"}
       ]
     },
     "compiler": {
-      "cmd": ["{root}/build/splc", "-g", "{grammar}", "-o", "{exe}", "{input}"]
+      "cmd": ["sbt", "--batch", "--error", "run --compile {exe} {input}"]
     },
     "run": {
       "cmd": ["{exe}"],
