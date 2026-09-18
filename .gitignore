@@ -19,3 +19,13 @@ __pycache__/
 # OS
 .DS_Store
 Thumbs.db
+
+# Scala & sbt
+target/
+project/target/
+project/project/
+.idea/
+.bsp/
+.metals/
+.bloop/
+*.iml
