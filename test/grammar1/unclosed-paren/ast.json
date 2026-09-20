@@ -2,29 +2,37 @@
   "line": 1,
   "column": 15,
   "kind": "Program",
-  "body": [
-  {
-    "line": 1,
-    "column": 15,
-    "kind": "Return",
-    "value": {
+  "elems": [
+    {
       "line": 1,
-      "column": 14,
-      "kind": "BinOp",
-      "op": "+",
-      "left": {
-        "line": 1,
-        "column": 9,
-        "kind": "IntLiteral",
-        "value": 42
-      },
-      "right": {
-        "line": 1,
-        "column": 14,
-        "kind": "IntLiteral",
-        "value": 3
-      }
+      "column": 15,
+      "kind": "Return",
+      "value": null,
+      "elems": [
+        {
+          "line": 1,
+          "column": 14,
+          "kind": "BinOp",
+          "elems": [
+            {
+              "line": 1,
+              "column": 9,
+              "kind": "IntLiteral",
+              "value": 42,
+              "elems": []
+            },
+            {
+              "line": 1,
+              "column": 14,
+              "kind": "IntLiteral",
+              "value": 3,
+              "elems": []
+            }
+          ],
+          "value": "+"
+        }
+      ]
     }
-  }
-  ]
+  ],
+  "value": null
 }

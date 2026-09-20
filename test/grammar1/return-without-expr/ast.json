@@ -2,17 +2,22 @@
   "line": 1,
   "column": 7,
   "kind": "Program",
-  "body": [
-  {
-    "line": 1,
-    "column": 7,
-    "kind": "Return",
-    "value": {
+  "elems": [
+    {
       "line": 1,
       "column": 7,
-      "kind": "Error",
-      "message": "unexpected token 'SEMI'"
+      "kind": "Return",
+      "value": null,
+      "elems": [
+        {
+          "line": 1,
+          "column": 7,
+          "kind": "Error",
+          "elems": [],
+          "value": "unexpected token 'SEMI'"
+        }
+      ]
     }
-  }
-  ]
+  ],
+  "value": null
 }

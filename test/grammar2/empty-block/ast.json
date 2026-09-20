@@ -2,35 +2,45 @@
   "line": 2,
   "column": 12,
   "kind": "Program",
-  "body": [
-{
-  "line": 1,
-  "column": 10,
-    "kind": "Declare",
-    "mut": "var",
-    "name": "x",
-    "init": {
-  "line": 1,
-  "column": 9,
-      "kind": "IntLiteral",
-      "value": 1
-    }
-  },
-{
-  "line": 2,
-  "column": 12,
-    "kind": "While",
-    "cond": {
-  "line": 2,
-  "column": 8,
-      "kind": "Ident",
-      "name": "x"
+  "elems": [
+    {
+      "line": 1,
+      "column": 10,
+      "kind": "Declare",
+      "mut": "var",
+      "elems": [
+        {
+          "line": 1,
+          "column": 9,
+          "kind": "IntLiteral",
+          "value": 1,
+          "elems": []
+        }
+      ],
+      "value": "x"
     },
-    "body": {
-  "line": 2,
-  "column": 12,
-      "kind": "Block",
-      "body": [
-    ]}
-  }
-]}
+    {
+      "line": 2,
+      "column": 12,
+      "kind": "While",
+      "elems": [
+        {
+          "line": 2,
+          "column": 8,
+          "kind": "Ident",
+          "elems": [],
+          "value": "x"
+        },
+        {
+          "line": 2,
+          "column": 12,
+          "kind": "Block",
+          "elems": [],
+          "value": null
+        }
+      ],
+      "value": null
+    }
+  ],
+  "value": null
+}

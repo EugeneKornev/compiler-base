@@ -2,29 +2,38 @@
   "line": 3,
   "column": 1,
   "kind": "Program",
-  "body": [
-{
-  "line": 3,
-  "column": 1,
-    "kind": "FuncDecl",
-    "name": "foo",
-    "params": [],
-    "body": {
-  "line": 3,
-  "column": 1,
-      "kind": "Block",
-      "body": [
-{
-  "line": 2,
-  "column": 14,
-        "kind": "Return",
-        "value": {
-  "line": 2,
-  "column": 12,
-          "kind": "IntLiteral",
-          "value": 42
+  "elems": [
+    {
+      "line": 3,
+      "column": 1,
+      "kind": "FuncDecl",
+      "elems": [
+        {
+          "line": 3,
+          "column": 1,
+          "kind": "Block",
+          "elems": [
+            {
+              "line": 2,
+              "column": 14,
+              "kind": "Return",
+              "value": null,
+              "elems": [
+                {
+                  "line": 2,
+                  "column": 12,
+                  "kind": "IntLiteral",
+                  "value": 42,
+                  "elems": []
+                }
+              ]
+            }
+          ],
+          "value": null
         }
-      }
-    ]}
-  }
-]}
+      ],
+      "value": "foo"
+    }
+  ],
+  "value": null
+}

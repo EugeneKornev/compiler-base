@@ -2,17 +2,22 @@
   "line": 1,
   "column": 18,
   "kind": "Program",
-  "body": [
-  {
-    "line": 1,
-    "column": 18,
-    "kind": "Return",
-    "value": {
+  "elems": [
+    {
       "line": 1,
-      "column": 12,
-      "kind": "IntLiteral",
-      "value": 10
+      "column": 18,
+      "kind": "Return",
+      "value": null,
+      "elems": [
+        {
+          "line": 1,
+          "column": 12,
+          "kind": "IntLiteral",
+          "value": 10,
+          "elems": []
+        }
+      ]
     }
-  }
-  ]
+  ],
+  "value": null
 }

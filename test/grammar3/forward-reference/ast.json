@@ -2,69 +2,91 @@
   "line": 7,
   "column": 1,
   "kind": "Program",
-  "body": [
-{
-  "line": 3,
-  "column": 1,
-    "kind": "FuncDecl",
-    "name": "main",
-    "params": [],
-    "body": {
-  "line": 3,
-  "column": 1,
-      "kind": "Block",
-      "body": [
-{
-  "line": 2,
-  "column": 19,
-        "kind": "Return",
-        "value": {
-  "line": 2,
-  "column": 18,
-          "kind": "Call",
-          "callee": {
-  "line": 2,
-  "column": 12,
-            "kind": "Ident",
-            "name": "foo"
-          },
-          "args": [{
-  "line": 2,
-  "column": 16,
-  "kind": "IntLiteral",
-  "value": 42
-}]
+  "elems": [
+    {
+      "line": 3,
+      "column": 1,
+      "kind": "FuncDecl",
+      "elems": [
+        {
+          "line": 3,
+          "column": 1,
+          "kind": "Block",
+          "elems": [
+            {
+              "line": 2,
+              "column": 19,
+              "kind": "Return",
+              "value": null,
+              "elems": [
+                {
+                  "line": 2,
+                  "column": 18,
+                  "kind": "Call",
+                  "elems": [
+                    {
+                      "line": 2,
+                      "column": 12,
+                      "kind": "Ident",
+                      "elems": [],
+                      "value": "foo"
+                    },
+                    {
+                      "line": 2,
+                      "column": 16,
+                      "kind": "IntLiteral",
+                      "value": 42,
+                      "elems": []
+                    }
+                  ],
+                  "value": null
+                }
+              ]
+            }
+          ],
+          "value": null
         }
-      }
-    ]}
-  },
-{
-  "line": 7,
-  "column": 1,
-    "kind": "FuncDecl",
-    "name": "foo",
-    "params": [{
-  "line": 5,
-  "column": 9,
-  "kind": "Ident",
-  "name": "x"
-}],
-    "body": {
-  "line": 7,
-  "column": 1,
-      "kind": "Block",
-      "body": [
-{
-  "line": 6,
-  "column": 13,
-        "kind": "Return",
-        "value": {
-  "line": 6,
-  "column": 12,
+      ],
+      "value": "main"
+    },
+    {
+      "line": 7,
+      "column": 1,
+      "kind": "FuncDecl",
+      "elems": [
+        {
+          "line": 5,
+          "column": 9,
           "kind": "Ident",
-          "name": "x"
+          "elems": [],
+          "value": "x"
+        },
+        {
+          "line": 7,
+          "column": 1,
+          "kind": "Block",
+          "elems": [
+            {
+              "line": 6,
+              "column": 13,
+              "kind": "Return",
+              "value": null,
+              "elems": [
+                {
+                  "line": 6,
+                  "column": 12,
+                  "kind": "Ident",
+                  "elems": [],
+                  "value": "x"
+                }
+              ]
+            }
+          ],
+          "value": null
         }
-      }
-    ]}
-  }
-]}
+      ],
+      "value": "foo"
+    }
+  ],
+  "value": null
+}

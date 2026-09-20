@@ -2,22 +2,29 @@
   "line": 2,
   "column": 9,
   "kind": "Program",
-  "body": [
-  {
-    "line": 1,
-    "column": 9,
-    "kind": "Continue"
-  },
-  {
-    "line": 2,
-    "column": 9,
-    "kind": "Return",
-    "value": {
+  "elems": [
+    {
+      "line": 1,
+      "column": 9,
+      "kind": "Continue",
+      "elems": [],
+      "value": null
+    },
+    {
       "line": 2,
-      "column": 8,
-      "kind": "IntLiteral",
-      "value": 0
+      "column": 9,
+      "kind": "Return",
+      "value": null,
+      "elems": [
+        {
+          "line": 2,
+          "column": 8,
+          "kind": "IntLiteral",
+          "value": 0,
+          "elems": []
+        }
+      ]
     }
-  }
-  ]
+  ],
+  "value": null
 }

@@ -2,96 +2,121 @@
   "line": 2,
   "column": 15,
   "kind": "Program",
-  "body": [
-  {
-    "line": 1,
-    "column": 39,
-    "kind": "Declare",
-    "mut": "var",
-    "name": "result",
-    "init": {
+  "elems": [
+    {
       "line": 1,
-      "column": 38,
-      "kind": "BinOp",
-      "op": "/",
-      "left": {
-        "line": 1,
-        "column": 34,
-        "kind": "BinOp",
-        "op": "*",
-        "left": {
+      "column": 39,
+      "kind": "Declare",
+      "mut": "var",
+      "elems": [
+        {
           "line": 1,
-          "column": 24,
+          "column": 38,
           "kind": "BinOp",
-          "op": "*",
-          "left": {
-            "line": 1,
-            "column": 14,
-            "kind": "IntLiteral",
-            "value": 2
-          },
-          "right": {
-            "line": 1,
-            "column": 23,
-            "kind": "BinOp",
-            "op": "+",
-            "left": {
+          "elems": [
+            {
               "line": 1,
-              "column": 19,
-              "kind": "IntLiteral",
-              "value": 2
+              "column": 34,
+              "kind": "BinOp",
+              "elems": [
+                {
+                  "line": 1,
+                  "column": 24,
+                  "kind": "BinOp",
+                  "elems": [
+                    {
+                      "line": 1,
+                      "column": 14,
+                      "kind": "IntLiteral",
+                      "value": 2,
+                      "elems": []
+                    },
+                    {
+                      "line": 1,
+                      "column": 23,
+                      "kind": "BinOp",
+                      "elems": [
+                        {
+                          "line": 1,
+                          "column": 19,
+                          "kind": "IntLiteral",
+                          "value": 2,
+                          "elems": []
+                        },
+                        {
+                          "line": 1,
+                          "column": 23,
+                          "kind": "IntLiteral",
+                          "value": 3,
+                          "elems": []
+                        }
+                      ],
+                      "value": "+"
+                    }
+                  ],
+                  "value": "*"
+                },
+                {
+                  "line": 1,
+                  "column": 33,
+                  "kind": "BinOp",
+                  "elems": [
+                    {
+                      "line": 1,
+                      "column": 29,
+                      "kind": "IntLiteral",
+                      "value": 3,
+                      "elems": []
+                    },
+                    {
+                      "line": 1,
+                      "column": 33,
+                      "kind": "IntLiteral",
+                      "value": 4,
+                      "elems": []
+                    }
+                  ],
+                  "value": "-"
+                }
+              ],
+              "value": "*"
             },
-            "right": {
+            {
               "line": 1,
-              "column": 23,
+              "column": 38,
               "kind": "IntLiteral",
-              "value": 3
+              "value": 5,
+              "elems": []
             }
-          }
-        },
-        "right": {
-          "line": 1,
-          "column": 33,
-          "kind": "BinOp",
-          "op": "-",
-          "left": {
-            "line": 1,
-            "column": 29,
-            "kind": "IntLiteral",
-            "value": 3
-          },
-          "right": {
-            "line": 1,
-            "column": 33,
-            "kind": "IntLiteral",
-            "value": 4
-          }
+          ],
+          "value": "/"
         }
-      },
-      "right": {
-        "line": 1,
-        "column": 38,
-        "kind": "IntLiteral",
-        "value": 5
-      }
-    }
-  },
-  {
-    "line": 2,
-    "column": 15,
-    "kind": "Return",
-    "value": {
+      ],
+      "value": "result"
+    },
+    {
       "line": 2,
-      "column": 9,
-      "kind": "Unary",
-      "op": "-",
-      "operand": {
-        "line": 2,
-        "column": 9,
-        "kind": "Ident",
-        "name": "result"
-      }
+      "column": 15,
+      "kind": "Return",
+      "value": null,
+      "elems": [
+        {
+          "line": 2,
+          "column": 9,
+          "kind": "Unary",
+          "elems": [
+            {
+              "line": 2,
+              "column": 9,
+              "kind": "Ident",
+              "elems": [],
+              "value": "result"
+            }
+          ],
+          "value": "-"
+        }
+      ]
     }
-  }
-  ]
+  ],
+  "value": null
 }

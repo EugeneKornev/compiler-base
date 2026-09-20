@@ -2,58 +2,73 @@
   "line": 5,
   "column": 1,
   "kind": "Program",
-  "body": [
-{
-  "line": 5,
-  "column": 1,
-    "kind": "FuncDecl",
-    "name": "main",
-    "returnType": "Int64",
-    "params": [],
-    "body": {
-  "line": 5,
-  "column": 1,
-      "kind": "Block",
-      "body": [
-{
-  "line": 2,
-  "column": 28,
-        "kind": "Declare",
-        "mut": "val",
-        "type": "String",
-        "name": "s",
-        "init": {
-  "line": 2,
-  "column": 21,
-          "kind": "StringLiteral",
-          "value": "hello"
+  "elems": [
+    {
+      "line": 5,
+      "column": 1,
+      "kind": "FuncDecl",
+      "returnType": "Int64",
+      "elems": [
+        {
+          "line": 5,
+          "column": 1,
+          "kind": "Block",
+          "elems": [
+            {
+              "line": 2,
+              "column": 28,
+              "kind": "Declare",
+              "mut": "val",
+              "type": "String",
+              "elems": [
+                {
+                  "line": 2,
+                  "column": 21,
+                  "kind": "StringLiteral",
+                  "value": "hello",
+                  "elems": []
+                }
+              ],
+              "value": "s"
+            },
+            {
+              "line": 3,
+              "column": 30,
+              "kind": "Declare",
+              "mut": "val",
+              "type": "String",
+              "elems": [
+                {
+                  "line": 3,
+                  "column": 23,
+                  "kind": "StringLiteral",
+                  "value": "world",
+                  "elems": []
+                }
+              ],
+              "value": "msg"
+            },
+            {
+              "line": 4,
+              "column": 13,
+              "kind": "Return",
+              "value": null,
+              "elems": [
+                {
+                  "line": 4,
+                  "column": 12,
+                  "kind": "IntLiteral",
+                  "value": 0,
+                  "elems": []
+                }
+              ]
+            }
+          ],
+          "value": null
         }
-      },
-{
-  "line": 3,
-  "column": 30,
-        "kind": "Declare",
-        "mut": "val",
-        "type": "String",
-        "name": "msg",
-        "init": {
-  "line": 3,
-  "column": 23,
-          "kind": "StringLiteral",
-          "value": "world"
-        }
-      },
-{
-  "line": 4,
-  "column": 13,
-        "kind": "Return",
-        "value": {
-  "line": 4,
-  "column": 12,
-          "kind": "IntLiteral",
-          "value": 0
-        }
-      }
-    ]}
-  }
-]}
+      ],
+      "value": "main"
+    }
+  ],
+  "value": null
+}

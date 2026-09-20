@@ -2,84 +2,105 @@
   "line": 6,
   "column": 1,
   "kind": "Program",
-  "body": [
-{
-  "line": 6,
-  "column": 1,
-    "kind": "FuncDecl",
-    "name": "main",
-    "returnType": "Int64",
-    "params": [],
-    "body": {
-  "line": 6,
-  "column": 1,
-      "kind": "Block",
-      "body": [
-{
-  "line": 2,
-  "column": 23,
-        "kind": "Declare",
-        "mut": "val",
-        "type": "Bool",
-        "name": "a",
-        "init": {
-  "line": 2,
-  "column": 19,
-          "kind": "BoolLiteral",
-          "value": true
+  "elems": [
+    {
+      "line": 6,
+      "column": 1,
+      "kind": "FuncDecl",
+      "returnType": "Int64",
+      "elems": [
+        {
+          "line": 6,
+          "column": 1,
+          "kind": "Block",
+          "elems": [
+            {
+              "line": 2,
+              "column": 23,
+              "kind": "Declare",
+              "mut": "val",
+              "type": "Bool",
+              "elems": [
+                {
+                  "line": 2,
+                  "column": 19,
+                  "kind": "BoolLiteral",
+                  "value": true,
+                  "elems": []
+                }
+              ],
+              "value": "a"
+            },
+            {
+              "line": 3,
+              "column": 24,
+              "kind": "Declare",
+              "mut": "val",
+              "type": "Bool",
+              "elems": [
+                {
+                  "line": 3,
+                  "column": 19,
+                  "kind": "BoolLiteral",
+                  "value": false,
+                  "elems": []
+                }
+              ],
+              "value": "b"
+            },
+            {
+              "line": 4,
+              "column": 27,
+              "kind": "Declare",
+              "mut": "val",
+              "type": "Bool",
+              "elems": [
+                {
+                  "line": 4,
+                  "column": 26,
+                  "kind": "BinOp",
+                  "elems": [
+                    {
+                      "line": 4,
+                      "column": 21,
+                      "kind": "IntLiteral",
+                      "value": 1,
+                      "elems": []
+                    },
+                    {
+                      "line": 4,
+                      "column": 26,
+                      "kind": "IntLiteral",
+                      "value": 1,
+                      "elems": []
+                    }
+                  ],
+                  "value": "=="
+                }
+              ],
+              "value": "cmp"
+            },
+            {
+              "line": 5,
+              "column": 13,
+              "kind": "Return",
+              "value": null,
+              "elems": [
+                {
+                  "line": 5,
+                  "column": 12,
+                  "kind": "IntLiteral",
+                  "value": 0,
+                  "elems": []
+                }
+              ]
+            }
+          ],
+          "value": null
         }
-      },
-{
-  "line": 3,
-  "column": 24,
-        "kind": "Declare",
-        "mut": "val",
-        "type": "Bool",
-        "name": "b",
-        "init": {
-  "line": 3,
-  "column": 19,
-          "kind": "BoolLiteral",
-          "value": false
-        }
-      },
-{
-  "line": 4,
-  "column": 27,
-        "kind": "Declare",
-        "mut": "val",
-        "type": "Bool",
-        "name": "cmp",
-        "init": {
-  "line": 4,
-  "column": 26,
-          "kind": "BinOp",
-          "op": "==",
-          "left": {
-  "line": 4,
-  "column": 21,
-            "kind": "IntLiteral",
-            "value": 1
-          },
-          "right": {
-  "line": 4,
-  "column": 26,
-            "kind": "IntLiteral",
-            "value": 1
-          }
-        }
-      },
-{
-  "line": 5,
-  "column": 13,
-        "kind": "Return",
-        "value": {
-  "line": 5,
-  "column": 12,
-          "kind": "IntLiteral",
-          "value": 0
-        }
-      }
-    ]}
-  }
-]}
+      ],
+      "value": "main"
+    }
+  ],
+  "value": null
+}

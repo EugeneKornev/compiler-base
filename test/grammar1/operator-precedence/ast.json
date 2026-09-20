@@ -2,54 +2,68 @@
   "line": 2,
   "column": 9,
   "kind": "Program",
-  "body": [
-  {
-    "line": 1,
-    "column": 18,
-    "kind": "Declare",
-    "mut": "var",
-    "name": "x",
-    "init": {
+  "elems": [
+    {
       "line": 1,
-      "column": 17,
-      "kind": "BinOp",
-      "op": "+",
-      "left": {
-        "line": 1,
-        "column": 9,
-        "kind": "IntLiteral",
-        "value": 2
-      },
-      "right": {
-        "line": 1,
-        "column": 17,
-        "kind": "BinOp",
-        "op": "*",
-        "left": {
-          "line": 1,
-          "column": 13,
-          "kind": "IntLiteral",
-          "value": 3
-        },
-        "right": {
+      "column": 18,
+      "kind": "Declare",
+      "mut": "var",
+      "elems": [
+        {
           "line": 1,
           "column": 17,
-          "kind": "IntLiteral",
-          "value": 4
+          "kind": "BinOp",
+          "elems": [
+            {
+              "line": 1,
+              "column": 9,
+              "kind": "IntLiteral",
+              "value": 2,
+              "elems": []
+            },
+            {
+              "line": 1,
+              "column": 17,
+              "kind": "BinOp",
+              "elems": [
+                {
+                  "line": 1,
+                  "column": 13,
+                  "kind": "IntLiteral",
+                  "value": 3,
+                  "elems": []
+                },
+                {
+                  "line": 1,
+                  "column": 17,
+                  "kind": "IntLiteral",
+                  "value": 4,
+                  "elems": []
+                }
+              ],
+              "value": "*"
+            }
+          ],
+          "value": "+"
         }
-      }
-    }
-  },
-  {
-    "line": 2,
-    "column": 9,
-    "kind": "Return",
-    "value": {
+      ],
+      "value": "x"
+    },
+    {
       "line": 2,
-      "column": 8,
-      "kind": "Ident",
-      "name": "x"
+      "column": 9,
+      "kind": "Return",
+      "value": null,
+      "elems": [
+        {
+          "line": 2,
+          "column": 8,
+          "kind": "Ident",
+          "elems": [],
+          "value": "x"
+        }
+      ]
     }
-  }
-  ]
+  ],
+  "value": null
 }

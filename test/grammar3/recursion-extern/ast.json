@@ -2,206 +2,266 @@
   "line": 14,
   "column": 1,
   "kind": "Program",
-  "body": [
-{
-  "line": 6,
-  "column": 1,
-    "kind": "FuncDecl",
-    "name": "fib",
-    "params": [{
-  "line": 1,
-  "column": 9,
-  "kind": "Ident",
-  "name": "n"
-}],
-    "body": {
-  "line": 6,
-  "column": 1,
-      "kind": "Block",
-      "body": [
-{
-  "line": 4,
-  "column": 5,
-        "kind": "If",
-        "cond": {
-  "line": 2,
-  "column": 14,
-          "kind": "BinOp",
-          "op": "<=",
-          "left": {
-  "line": 2,
-  "column": 9,
-            "kind": "Ident",
-            "name": "n"
-          },
-          "right": {
-  "line": 2,
-  "column": 14,
-            "kind": "IntLiteral",
-            "value": 1
-          }
-        },
-        "then": {
-  "line": 4,
-  "column": 5,
-          "kind": "Block",
-          "body": [
-{
-  "line": 3,
-  "column": 17,
-            "kind": "Return",
-            "value": {
-  "line": 3,
-  "column": 16,
-              "kind": "Ident",
-              "name": "n"
-            }
-          }
-        ]}
-      },
-{
-  "line": 5,
-  "column": 35,
-        "kind": "Return",
-        "value": {
-  "line": 5,
-  "column": 34,
-          "kind": "BinOp",
-          "op": "+",
-          "left": {
-  "line": 5,
-  "column": 21,
-            "kind": "Call",
-            "callee": {
-  "line": 5,
-  "column": 12,
-              "kind": "Ident",
-              "name": "fib"
-            },
-            "args": [{
-  "line": 5,
-  "column": 20,
-  "kind": "BinOp",
-  "op": "-",
-  "left": {
-  "line": 5,
-  "column": 16,
-    "kind": "Ident",
-    "name": "n"
-  },
-  "right": {
-  "line": 5,
-  "column": 20,
-    "kind": "IntLiteral",
-    "value": 1
-  }
-}]
-          },
-          "right": {
-  "line": 5,
-  "column": 34,
-            "kind": "Call",
-            "callee": {
-  "line": 5,
-  "column": 25,
-              "kind": "Ident",
-              "name": "fib"
-            },
-            "args": [{
-  "line": 5,
-  "column": 33,
-  "kind": "BinOp",
-  "op": "-",
-  "left": {
-  "line": 5,
-  "column": 29,
-    "kind": "Ident",
-    "name": "n"
-  },
-  "right": {
-  "line": 5,
-  "column": 33,
-    "kind": "IntLiteral",
-    "value": 2
-  }
-}]
-          }
-        }
-      }
-    ]}
-  },
-{
-  "line": 8,
-  "column": 21,
-    "kind": "ExternDecl",
-    "name": "getchar",
-    "params": []
-  },
-{
-  "line": 14,
-  "column": 1,
-    "kind": "FuncDecl",
-    "name": "main",
-    "params": [],
-    "body": {
-  "line": 14,
-  "column": 1,
-      "kind": "Block",
-      "body": [
-{
-  "line": 11,
-  "column": 25,
-        "kind": "Declare",
-        "mut": "var",
-        "name": "result",
-        "init": {
-  "line": 11,
-  "column": 24,
-          "kind": "Call",
-          "callee": {
-  "line": 11,
-  "column": 18,
-            "kind": "Ident",
-            "name": "fib"
-          },
-          "args": [{
-  "line": 11,
-  "column": 22,
-  "kind": "IntLiteral",
-  "value": 10
-}]
-        }
-      },
-{
-  "line": 12,
-  "column": 22,
-        "kind": "Declare",
-        "mut": "var",
-        "name": "c",
-        "init": {
-  "line": 12,
-  "column": 21,
-          "kind": "Call",
-          "callee": {
-  "line": 12,
-  "column": 13,
-            "kind": "Ident",
-            "name": "getchar"
-          },
-          "args": []
-        }
-      },
-{
-  "line": 13,
-  "column": 18,
-        "kind": "Return",
-        "value": {
-  "line": 13,
-  "column": 12,
+  "elems": [
+    {
+      "line": 6,
+      "column": 1,
+      "kind": "FuncDecl",
+      "elems": [
+        {
+          "line": 1,
+          "column": 9,
           "kind": "Ident",
-          "name": "result"
+          "elems": [],
+          "value": "n"
+        },
+        {
+          "line": 6,
+          "column": 1,
+          "kind": "Block",
+          "elems": [
+            {
+              "line": 4,
+              "column": 5,
+              "kind": "If",
+              "elems": [
+                {
+                  "line": 2,
+                  "column": 14,
+                  "kind": "BinOp",
+                  "elems": [
+                    {
+                      "line": 2,
+                      "column": 9,
+                      "kind": "Ident",
+                      "elems": [],
+                      "value": "n"
+                    },
+                    {
+                      "line": 2,
+                      "column": 14,
+                      "kind": "IntLiteral",
+                      "value": 1,
+                      "elems": []
+                    }
+                  ],
+                  "value": "<="
+                },
+                {
+                  "line": 4,
+                  "column": 5,
+                  "kind": "Block",
+                  "elems": [
+                    {
+                      "line": 3,
+                      "column": 17,
+                      "kind": "Return",
+                      "value": null,
+                      "elems": [
+                        {
+                          "line": 3,
+                          "column": 16,
+                          "kind": "Ident",
+                          "elems": [],
+                          "value": "n"
+                        }
+                      ]
+                    }
+                  ],
+                  "value": null
+                }
+              ],
+              "value": null
+            },
+            {
+              "line": 5,
+              "column": 35,
+              "kind": "Return",
+              "value": null,
+              "elems": [
+                {
+                  "line": 5,
+                  "column": 34,
+                  "kind": "BinOp",
+                  "elems": [
+                    {
+                      "line": 5,
+                      "column": 21,
+                      "kind": "Call",
+                      "elems": [
+                        {
+                          "line": 5,
+                          "column": 12,
+                          "kind": "Ident",
+                          "elems": [],
+                          "value": "fib"
+                        },
+                        {
+                          "line": 5,
+                          "column": 20,
+                          "kind": "BinOp",
+                          "elems": [
+                            {
+                              "line": 5,
+                              "column": 16,
+                              "kind": "Ident",
+                              "elems": [],
+                              "value": "n"
+                            },
+                            {
+                              "line": 5,
+                              "column": 20,
+                              "kind": "IntLiteral",
+                              "value": 1,
+                              "elems": []
+                            }
+                          ],
+                          "value": "-"
+                        }
+                      ],
+                      "value": null
+                    },
+                    {
+                      "line": 5,
+                      "column": 34,
+                      "kind": "Call",
+                      "elems": [
+                        {
+                          "line": 5,
+                          "column": 25,
+                          "kind": "Ident",
+                          "elems": [],
+                          "value": "fib"
+                        },
+                        {
+                          "line": 5,
+                          "column": 33,
+                          "kind": "BinOp",
+                          "elems": [
+                            {
+                              "line": 5,
+                              "column": 29,
+                              "kind": "Ident",
+                              "elems": [],
+                              "value": "n"
+                            },
+                            {
+                              "line": 5,
+                              "column": 33,
+                              "kind": "IntLiteral",
+                              "value": 2,
+                              "elems": []
+                            }
+                          ],
+                          "value": "-"
+                        }
+                      ],
+                      "value": null
+                    }
+                  ],
+                  "value": "+"
+                }
+              ]
+            }
+          ],
+          "value": null
         }
-      }
-    ]}
-  }
-]}
+      ],
+      "value": "fib"
+    },
+    {
+      "line": 8,
+      "column": 21,
+      "kind": "ExternDecl",
+      "elems": [],
+      "value": "getchar"
+    },
+    {
+      "line": 14,
+      "column": 1,
+      "kind": "FuncDecl",
+      "elems": [
+        {
+          "line": 14,
+          "column": 1,
+          "kind": "Block",
+          "elems": [
+            {
+              "line": 11,
+              "column": 25,
+              "kind": "Declare",
+              "mut": "var",
+              "elems": [
+                {
+                  "line": 11,
+                  "column": 24,
+                  "kind": "Call",
+                  "elems": [
+                    {
+                      "line": 11,
+                      "column": 18,
+                      "kind": "Ident",
+                      "elems": [],
+                      "value": "fib"
+                    },
+                    {
+                      "line": 11,
+                      "column": 22,
+                      "kind": "IntLiteral",
+                      "value": 10,
+                      "elems": []
+                    }
+                  ],
+                  "value": null
+                }
+              ],
+              "value": "result"
+            },
+            {
+              "line": 12,
+              "column": 22,
+              "kind": "Declare",
+              "mut": "var",
+              "elems": [
+                {
+                  "line": 12,
+                  "column": 21,
+                  "kind": "Call",
+                  "elems": [
+                    {
+                      "line": 12,
+                      "column": 13,
+                      "kind": "Ident",
+                      "elems": [],
+                      "value": "getchar"
+                    }
+                  ],
+                  "value": null
+                }
+              ],
+              "value": "c"
+            },
+            {
+              "line": 13,
+              "column": 18,
+              "kind": "Return",
+              "value": null,
+              "elems": [
+                {
+                  "line": 13,
+                  "column": 12,
+                  "kind": "Ident",
+                  "elems": [],
+                  "value": "result"
+                }
+              ]
+            }
+          ],
+          "value": null
+        }
+      ],
+      "value": "main"
+    }
+  ],
+  "value": null
+}

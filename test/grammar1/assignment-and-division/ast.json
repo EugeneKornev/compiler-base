@@ -2,42 +2,53 @@
   "line": 2,
   "column": 13,
   "kind": "Program",
-  "body": [
-  {
-    "line": 1,
-    "column": 11,
-    "kind": "Declare",
-    "mut": "var",
-    "name": "x",
-    "init": {
+  "elems": [
+    {
       "line": 1,
-      "column": 9,
-      "kind": "IntLiteral",
-      "value": 10
-    }
-  },
-  {
-    "line": 2,
-    "column": 13,
-    "kind": "Return",
-    "value": {
+      "column": 11,
+      "kind": "Declare",
+      "mut": "var",
+      "elems": [
+        {
+          "line": 1,
+          "column": 9,
+          "kind": "IntLiteral",
+          "value": 10,
+          "elems": []
+        }
+      ],
+      "value": "x"
+    },
+    {
       "line": 2,
-      "column": 12,
-      "kind": "BinOp",
-      "op": "/",
-      "left": {
-        "line": 2,
-        "column": 8,
-        "kind": "Ident",
-        "name": "x"
-      },
-      "right": {
-        "line": 2,
-        "column": 12,
-        "kind": "IntLiteral",
-        "value": 2
-      }
+      "column": 13,
+      "kind": "Return",
+      "value": null,
+      "elems": [
+        {
+          "line": 2,
+          "column": 12,
+          "kind": "BinOp",
+          "elems": [
+            {
+              "line": 2,
+              "column": 8,
+              "kind": "Ident",
+              "elems": [],
+              "value": "x"
+            },
+            {
+              "line": 2,
+              "column": 12,
+              "kind": "IntLiteral",
+              "value": 2,
+              "elems": []
+            }
+          ],
+          "value": "/"
+        }
+      ]
     }
-  }
-  ]
+  ],
+  "value": null
 }

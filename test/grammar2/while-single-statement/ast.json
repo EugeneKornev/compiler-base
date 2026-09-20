@@ -2,58 +2,75 @@
   "line": 3,
   "column": 14,
   "kind": "Program",
-  "body": [
-{
-  "line": 1,
-  "column": 10,
-    "kind": "Declare",
-    "mut": "var",
-    "name": "x",
-    "init": {
-  "line": 1,
-  "column": 9,
-      "kind": "IntLiteral",
-      "value": 1
-    }
-  },
-{
-  "line": 3,
-  "column": 14,
-    "kind": "While",
-    "cond": {
-  "line": 2,
-  "column": 8,
-      "kind": "Ident",
-      "name": "x"
-    },
-    "body": {
-  "line": 3,
-  "column": 14,
-      "kind": "Assign",
-      "target": {
-  "line": 3,
-  "column": 5,
-        "kind": "Ident",
-        "name": "x"
-      },
-      "value": {
-  "line": 3,
-  "column": 13,
-        "kind": "BinOp",
-        "op": "-",
-        "left": {
-  "line": 3,
-  "column": 9,
-          "kind": "Ident",
-          "name": "x"
-        },
-        "right": {
-  "line": 3,
-  "column": 13,
+  "elems": [
+    {
+      "line": 1,
+      "column": 10,
+      "kind": "Declare",
+      "mut": "var",
+      "elems": [
+        {
+          "line": 1,
+          "column": 9,
           "kind": "IntLiteral",
-          "value": 1
+          "value": 1,
+          "elems": []
         }
-      }
+      ],
+      "value": "x"
+    },
+    {
+      "line": 3,
+      "column": 14,
+      "kind": "While",
+      "elems": [
+        {
+          "line": 2,
+          "column": 8,
+          "kind": "Ident",
+          "elems": [],
+          "value": "x"
+        },
+        {
+          "line": 3,
+          "column": 14,
+          "kind": "Assign",
+          "value": null,
+          "elems": [
+            {
+              "line": 3,
+              "column": 5,
+              "kind": "Ident",
+              "elems": [],
+              "value": "x"
+            },
+            {
+              "line": 3,
+              "column": 13,
+              "kind": "BinOp",
+              "elems": [
+                {
+                  "line": 3,
+                  "column": 9,
+                  "kind": "Ident",
+                  "elems": [],
+                  "value": "x"
+                },
+                {
+                  "line": 3,
+                  "column": 13,
+                  "kind": "IntLiteral",
+                  "value": 1,
+                  "elems": []
+                }
+              ],
+              "value": "-"
+            }
+          ]
+        }
+      ],
+      "value": null
     }
-  }
-]}
+  ],
+  "value": null
+}

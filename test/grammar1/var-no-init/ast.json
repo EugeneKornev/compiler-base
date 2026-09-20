@@ -2,19 +2,23 @@
   "line": 2,
   "column": 9,
   "kind": "Program",
-  "body": [
-  {
-    "line": 2,
-    "column": 9,
-    "kind": "Declare",
-    "mut": "var",
-    "name": "x",
-    "init": {
+  "elems": [
+    {
       "line": 2,
-      "column": 1,
-      "kind": "Error",
-      "message": "unexpected token 'RETURN'"
+      "column": 9,
+      "kind": "Declare",
+      "mut": "var",
+      "elems": [
+        {
+          "line": 2,
+          "column": 1,
+          "kind": "Error",
+          "elems": [],
+          "value": "unexpected token 'RETURN'"
+        }
+      ],
+      "value": "x"
     }
-  }
-  ]
+  ],
+  "value": null
 }

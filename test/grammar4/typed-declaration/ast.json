@@ -2,84 +2,105 @@
   "line": 6,
   "column": 1,
   "kind": "Program",
-  "body": [
-{
-  "line": 6,
-  "column": 1,
-    "kind": "FuncDecl",
-    "name": "main",
-    "returnType": "Int64",
-    "params": [],
-    "body": {
-  "line": 6,
-  "column": 1,
-      "kind": "Block",
-      "body": [
-{
-  "line": 2,
-  "column": 22,
-        "kind": "Declare",
-        "mut": "val",
-        "type": "Int64",
-        "name": "x",
-        "init": {
-  "line": 2,
-  "column": 20,
-          "kind": "IntLiteral",
-          "value": 42
+  "elems": [
+    {
+      "line": 6,
+      "column": 1,
+      "kind": "FuncDecl",
+      "returnType": "Int64",
+      "elems": [
+        {
+          "line": 6,
+          "column": 1,
+          "kind": "Block",
+          "elems": [
+            {
+              "line": 2,
+              "column": 22,
+              "kind": "Declare",
+              "mut": "val",
+              "type": "Int64",
+              "elems": [
+                {
+                  "line": 2,
+                  "column": 20,
+                  "kind": "IntLiteral",
+                  "value": 42,
+                  "elems": []
+                }
+              ],
+              "value": "x"
+            },
+            {
+              "line": 3,
+              "column": 22,
+              "kind": "Declare",
+              "mut": "val",
+              "type": "Int64",
+              "elems": [
+                {
+                  "line": 3,
+                  "column": 20,
+                  "kind": "IntLiteral",
+                  "value": 10,
+                  "elems": []
+                }
+              ],
+              "value": "y"
+            },
+            {
+              "line": 4,
+              "column": 27,
+              "kind": "Declare",
+              "mut": "var",
+              "type": "Int64",
+              "elems": [
+                {
+                  "line": 4,
+                  "column": 26,
+                  "kind": "BinOp",
+                  "elems": [
+                    {
+                      "line": 4,
+                      "column": 22,
+                      "kind": "Ident",
+                      "elems": [],
+                      "value": "x"
+                    },
+                    {
+                      "line": 4,
+                      "column": 26,
+                      "kind": "Ident",
+                      "elems": [],
+                      "value": "y"
+                    }
+                  ],
+                  "value": "+"
+                }
+              ],
+              "value": "sum"
+            },
+            {
+              "line": 5,
+              "column": 15,
+              "kind": "Return",
+              "value": null,
+              "elems": [
+                {
+                  "line": 5,
+                  "column": 12,
+                  "kind": "Ident",
+                  "elems": [],
+                  "value": "sum"
+                }
+              ]
+            }
+          ],
+          "value": null
         }
-      },
-{
-  "line": 3,
-  "column": 22,
-        "kind": "Declare",
-        "mut": "val",
-        "type": "Int64",
-        "name": "y",
-        "init": {
-  "line": 3,
-  "column": 20,
-          "kind": "IntLiteral",
-          "value": 10
-        }
-      },
-{
-  "line": 4,
-  "column": 27,
-        "kind": "Declare",
-        "mut": "var",
-        "type": "Int64",
-        "name": "sum",
-        "init": {
-  "line": 4,
-  "column": 26,
-          "kind": "BinOp",
-          "op": "+",
-          "left": {
-  "line": 4,
-  "column": 22,
-            "kind": "Ident",
-            "name": "x"
-          },
-          "right": {
-  "line": 4,
-  "column": 26,
-            "kind": "Ident",
-            "name": "y"
-          }
-        }
-      },
-{
-  "line": 5,
-  "column": 15,
-        "kind": "Return",
-        "value": {
-  "line": 5,
-  "column": 12,
-          "kind": "Ident",
-          "name": "sum"
-        }
-      }
-    ]}
-  }
-]}
+      ],
+      "value": "main"
+    }
+  ],
+  "value": null
+}

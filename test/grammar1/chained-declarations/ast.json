@@ -2,43 +2,54 @@
   "line": 3,
   "column": 9,
   "kind": "Program",
-  "body": [
-  {
-    "line": 1,
-    "column": 10,
-    "kind": "Declare",
-    "mut": "var",
-    "name": "x",
-    "init": {
+  "elems": [
+    {
       "line": 1,
-      "column": 9,
-      "kind": "IntLiteral",
-      "value": 5
-    }
-  },
-  {
-    "line": 2,
-    "column": 10,
-    "kind": "Declare",
-    "mut": "var",
-    "name": "y",
-    "init": {
+      "column": 10,
+      "kind": "Declare",
+      "mut": "var",
+      "elems": [
+        {
+          "line": 1,
+          "column": 9,
+          "kind": "IntLiteral",
+          "value": 5,
+          "elems": []
+        }
+      ],
+      "value": "x"
+    },
+    {
       "line": 2,
-      "column": 9,
-      "kind": "Ident",
-      "name": "x"
-    }
-  },
-  {
-    "line": 3,
-    "column": 9,
-    "kind": "Return",
-    "value": {
+      "column": 10,
+      "kind": "Declare",
+      "mut": "var",
+      "elems": [
+        {
+          "line": 2,
+          "column": 9,
+          "kind": "Ident",
+          "elems": [],
+          "value": "x"
+        }
+      ],
+      "value": "y"
+    },
+    {
       "line": 3,
-      "column": 8,
-      "kind": "Ident",
-      "name": "y"
+      "column": 9,
+      "kind": "Return",
+      "value": null,
+      "elems": [
+        {
+          "line": 3,
+          "column": 8,
+          "kind": "Ident",
+          "elems": [],
+          "value": "y"
+        }
+      ]
     }
-  }
-  ]
+  ],
+  "value": null
 }

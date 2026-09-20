@@ -2,34 +2,44 @@
   "line": 2,
   "column": 9,
   "kind": "Program",
-  "body": [
-  {
-    "line": 1,
-    "column": 7,
-    "kind": "Assign",
-    "target": {
+  "elems": [
+    {
       "line": 1,
-      "column": 1,
-      "kind": "Ident",
-      "name": "x"
+      "column": 7,
+      "kind": "Assign",
+      "value": null,
+      "elems": [
+        {
+          "line": 1,
+          "column": 1,
+          "kind": "Ident",
+          "elems": [],
+          "value": "x"
+        },
+        {
+          "line": 1,
+          "column": 5,
+          "kind": "IntLiteral",
+          "value": 42,
+          "elems": []
+        }
+      ]
     },
-    "value": {
-      "line": 1,
-      "column": 5,
-      "kind": "IntLiteral",
-      "value": 42
-    }
-  },
-  {
-    "line": 2,
-    "column": 9,
-    "kind": "Return",
-    "value": {
+    {
       "line": 2,
-      "column": 8,
-      "kind": "Ident",
-      "name": "x"
+      "column": 9,
+      "kind": "Return",
+      "value": null,
+      "elems": [
+        {
+          "line": 2,
+          "column": 8,
+          "kind": "Ident",
+          "elems": [],
+          "value": "x"
+        }
+      ]
     }
-  }
-  ]
+  ],
+  "value": null
 }
