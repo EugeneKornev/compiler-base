@@ -16,7 +16,7 @@
       "cmd": ["sbt", "--batch", "--error", "run --parse {input} -o {ast_out}"],
       "out": "{ast_out}",
       "preprocess": [
-        {"type": "json", "keep": ["kind", "line", "column", "value", "elems"]}
+        {"type": "json", "keep": ["kind", "line", "column", "elems"]}
       ]
     },
     "llvm": {
