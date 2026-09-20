@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate all config.json and meta.json files against their JSON schemas.
+"""Validate all config.json, meta.json and tokens.json files against their JSON schemas.
 
 Usage:
   python test/validate_schemas.py
@@ -63,6 +63,13 @@ def main():
     for path in sorted(glob.glob(meta_pattern, recursive=True)):
         results.append(validate_file(path, meta_schema, "meta.json"))
 
+    tokens_schema = load_schema("tokens.schema.json")
+
+    # 3. Validate all tokens.json files under test/
+    tokens_pattern = os.path.join(test_root, "**", "tokens.json")
+    for path in sorted(glob.glob(tokens_pattern, recursive=True)):
+        results.append(validate_file(path, tokens_schema, "tokens.json"))
+
     # Print results
     failed = 0
     for path, error in results:
@@ -75,7 +82,7 @@ def main():
             failed += 1
 
     total = len(results)
-    print(f"\n{total - failed}/{total} files valid", file=sys.stderr)
+    print(f"\n{total - failed}/{total} files valid (config.json / meta.json / tokens.json)", file=sys.stderr)
     return 1 if failed else 0
 
 
