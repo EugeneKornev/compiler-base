@@ -1,55 +1,60 @@
 {
-  "line": 3,
-  "column": 9,
+  "line": 1,
+  "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
     {
       "line": 1,
-      "column": 11,
-      "kind": "Declare",
-      "mut": "var",
-      "elems": [
-        {
-          "line": 1,
-          "column": 9,
-          "kind": "IntLiteral",
-          "value": 42,
-          "elems": []
-        }
-      ],
-      "value": "x"
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 9,
+      "kind": "IntLiteral",
+      "elems": []
+    }
+    ]
+  },
+  {
+    "line": 2,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "val",
+    "elems": [
+    {
+      "line": 2,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
       "line": 2,
-      "column": 11,
-      "kind": "Declare",
-      "mut": "val",
-      "elems": [
-        {
-          "line": 2,
-          "column": 9,
-          "kind": "IntLiteral",
-          "value": 37,
-          "elems": []
-        }
-      ],
-      "value": "x"
-    },
+      "column": 9,
+      "kind": "IntLiteral",
+      "elems": []
+    }
+    ]
+  },
+  {
+    "line": 3,
+    "column": 1,
+    "kind": "Return",
+    "elems": [
     {
       "line": 3,
-      "column": 9,
-      "kind": "Return",
-      "value": null,
-      "elems": [
-        {
-          "line": 3,
-          "column": 8,
-          "kind": "Ident",
-          "elems": [],
-          "value": "x"
-        }
-      ]
+      "column": 8,
+      "kind": "Ident",
+      "elems": []
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }

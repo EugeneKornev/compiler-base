@@ -1,54 +1,60 @@
 {
-  "line": 5,
+  "line": 1,
   "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "FuncDecl",
+    "elems": [
     {
       "line": 1,
-      "column": 12,
-      "kind": "FuncDecl",
-      "elems": [
-        {
-          "line": 1,
-          "column": 12,
-          "kind": "Block",
-          "elems": [],
-          "value": null
-        }
-      ],
-      "value": "foo"
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
-      "line": 5,
-      "column": 1,
-      "kind": "FuncDecl",
+      "line": 1,
+      "column": 11,
+      "kind": "Block",
       "elems": [
-        {
-          "line": 5,
-          "column": 1,
-          "kind": "Block",
-          "elems": [
-            {
-              "line": 4,
-              "column": 13,
-              "kind": "Return",
-              "value": null,
-              "elems": [
-                {
-                  "line": 4,
-                  "column": 12,
-                  "kind": "IntLiteral",
-                  "value": 0,
-                  "elems": []
-                }
-              ]
-            }
-          ],
-          "value": null
-        }
-      ],
-      "value": "main"
+      ]
     }
-  ],
-  "value": null
+    ]
+  },
+  {
+    "line": 3,
+    "column": 1,
+    "kind": "FuncDecl",
+    "elems": [
+    {
+      "line": 3,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 3,
+      "column": 12,
+      "kind": "Block",
+      "elems": [
+      {
+        "line": 4,
+        "column": 5,
+        "kind": "Return",
+        "elems": [
+        {
+          "line": 4,
+          "column": 12,
+          "kind": "IntLiteral",
+          "elems": []
+        }
+        ]
+      }
+      ]
+    }
+    ]
+  }
+  ]
 }

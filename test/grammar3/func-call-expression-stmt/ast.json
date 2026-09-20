@@ -1,78 +1,73 @@
 {
-  "line": 7,
+  "line": 1,
   "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "FuncDecl",
+    "elems": [
     {
-      "line": 3,
-      "column": 1,
-      "kind": "FuncDecl",
-      "elems": [
-        {
-          "line": 3,
-          "column": 1,
-          "kind": "Block",
-          "elems": [
-            {
-              "line": 2,
-              "column": 10,
-              "kind": "ExprStmt",
-              "value": null,
-              "elems": [
-                {
-                  "line": 2,
-                  "column": 9,
-                  "kind": "Call",
-                  "elems": [
-                    {
-                      "line": 2,
-                      "column": 5,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "bar"
-                    }
-                  ],
-                  "value": null
-                }
-              ]
-            }
-          ],
-          "value": null
-        }
-      ],
-      "value": "foo"
+      "line": 1,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
-      "line": 7,
-      "column": 1,
-      "kind": "FuncDecl",
+      "line": 1,
+      "column": 11,
+      "kind": "Block",
       "elems": [
+      {
+        "line": 2,
+        "column": 8,
+        "kind": "Call",
+        "elems": [
         {
-          "line": 7,
-          "column": 1,
-          "kind": "Block",
-          "elems": [
-            {
-              "line": 6,
-              "column": 13,
-              "kind": "Return",
-              "value": null,
-              "elems": [
-                {
-                  "line": 6,
-                  "column": 12,
-                  "kind": "IntLiteral",
-                  "value": 0,
-                  "elems": []
-                }
-              ]
-            }
-          ],
-          "value": null
+          "line": 2,
+          "column": 5,
+          "kind": "Ident",
+          "elems": []
         }
-      ],
-      "value": "main"
+        ]
+      }
+      ]
     }
-  ],
-  "value": null
+    ]
+  },
+  {
+    "line": 5,
+    "column": 1,
+    "kind": "FuncDecl",
+    "elems": [
+    {
+      "line": 5,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 5,
+      "column": 12,
+      "kind": "Block",
+      "elems": [
+      {
+        "line": 6,
+        "column": 5,
+        "kind": "Return",
+        "elems": [
+        {
+          "line": 6,
+          "column": 12,
+          "kind": "IntLiteral",
+          "elems": []
+        }
+        ]
+      }
+      ]
+    }
+    ]
+  }
+  ]
 }

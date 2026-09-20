@@ -1,94 +1,100 @@
 {
-  "line": 3,
-  "column": 21,
+  "line": 1,
+  "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
     {
       "line": 1,
-      "column": 13,
-      "kind": "Declare",
-      "mut": "var",
-      "elems": [
-        {
-          "line": 1,
-          "column": 9,
-          "kind": "BoolLiteral",
-          "value": true,
-          "elems": []
-        }
-      ],
-      "value": "a"
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 9,
+      "kind": "BoolLiteral",
+      "elems": []
+    }
+    ]
+  },
+  {
+    "line": 2,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
+    {
+      "line": 2,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
       "line": 2,
-      "column": 14,
-      "kind": "Declare",
-      "mut": "var",
-      "elems": [
-        {
-          "line": 2,
-          "column": 9,
-          "kind": "BoolLiteral",
-          "value": false,
-          "elems": []
-        }
-      ],
-      "value": "b"
+      "column": 9,
+      "kind": "BoolLiteral",
+      "elems": []
+    }
+    ]
+  },
+  {
+    "line": 3,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
+    {
+      "line": 3,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
       "line": 3,
-      "column": 21,
-      "kind": "Declare",
-      "mut": "var",
+      "column": 16,
+      "kind": "BinOp",
       "elems": [
+      {
+        "line": 3,
+        "column": 11,
+        "kind": "BinOp",
+        "elems": [
+        {
+          "line": 3,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 3,
+          "column": 14,
+          "kind": "Ident",
+          "elems": []
+        }
+        ]
+      },
+      {
+        "line": 3,
+        "column": 19,
+        "kind": "Unary",
+        "elems": [
         {
           "line": 3,
           "column": 20,
-          "kind": "BinOp",
-          "elems": [
-            {
-              "line": 3,
-              "column": 14,
-              "kind": "BinOp",
-              "elems": [
-                {
-                  "line": 3,
-                  "column": 9,
-                  "kind": "Ident",
-                  "elems": [],
-                  "value": "a"
-                },
-                {
-                  "line": 3,
-                  "column": 14,
-                  "kind": "Ident",
-                  "elems": [],
-                  "value": "b"
-                }
-              ],
-              "value": "&&"
-            },
-            {
-              "line": 3,
-              "column": 20,
-              "kind": "Unary",
-              "elems": [
-                {
-                  "line": 3,
-                  "column": 20,
-                  "kind": "Ident",
-                  "elems": [],
-                  "value": "a"
-                }
-              ],
-              "value": "!"
-            }
-          ],
-          "value": "||"
+          "kind": "Ident",
+          "elems": []
         }
-      ],
-      "value": "c"
+        ]
+      }
+      ]
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }

@@ -1,181 +1,175 @@
 {
-  "line": 8,
+  "line": 1,
   "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "FuncDecl",
+    "elems": [
     {
-      "line": 3,
-      "column": 1,
-      "kind": "FuncDecl",
-      "elems": [
-        {
-          "line": 1,
-          "column": 9,
-          "kind": "Ident",
-          "elems": [],
-          "value": "a"
-        },
-        {
-          "line": 1,
-          "column": 12,
-          "kind": "Ident",
-          "elems": [],
-          "value": "b"
-        },
-        {
-          "line": 3,
-          "column": 1,
-          "kind": "Block",
-          "elems": [
-            {
-              "line": 2,
-              "column": 17,
-              "kind": "Return",
-              "value": null,
-              "elems": [
-                {
-                  "line": 2,
-                  "column": 16,
-                  "kind": "BinOp",
-                  "elems": [
-                    {
-                      "line": 2,
-                      "column": 12,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "a"
-                    },
-                    {
-                      "line": 2,
-                      "column": 16,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "b"
-                    }
-                  ],
-                  "value": "+"
-                }
-              ]
-            }
-          ],
-          "value": null
-        }
-      ],
-      "value": "add"
+      "line": 1,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
-      "line": 8,
-      "column": 1,
-      "kind": "FuncDecl",
+      "line": 1,
+      "column": 9,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 12,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 15,
+      "kind": "Block",
       "elems": [
+      {
+        "line": 2,
+        "column": 5,
+        "kind": "Return",
+        "elems": [
         {
-          "line": 8,
-          "column": 1,
-          "kind": "Block",
+          "line": 2,
+          "column": 14,
+          "kind": "BinOp",
           "elems": [
+          {
+            "line": 2,
+            "column": 12,
+            "kind": "Ident",
+            "elems": []
+          },
+          {
+            "line": 2,
+            "column": 16,
+            "kind": "Ident",
+            "elems": []
+          }
+          ]
+        }
+        ]
+      }
+      ]
+    }
+    ]
+  },
+  {
+    "line": 5,
+    "column": 1,
+    "kind": "FuncDecl",
+    "elems": [
+    {
+      "line": 5,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 5,
+      "column": 12,
+      "kind": "Block",
+      "elems": [
+      {
+        "line": 6,
+        "column": 5,
+        "kind": "Declare",
+        "mut": "var",
+        "elems": [
+        {
+          "line": 6,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 6,
+          "column": 16,
+          "kind": "Call",
+          "elems": [
+          {
+            "line": 6,
+            "column": 13,
+            "kind": "Ident",
+            "elems": []
+          },
+          {
+            "line": 6,
+            "column": 20,
+            "kind": "Call",
+            "elems": [
             {
               "line": 6,
-              "column": 38,
-              "kind": "Declare",
-              "mut": "var",
-              "elems": [
-                {
-                  "line": 6,
-                  "column": 37,
-                  "kind": "Call",
-                  "elems": [
-                    {
-                      "line": 6,
-                      "column": 13,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "add"
-                    },
-                    {
-                      "line": 6,
-                      "column": 25,
-                      "kind": "Call",
-                      "elems": [
-                        {
-                          "line": 6,
-                          "column": 17,
-                          "kind": "Ident",
-                          "elems": [],
-                          "value": "add"
-                        },
-                        {
-                          "line": 6,
-                          "column": 21,
-                          "kind": "IntLiteral",
-                          "value": 1,
-                          "elems": []
-                        },
-                        {
-                          "line": 6,
-                          "column": 24,
-                          "kind": "IntLiteral",
-                          "value": 2,
-                          "elems": []
-                        }
-                      ],
-                      "value": null
-                    },
-                    {
-                      "line": 6,
-                      "column": 36,
-                      "kind": "Call",
-                      "elems": [
-                        {
-                          "line": 6,
-                          "column": 28,
-                          "kind": "Ident",
-                          "elems": [],
-                          "value": "add"
-                        },
-                        {
-                          "line": 6,
-                          "column": 32,
-                          "kind": "IntLiteral",
-                          "value": 3,
-                          "elems": []
-                        },
-                        {
-                          "line": 6,
-                          "column": 35,
-                          "kind": "IntLiteral",
-                          "value": 4,
-                          "elems": []
-                        }
-                      ],
-                      "value": null
-                    }
-                  ],
-                  "value": null
-                }
-              ],
-              "value": "x"
+              "column": 17,
+              "kind": "Ident",
+              "elems": []
             },
             {
-              "line": 7,
-              "column": 13,
-              "kind": "Return",
-              "value": null,
-              "elems": [
-                {
-                  "line": 7,
-                  "column": 12,
-                  "kind": "Ident",
-                  "elems": [],
-                  "value": "x"
-                }
-              ]
+              "line": 6,
+              "column": 21,
+              "kind": "IntLiteral",
+              "elems": []
+            },
+            {
+              "line": 6,
+              "column": 24,
+              "kind": "IntLiteral",
+              "elems": []
             }
-          ],
-          "value": null
+            ]
+          },
+          {
+            "line": 6,
+            "column": 31,
+            "kind": "Call",
+            "elems": [
+            {
+              "line": 6,
+              "column": 28,
+              "kind": "Ident",
+              "elems": []
+            },
+            {
+              "line": 6,
+              "column": 32,
+              "kind": "IntLiteral",
+              "elems": []
+            },
+            {
+              "line": 6,
+              "column": 35,
+              "kind": "IntLiteral",
+              "elems": []
+            }
+            ]
+          }
+          ]
         }
-      ],
-      "value": "main"
+        ]
+      },
+      {
+        "line": 7,
+        "column": 5,
+        "kind": "Return",
+        "elems": [
+        {
+          "line": 7,
+          "column": 12,
+          "kind": "Ident",
+          "elems": []
+        }
+        ]
+      }
+      ]
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }

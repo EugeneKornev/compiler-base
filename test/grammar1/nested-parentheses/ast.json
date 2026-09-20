@@ -1,23 +1,20 @@
 {
   "line": 1,
-  "column": 18,
+  "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "Return",
+    "elems": [
     {
       "line": 1,
-      "column": 18,
-      "kind": "Return",
-      "value": null,
-      "elems": [
-        {
-          "line": 1,
-          "column": 12,
-          "kind": "IntLiteral",
-          "value": 10,
-          "elems": []
-        }
-      ]
+      "column": 12,
+      "kind": "IntLiteral",
+      "elems": []
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }

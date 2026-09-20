@@ -1,132 +1,160 @@
 {
-  "line": 8,
+  "line": 1,
   "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "ExternDecl",
+    "returnType": "Int64",
+    "elems": [
     {
       "line": 1,
-      "column": 35,
-      "kind": "ExternDecl",
-      "returnType": "Int64",
+      "column": 12,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 20,
+      "kind": "Param",
+      "type": "Int8",
       "elems": [
-        {
-          "line": 1,
-          "column": 23,
-          "kind": "Param",
-          "type": "Int8",
-          "elems": [],
-          "value": "c"
-        }
-      ],
-      "value": "putchar"
+      {
+        "line": 1,
+        "column": 20,
+        "kind": "Ident",
+        "elems": []
+      }
+      ]
+    }
+    ]
+  },
+  {
+    "line": 2,
+    "column": 1,
+    "kind": "ExternDecl",
+    "returnType": "Int64",
+    "elems": [
+    {
+      "line": 2,
+      "column": 12,
+      "kind": "Ident",
+      "elems": []
     },
     {
       "line": 2,
-      "column": 36,
-      "kind": "ExternDecl",
-      "returnType": "Int64",
+      "column": 17,
+      "kind": "Param",
+      "type": "Int64",
       "elems": [
-        {
-          "line": 2,
-          "column": 23,
-          "kind": "Param",
-          "type": "Int64",
-          "elems": [],
-          "value": "code"
-        }
-      ],
-      "value": "exit"
+      {
+        "line": 2,
+        "column": 17,
+        "kind": "Ident",
+        "elems": []
+      }
+      ]
+    }
+    ]
+  },
+  {
+    "line": 4,
+    "column": 1,
+    "kind": "FuncDecl",
+    "returnType": "Int64",
+    "elems": [
+    {
+      "line": 4,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
-      "line": 8,
-      "column": 1,
-      "kind": "FuncDecl",
-      "returnType": "Int64",
+      "line": 4,
+      "column": 19,
+      "kind": "Block",
       "elems": [
+      {
+        "line": 5,
+        "column": 5,
+        "kind": "Declare",
+        "mut": "val",
+        "type": "Int64",
+        "elems": [
         {
-          "line": 8,
-          "column": 1,
-          "kind": "Block",
+          "line": 5,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 5,
+          "column": 27,
+          "kind": "Call",
           "elems": [
+          {
+            "line": 5,
+            "column": 20,
+            "kind": "Ident",
+            "elems": []
+          },
+          {
+            "line": 5,
+            "column": 28,
+            "kind": "Cast",
+            "type": "Int8",
+            "elems": [
             {
               "line": 5,
-              "column": 43,
-              "kind": "Declare",
-              "mut": "val",
-              "type": "Int64",
-              "elems": [
-                {
-                  "line": 5,
-                  "column": 42,
-                  "kind": "Call",
-                  "elems": [
-                    {
-                      "line": 5,
-                      "column": 20,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "putchar"
-                    },
-                    {
-                      "line": 5,
-                      "column": 41,
-                      "kind": "Cast",
-                      "type": "Int8",
-                      "value": "Int8",
-                      "elems": [
-                        {
-                          "line": 5,
-                          "column": 39,
-                          "kind": "IntLiteral",
-                          "value": 65,
-                          "elems": []
-                        }
-                      ]
-                    }
-                  ],
-                  "value": null
-                }
-              ],
-              "value": "r"
-            },
-            {
-              "line": 6,
-              "column": 24,
-              "kind": "Declare",
-              "mut": "var",
-              "type": "Int64",
-              "elems": [
-                {
-                  "line": 6,
-                  "column": 23,
-                  "kind": "IntLiteral",
-                  "value": 0,
-                  "elems": []
-                }
-              ],
-              "value": "code"
-            },
-            {
-              "line": 7,
-              "column": 16,
-              "kind": "Return",
-              "value": null,
-              "elems": [
-                {
-                  "line": 7,
-                  "column": 12,
-                  "kind": "Ident",
-                  "elems": [],
-                  "value": "code"
-                }
-              ]
+              "column": 39,
+              "kind": "IntLiteral",
+              "elems": []
             }
-          ],
-          "value": null
+            ]
+          }
+          ]
         }
-      ],
-      "value": "main"
+        ]
+      },
+      {
+        "line": 6,
+        "column": 5,
+        "kind": "Declare",
+        "mut": "var",
+        "type": "Int64",
+        "elems": [
+        {
+          "line": 6,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 6,
+          "column": 23,
+          "kind": "IntLiteral",
+          "elems": []
+        }
+        ]
+      },
+      {
+        "line": 7,
+        "column": 5,
+        "kind": "Return",
+        "elems": [
+        {
+          "line": 7,
+          "column": 12,
+          "kind": "Ident",
+          "elems": []
+        }
+        ]
+      }
+      ]
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }

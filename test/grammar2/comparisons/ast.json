@@ -1,194 +1,205 @@
 {
-  "line": 6,
-  "column": 20,
+  "line": 1,
+  "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
     {
       "line": 1,
-      "column": 17,
-      "kind": "Declare",
-      "mut": "var",
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 13,
+      "kind": "BinOp",
       "elems": [
-        {
-          "line": 1,
-          "column": 16,
-          "kind": "BinOp",
-          "elems": [
-            {
-              "line": 1,
-              "column": 11,
-              "kind": "IntLiteral",
-              "value": 1,
-              "elems": []
-            },
-            {
-              "line": 1,
-              "column": 16,
-              "kind": "IntLiteral",
-              "value": 2,
-              "elems": []
-            }
-          ],
-          "value": "=="
-        }
-      ],
-      "value": "cmp"
+      {
+        "line": 1,
+        "column": 11,
+        "kind": "IntLiteral",
+        "elems": []
+      },
+      {
+        "line": 1,
+        "column": 16,
+        "kind": "IntLiteral",
+        "elems": []
+      }
+      ]
+    }
+    ]
+  },
+  {
+    "line": 2,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
+    {
+      "line": 2,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
       "line": 2,
-      "column": 18,
-      "kind": "Declare",
-      "mut": "var",
+      "column": 14,
+      "kind": "BinOp",
       "elems": [
-        {
-          "line": 2,
-          "column": 17,
-          "kind": "BinOp",
-          "elems": [
-            {
-              "line": 2,
-              "column": 12,
-              "kind": "IntLiteral",
-              "value": 3,
-              "elems": []
-            },
-            {
-              "line": 2,
-              "column": 17,
-              "kind": "IntLiteral",
-              "value": 4,
-              "elems": []
-            }
-          ],
-          "value": "!="
-        }
-      ],
-      "value": "cmp2"
+      {
+        "line": 2,
+        "column": 12,
+        "kind": "IntLiteral",
+        "elems": []
+      },
+      {
+        "line": 2,
+        "column": 17,
+        "kind": "IntLiteral",
+        "elems": []
+      }
+      ]
+    }
+    ]
+  },
+  {
+    "line": 3,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
+    {
+      "line": 3,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
       "line": 3,
-      "column": 17,
-      "kind": "Declare",
-      "mut": "var",
+      "column": 14,
+      "kind": "BinOp",
       "elems": [
-        {
-          "line": 3,
-          "column": 16,
-          "kind": "BinOp",
-          "elems": [
-            {
-              "line": 3,
-              "column": 12,
-              "kind": "IntLiteral",
-              "value": 5,
-              "elems": []
-            },
-            {
-              "line": 3,
-              "column": 16,
-              "kind": "IntLiteral",
-              "value": 6,
-              "elems": []
-            }
-          ],
-          "value": "<"
-        }
-      ],
-      "value": "cmp3"
+      {
+        "line": 3,
+        "column": 12,
+        "kind": "IntLiteral",
+        "elems": []
+      },
+      {
+        "line": 3,
+        "column": 16,
+        "kind": "IntLiteral",
+        "elems": []
+      }
+      ]
+    }
+    ]
+  },
+  {
+    "line": 4,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
+    {
+      "line": 4,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
       "line": 4,
-      "column": 17,
-      "kind": "Declare",
-      "mut": "var",
+      "column": 14,
+      "kind": "BinOp",
       "elems": [
-        {
-          "line": 4,
-          "column": 16,
-          "kind": "BinOp",
-          "elems": [
-            {
-              "line": 4,
-              "column": 12,
-              "kind": "IntLiteral",
-              "value": 7,
-              "elems": []
-            },
-            {
-              "line": 4,
-              "column": 16,
-              "kind": "IntLiteral",
-              "value": 8,
-              "elems": []
-            }
-          ],
-          "value": ">"
-        }
-      ],
-      "value": "cmp4"
+      {
+        "line": 4,
+        "column": 12,
+        "kind": "IntLiteral",
+        "elems": []
+      },
+      {
+        "line": 4,
+        "column": 16,
+        "kind": "IntLiteral",
+        "elems": []
+      }
+      ]
+    }
+    ]
+  },
+  {
+    "line": 5,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
+    {
+      "line": 5,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
       "line": 5,
-      "column": 19,
-      "kind": "Declare",
-      "mut": "var",
+      "column": 14,
+      "kind": "BinOp",
       "elems": [
-        {
-          "line": 5,
-          "column": 17,
-          "kind": "BinOp",
-          "elems": [
-            {
-              "line": 5,
-              "column": 12,
-              "kind": "IntLiteral",
-              "value": 9,
-              "elems": []
-            },
-            {
-              "line": 5,
-              "column": 17,
-              "kind": "IntLiteral",
-              "value": 10,
-              "elems": []
-            }
-          ],
-          "value": "<="
-        }
-      ],
-      "value": "cmp5"
+      {
+        "line": 5,
+        "column": 12,
+        "kind": "IntLiteral",
+        "elems": []
+      },
+      {
+        "line": 5,
+        "column": 17,
+        "kind": "IntLiteral",
+        "elems": []
+      }
+      ]
+    }
+    ]
+  },
+  {
+    "line": 6,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
+    {
+      "line": 6,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
       "line": 6,
-      "column": 20,
-      "kind": "Declare",
-      "mut": "var",
+      "column": 15,
+      "kind": "BinOp",
       "elems": [
-        {
-          "line": 6,
-          "column": 18,
-          "kind": "BinOp",
-          "elems": [
-            {
-              "line": 6,
-              "column": 12,
-              "kind": "IntLiteral",
-              "value": 11,
-              "elems": []
-            },
-            {
-              "line": 6,
-              "column": 18,
-              "kind": "IntLiteral",
-              "value": 12,
-              "elems": []
-            }
-          ],
-          "value": ">="
-        }
-      ],
-      "value": "cmp6"
+      {
+        "line": 6,
+        "column": 12,
+        "kind": "IntLiteral",
+        "elems": []
+      },
+      {
+        "line": 6,
+        "column": 18,
+        "kind": "IntLiteral",
+        "elems": []
+      }
+      ]
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }

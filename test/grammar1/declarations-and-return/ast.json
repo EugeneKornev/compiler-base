@@ -1,70 +1,73 @@
 {
-  "line": 3,
-  "column": 9,
+  "line": 1,
+  "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "val",
+    "elems": [
     {
       "line": 1,
-      "column": 11,
-      "kind": "Declare",
-      "mut": "val",
-      "elems": [
-        {
-          "line": 1,
-          "column": 9,
-          "kind": "IntLiteral",
-          "value": 42,
-          "elems": []
-        }
-      ],
-      "value": "x"
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 9,
+      "kind": "IntLiteral",
+      "elems": []
+    }
+    ]
+  },
+  {
+    "line": 2,
+    "column": 1,
+    "kind": "Declare",
+    "mut": "var",
+    "elems": [
+    {
+      "line": 2,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
       "line": 2,
-      "column": 14,
-      "kind": "Declare",
-      "mut": "var",
+      "column": 11,
+      "kind": "BinOp",
       "elems": [
-        {
-          "line": 2,
-          "column": 13,
-          "kind": "BinOp",
-          "elems": [
-            {
-              "line": 2,
-              "column": 9,
-              "kind": "Ident",
-              "elems": [],
-              "value": "x"
-            },
-            {
-              "line": 2,
-              "column": 13,
-              "kind": "IntLiteral",
-              "value": 1,
-              "elems": []
-            }
-          ],
-          "value": "+"
-        }
-      ],
-      "value": "y"
-    },
-    {
-      "line": 3,
-      "column": 9,
-      "kind": "Return",
-      "value": null,
-      "elems": [
-        {
-          "line": 3,
-          "column": 8,
-          "kind": "Ident",
-          "elems": [],
-          "value": "y"
-        }
+      {
+        "line": 2,
+        "column": 9,
+        "kind": "Ident",
+        "elems": []
+      },
+      {
+        "line": 2,
+        "column": 13,
+        "kind": "IntLiteral",
+        "elems": []
+      }
       ]
     }
-  ],
-  "value": null
+    ]
+  },
+  {
+    "line": 3,
+    "column": 1,
+    "kind": "Return",
+    "elems": [
+    {
+      "line": 3,
+      "column": 8,
+      "kind": "Ident",
+      "elems": []
+    }
+    ]
+  }
+  ]
 }

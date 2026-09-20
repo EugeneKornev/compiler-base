@@ -1,129 +1,131 @@
 {
-  "line": 9,
+  "line": 1,
   "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "FuncDecl",
+    "returnType": "Int64",
+    "elems": [
     {
-      "line": 9,
-      "column": 1,
-      "kind": "FuncDecl",
-      "returnType": "Int64",
+      "line": 1,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 19,
+      "kind": "Block",
       "elems": [
+      {
+        "line": 2,
+        "column": 5,
+        "kind": "Declare",
+        "mut": "var",
+        "type": "Int64",
+        "elems": [
         {
-          "line": 9,
-          "column": 1,
+          "line": 2,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 2,
+          "column": 20,
+          "kind": "IntLiteral",
+          "elems": []
+        }
+        ]
+      },
+      {
+        "line": 3,
+        "column": 5,
+        "kind": "Declare",
+        "mut": "var",
+        "type": "Bool",
+        "elems": [
+        {
+          "line": 3,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 3,
+          "column": 19,
+          "kind": "Cast",
+          "type": "Bool",
+          "elems": [
+          {
+            "line": 3,
+            "column": 30,
+            "kind": "Ident",
+            "elems": []
+          }
+          ]
+        }
+        ]
+      },
+      {
+        "line": 4,
+        "column": 5,
+        "kind": "If",
+        "elems": [
+        {
+          "line": 4,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 4,
+          "column": 12,
           "kind": "Block",
           "elems": [
+          {
+            "line": 5,
+            "column": 9,
+            "kind": "Return",
+            "elems": [
             {
-              "line": 2,
-              "column": 21,
-              "kind": "Declare",
-              "mut": "var",
-              "type": "Int64",
-              "elems": [
-                {
-                  "line": 2,
-                  "column": 20,
-                  "kind": "IntLiteral",
-                  "value": 1,
-                  "elems": []
-                }
-              ],
-              "value": "x"
-            },
-            {
-              "line": 3,
-              "column": 32,
-              "kind": "Declare",
-              "mut": "var",
-              "type": "Bool",
-              "elems": [
-                {
-                  "line": 3,
-                  "column": 31,
-                  "kind": "Cast",
-                  "type": "Bool",
-                  "value": "Bool",
-                  "elems": [
-                    {
-                      "line": 3,
-                      "column": 30,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "x"
-                    }
-                  ]
-                }
-              ],
-              "value": "y"
-            },
-            {
-              "line": 8,
-              "column": 5,
-              "kind": "If",
-              "elems": [
-                {
-                  "line": 4,
-                  "column": 9,
-                  "kind": "Ident",
-                  "elems": [],
-                  "value": "y"
-                },
-                {
-                  "line": 6,
-                  "column": 5,
-                  "kind": "Block",
-                  "elems": [
-                    {
-                      "line": 5,
-                      "column": 17,
-                      "kind": "Return",
-                      "value": null,
-                      "elems": [
-                        {
-                          "line": 5,
-                          "column": 16,
-                          "kind": "IntLiteral",
-                          "value": 1,
-                          "elems": []
-                        }
-                      ]
-                    }
-                  ],
-                  "value": null
-                },
-                {
-                  "line": 8,
-                  "column": 5,
-                  "kind": "Block",
-                  "elems": [
-                    {
-                      "line": 7,
-                      "column": 17,
-                      "kind": "Return",
-                      "value": null,
-                      "elems": [
-                        {
-                          "line": 7,
-                          "column": 16,
-                          "kind": "IntLiteral",
-                          "value": 0,
-                          "elems": []
-                        }
-                      ]
-                    }
-                  ],
-                  "value": null
-                }
-              ],
-              "value": null
+              "line": 5,
+              "column": 16,
+              "kind": "IntLiteral",
+              "elems": []
             }
-          ],
-          "value": null
+            ]
+          }
+          ]
+        },
+        {
+          "line": 6,
+          "column": 12,
+          "kind": "Block",
+          "elems": [
+          {
+            "line": 7,
+            "column": 9,
+            "kind": "Return",
+            "elems": [
+            {
+              "line": 7,
+              "column": 16,
+              "kind": "IntLiteral",
+              "elems": []
+            }
+            ]
+          }
+          ]
         }
-      ],
-      "value": "main"
+        ]
+      }
+      ]
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }

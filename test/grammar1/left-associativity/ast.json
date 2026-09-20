@@ -1,53 +1,46 @@
 {
   "line": 1,
-  "column": 18,
+  "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "Return",
+    "elems": [
     {
       "line": 1,
-      "column": 18,
-      "kind": "Return",
-      "value": null,
+      "column": 15,
+      "kind": "BinOp",
       "elems": [
+      {
+        "line": 1,
+        "column": 11,
+        "kind": "BinOp",
+        "elems": [
         {
           "line": 1,
-          "column": 17,
-          "kind": "BinOp",
-          "elems": [
-            {
-              "line": 1,
-              "column": 13,
-              "kind": "BinOp",
-              "elems": [
-                {
-                  "line": 1,
-                  "column": 8,
-                  "kind": "IntLiteral",
-                  "value": 10,
-                  "elems": []
-                },
-                {
-                  "line": 1,
-                  "column": 13,
-                  "kind": "IntLiteral",
-                  "value": 5,
-                  "elems": []
-                }
-              ],
-              "value": "-"
-            },
-            {
-              "line": 1,
-              "column": 17,
-              "kind": "IntLiteral",
-              "value": 2,
-              "elems": []
-            }
-          ],
-          "value": "-"
+          "column": 8,
+          "kind": "IntLiteral",
+          "elems": []
+        },
+        {
+          "line": 1,
+          "column": 13,
+          "kind": "IntLiteral",
+          "elems": []
         }
+        ]
+      },
+      {
+        "line": 1,
+        "column": 17,
+        "kind": "IntLiteral",
+        "elems": []
+      }
       ]
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }

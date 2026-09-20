@@ -1,115 +1,118 @@
 {
-  "line": 8,
+  "line": 1,
   "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "FuncDecl",
+    "elems": [
     {
-      "line": 4,
-      "column": 1,
-      "kind": "FuncDecl",
-      "elems": [
-        {
-          "line": 1,
-          "column": 9,
-          "kind": "Ident",
-          "elems": [],
-          "value": "a"
-        },
-        {
-          "line": 1,
-          "column": 12,
-          "kind": "Ident",
-          "elems": [],
-          "value": "b"
-        },
-        {
-          "line": 4,
-          "column": 1,
-          "kind": "Block",
-          "elems": [
-            {
-              "line": 2,
-              "column": 23,
-              "kind": "Declare",
-              "mut": "var",
-              "elems": [
-                {
-                  "line": 2,
-                  "column": 22,
-                  "kind": "BinOp",
-                  "elems": [
-                    {
-                      "line": 2,
-                      "column": 18,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "a"
-                    },
-                    {
-                      "line": 2,
-                      "column": 22,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "b"
-                    }
-                  ],
-                  "value": "+"
-                }
-              ],
-              "value": "result"
-            },
-            {
-              "line": 3,
-              "column": 18,
-              "kind": "Return",
-              "value": null,
-              "elems": [
-                {
-                  "line": 3,
-                  "column": 12,
-                  "kind": "Ident",
-                  "elems": [],
-                  "value": "result"
-                }
-              ]
-            }
-          ],
-          "value": null
-        }
-      ],
-      "value": "add"
+      "line": 1,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
-      "line": 8,
-      "column": 1,
-      "kind": "FuncDecl",
+      "line": 1,
+      "column": 9,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 12,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 15,
+      "kind": "Block",
       "elems": [
+      {
+        "line": 2,
+        "column": 5,
+        "kind": "Declare",
+        "mut": "var",
+        "elems": [
         {
-          "line": 8,
-          "column": 1,
-          "kind": "Block",
+          "line": 2,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 2,
+          "column": 20,
+          "kind": "BinOp",
           "elems": [
-            {
-              "line": 7,
-              "column": 13,
-              "kind": "Return",
-              "value": null,
-              "elems": [
-                {
-                  "line": 7,
-                  "column": 12,
-                  "kind": "IntLiteral",
-                  "value": 0,
-                  "elems": []
-                }
-              ]
-            }
-          ],
-          "value": null
+          {
+            "line": 2,
+            "column": 18,
+            "kind": "Ident",
+            "elems": []
+          },
+          {
+            "line": 2,
+            "column": 22,
+            "kind": "Ident",
+            "elems": []
+          }
+          ]
         }
-      ],
-      "value": "main"
+        ]
+      },
+      {
+        "line": 3,
+        "column": 5,
+        "kind": "Return",
+        "elems": [
+        {
+          "line": 3,
+          "column": 12,
+          "kind": "Ident",
+          "elems": []
+        }
+        ]
+      }
+      ]
     }
-  ],
-  "value": null
+    ]
+  },
+  {
+    "line": 6,
+    "column": 1,
+    "kind": "FuncDecl",
+    "elems": [
+    {
+      "line": 6,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 6,
+      "column": 12,
+      "kind": "Block",
+      "elems": [
+      {
+        "line": 7,
+        "column": 5,
+        "kind": "Return",
+        "elems": [
+        {
+          "line": 7,
+          "column": 12,
+          "kind": "IntLiteral",
+          "elems": []
+        }
+        ]
+      }
+      ]
+    }
+    ]
+  }
+  ]
 }

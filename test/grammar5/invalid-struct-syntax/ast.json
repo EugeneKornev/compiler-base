@@ -1,34 +1,50 @@
 {
-  "line": 4,
-  "column": 9,
+  "line": 1,
+  "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "StructDecl",
+    "elems": [
     {
-      "line": 4,
-      "column": 9,
-      "kind": "StructDecl",
+      "line": 1,
+      "column": 8,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 2,
+      "column": 5,
+      "kind": "Declare",
+      "mut": "val",
+      "type": "Int64",
       "elems": [
-        {
-          "line": 2,
-          "column": 13,
-          "kind": "Declare",
-          "mut": "val",
-          "type": "Int64",
-          "elems": [],
-          "value": "x"
-        },
-        {
-          "line": 4,
-          "column": 1,
-          "kind": "Declare",
-          "mut": "val",
-          "type": "Int64",
-          "elems": [],
-          "value": "y"
-        }
-      ],
-      "value": "Point"
+      {
+        "line": 2,
+        "column": 5,
+        "kind": "Ident",
+        "elems": []
+      }
+      ]
+    },
+    {
+      "line": 3,
+      "column": 5,
+      "kind": "Declare",
+      "mut": "val",
+      "type": "Int64",
+      "elems": [
+      {
+        "line": 3,
+        "column": 5,
+        "kind": "Ident",
+        "elems": []
+      }
+      ]
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }

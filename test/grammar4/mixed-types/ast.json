@@ -1,109 +1,120 @@
 {
-  "line": 6,
+  "line": 1,
   "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "FuncDecl",
+    "returnType": "Int64",
+    "elems": [
     {
-      "line": 6,
-      "column": 1,
-      "kind": "FuncDecl",
-      "returnType": "Int64",
+      "line": 1,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 19,
+      "kind": "Block",
       "elems": [
+      {
+        "line": 2,
+        "column": 5,
+        "kind": "Declare",
+        "mut": "val",
+        "type": "Int32",
+        "elems": [
         {
-          "line": 6,
-          "column": 1,
-          "kind": "Block",
-          "elems": [
-            {
-              "line": 2,
-              "column": 26,
-              "kind": "Declare",
-              "mut": "val",
-              "type": "Int32",
-              "elems": [
-                {
-                  "line": 2,
-                  "column": 22,
-                  "kind": "IntLiteral",
-                  "value": 1000,
-                  "elems": []
-                }
-              ],
-              "value": "i32"
-            },
-            {
-              "line": 3,
-              "column": 38,
-              "kind": "Declare",
-              "mut": "val",
-              "type": "Int16",
-              "elems": [
-                {
-                  "line": 3,
-                  "column": 37,
-                  "kind": "Cast",
-                  "type": "Int16",
-                  "value": "Int16",
-                  "elems": [
-                    {
-                      "line": 3,
-                      "column": 34,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "i32"
-                    }
-                  ]
-                }
-              ],
-              "value": "i16"
-            },
-            {
-              "line": 4,
-              "column": 38,
-              "kind": "Declare",
-              "mut": "val",
-              "type": "Int64",
-              "elems": [
-                {
-                  "line": 4,
-                  "column": 37,
-                  "kind": "Cast",
-                  "type": "Int64",
-                  "value": "Int64",
-                  "elems": [
-                    {
-                      "line": 4,
-                      "column": 34,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "i16"
-                    }
-                  ]
-                }
-              ],
-              "value": "i64"
-            },
-            {
-              "line": 5,
-              "column": 15,
-              "kind": "Return",
-              "value": null,
-              "elems": [
-                {
-                  "line": 5,
-                  "column": 12,
-                  "kind": "Ident",
-                  "elems": [],
-                  "value": "i64"
-                }
-              ]
-            }
-          ],
-          "value": null
+          "line": 2,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 2,
+          "column": 22,
+          "kind": "IntLiteral",
+          "elems": []
         }
-      ],
-      "value": "main"
+        ]
+      },
+      {
+        "line": 3,
+        "column": 5,
+        "kind": "Declare",
+        "mut": "val",
+        "type": "Int16",
+        "elems": [
+        {
+          "line": 3,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 3,
+          "column": 22,
+          "kind": "Cast",
+          "type": "Int16",
+          "elems": [
+          {
+            "line": 3,
+            "column": 34,
+            "kind": "Ident",
+            "elems": []
+          }
+          ]
+        }
+        ]
+      },
+      {
+        "line": 4,
+        "column": 5,
+        "kind": "Declare",
+        "mut": "val",
+        "type": "Int64",
+        "elems": [
+        {
+          "line": 4,
+          "column": 9,
+          "kind": "Ident",
+          "elems": []
+        },
+        {
+          "line": 4,
+          "column": 22,
+          "kind": "Cast",
+          "type": "Int64",
+          "elems": [
+          {
+            "line": 4,
+            "column": 34,
+            "kind": "Ident",
+            "elems": []
+          }
+          ]
+        }
+        ]
+      },
+      {
+        "line": 5,
+        "column": 5,
+        "kind": "Return",
+        "elems": [
+        {
+          "line": 5,
+          "column": 12,
+          "kind": "Ident",
+          "elems": []
+        }
+        ]
+      }
+      ]
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }

@@ -1,175 +1,164 @@
 {
-  "line": 10,
+  "line": 1,
   "column": 1,
   "kind": "Program",
   "elems": [
+  {
+    "line": 1,
+    "column": 1,
+    "kind": "FuncDecl",
+    "elems": [
     {
-      "line": 6,
-      "column": 1,
-      "kind": "FuncDecl",
+      "line": 1,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 10,
+      "kind": "Ident",
+      "elems": []
+    },
+    {
+      "line": 1,
+      "column": 13,
+      "kind": "Block",
       "elems": [
+      {
+        "line": 2,
+        "column": 5,
+        "kind": "If",
+        "elems": [
         {
-          "line": 1,
-          "column": 10,
-          "kind": "Ident",
-          "elems": [],
-          "value": "n"
+          "line": 2,
+          "column": 11,
+          "kind": "BinOp",
+          "elems": [
+          {
+            "line": 2,
+            "column": 9,
+            "kind": "Ident",
+            "elems": []
+          },
+          {
+            "line": 2,
+            "column": 14,
+            "kind": "IntLiteral",
+            "elems": []
+          }
+          ]
         },
         {
-          "line": 6,
-          "column": 1,
+          "line": 2,
+          "column": 17,
           "kind": "Block",
           "elems": [
+          {
+            "line": 3,
+            "column": 9,
+            "kind": "Return",
+            "elems": [
             {
-              "line": 4,
-              "column": 5,
-              "kind": "If",
-              "elems": [
-                {
-                  "line": 2,
-                  "column": 14,
-                  "kind": "BinOp",
-                  "elems": [
-                    {
-                      "line": 2,
-                      "column": 9,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "n"
-                    },
-                    {
-                      "line": 2,
-                      "column": 14,
-                      "kind": "IntLiteral",
-                      "value": 1,
-                      "elems": []
-                    }
-                  ],
-                  "value": "<="
-                },
-                {
-                  "line": 4,
-                  "column": 5,
-                  "kind": "Block",
-                  "elems": [
-                    {
-                      "line": 3,
-                      "column": 17,
-                      "kind": "Return",
-                      "value": null,
-                      "elems": [
-                        {
-                          "line": 3,
-                          "column": 16,
-                          "kind": "IntLiteral",
-                          "value": 1,
-                          "elems": []
-                        }
-                      ]
-                    }
-                  ],
-                  "value": null
-                }
-              ],
-              "value": null
+              "line": 3,
+              "column": 16,
+              "kind": "IntLiteral",
+              "elems": []
+            }
+            ]
+          }
+          ]
+        }
+        ]
+      },
+      {
+        "line": 5,
+        "column": 5,
+        "kind": "Return",
+        "elems": [
+        {
+          "line": 5,
+          "column": 14,
+          "kind": "BinOp",
+          "elems": [
+          {
+            "line": 5,
+            "column": 12,
+            "kind": "Ident",
+            "elems": []
+          },
+          {
+            "line": 5,
+            "column": 20,
+            "kind": "Call",
+            "elems": [
+            {
+              "line": 5,
+              "column": 16,
+              "kind": "Ident",
+              "elems": []
             },
             {
               "line": 5,
-              "column": 27,
-              "kind": "Return",
-              "value": null,
+              "column": 23,
+              "kind": "BinOp",
               "elems": [
-                {
-                  "line": 5,
-                  "column": 26,
-                  "kind": "BinOp",
-                  "elems": [
-                    {
-                      "line": 5,
-                      "column": 12,
-                      "kind": "Ident",
-                      "elems": [],
-                      "value": "n"
-                    },
-                    {
-                      "line": 5,
-                      "column": 26,
-                      "kind": "Call",
-                      "elems": [
-                        {
-                          "line": 5,
-                          "column": 16,
-                          "kind": "Ident",
-                          "elems": [],
-                          "value": "fact"
-                        },
-                        {
-                          "line": 5,
-                          "column": 25,
-                          "kind": "BinOp",
-                          "elems": [
-                            {
-                              "line": 5,
-                              "column": 21,
-                              "kind": "Ident",
-                              "elems": [],
-                              "value": "n"
-                            },
-                            {
-                              "line": 5,
-                              "column": 25,
-                              "kind": "IntLiteral",
-                              "value": 1,
-                              "elems": []
-                            }
-                          ],
-                          "value": "-"
-                        }
-                      ],
-                      "value": null
-                    }
-                  ],
-                  "value": "*"
-                }
+              {
+                "line": 5,
+                "column": 21,
+                "kind": "Ident",
+                "elems": []
+              },
+              {
+                "line": 5,
+                "column": 25,
+                "kind": "IntLiteral",
+                "elems": []
+              }
               ]
             }
-          ],
-          "value": null
+            ]
+          }
+          ]
         }
-      ],
-      "value": "fact"
+        ]
+      }
+      ]
+    }
+    ]
+  },
+  {
+    "line": 8,
+    "column": 1,
+    "kind": "FuncDecl",
+    "elems": [
+    {
+      "line": 8,
+      "column": 5,
+      "kind": "Ident",
+      "elems": []
     },
     {
-      "line": 10,
-      "column": 1,
-      "kind": "FuncDecl",
+      "line": 8,
+      "column": 12,
+      "kind": "Block",
       "elems": [
+      {
+        "line": 9,
+        "column": 5,
+        "kind": "Return",
+        "elems": [
         {
-          "line": 10,
-          "column": 1,
-          "kind": "Block",
-          "elems": [
-            {
-              "line": 9,
-              "column": 13,
-              "kind": "Return",
-              "value": null,
-              "elems": [
-                {
-                  "line": 9,
-                  "column": 12,
-                  "kind": "IntLiteral",
-                  "value": 0,
-                  "elems": []
-                }
-              ]
-            }
-          ],
-          "value": null
+          "line": 9,
+          "column": 12,
+          "kind": "IntLiteral",
+          "elems": []
         }
-      ],
-      "value": "main"
+        ]
+      }
+      ]
     }
-  ],
-  "value": null
+    ]
+  }
+  ]
 }
