@@ -13,10 +13,6 @@
         "description": "Token kind identifier (e.g., IDENT, INT, PLUS, SEMI, EOF, …).",
         "type": "string"
       },
-      "value": {
-        "description": "Lexeme text (the original source string for this token). May be empty for tokens like EOF.",
-        "type": "string"
-      },
       "line": {
         "description": "Line number (1-based) where the token starts in the source file.",
         "type": "integer",
@@ -28,8 +24,7 @@
         "minimum": 1
       }
     },
-    "required": ["kind", "line", "column"],
-    "additionalProperties": false
+    "required": ["kind", "line", "column"]
   },
   "minItems": 1
 }
