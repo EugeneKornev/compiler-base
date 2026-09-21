@@ -707,6 +707,87 @@ def test_preprocess_llvm_step(harness, run):
     assert "PASS  ll" in out
 
 
+def test_compiler_stages_auto_adds_run_backward_compat(harness, run):
+    """Backward compat: meta with stages=["compiler"] auto-adds "run" stage."""
+    harness.add_test("hw", src="0;", stdout="hello\n")
+    # Only compiler in stages, no run - run should be auto-added
+    harness.write("hw", "meta.json", json.dumps({"stages": ["compiler"], "exit": 0}))
+    stages = {"compiler": {"cmd": compile_exe('print("hello")')},
+              "run": {"cmd": ["python3", "{exe}"]}}
+    cfg = harness.write_config(stages=stages)
+    rc, out = run(["test", "--config", cfg])
+    assert rc == 0
+    assert "PASS  hw" in out
+
+
+def test_exit_dict_run_falls_back_to_compiler(harness, run):
+    """Backward compat: exit dict for 'run' stage falls back to 'compiler' key."""
+    harness.add_test("hw", src="0;", stdout="x\n")
+    # Use stages list that triggers only the run stage (no compiler stage discovery)
+    # We test the backward compat by setting exit: {"compiler": 5} and having
+    # the run stage check: for stage="run", exit_spec should return 5
+    harness.write("hw", "meta.json", json.dumps({
+        "exit": {"compiler": 5},
+        "tolerance": 10.0,  # numeric tolerance to avoid string diff
+    }))
+    stages = compiler_config(compile_exe("import sys;print('x');sys.exit(5)"), ["python3", "{exe}"])
+    cfg = harness.write_config(stages=stages)
+    rc, out = run(["test", "--config", cfg])
+    assert rc == 0 and "PASS  hw" in out
+
+
+def test_run_update_empty_stdout_removes_golden(harness, run):
+    """run_exec update with empty stdout removes golden and reports."""
+    harness.add_test("hw", src="0;", stdout="unused\n")
+    stages = compiler_config(compile_exe(""), ["python3", "{exe}"])
+    cfg = harness.write_config(stages=stages)
+    golden = harness.root / "hw" / "stdout"
+    assert golden.exists()
+    rc, out = run(["update", "--config", cfg])
+    assert rc == 0
+    assert "UPD  hw" in out
+    assert "stdout empty; no golden written" in out
+    # Golden file should have been removed
+    assert not golden.exists()
+
+
+def test_llvm_skip_without_check_ir(harness, run):
+    """LLVM stage golden comparison is skipped without --check-ir."""
+    harness.add_test("ll", src="0;", out_ll="%v0 = alloca i32\n")
+    # Use mock_compiler which writes nothing for -o, so golden won't match
+    stage = {
+        "cmd": ["{root}/mock_compiler.py", "-o", "{llvm_out}", "{input}"],
+        "out": "{llvm_out}",
+    }
+    cfg = harness.write_config(stages={"llvm": stage})
+    # Without --check-ir: llvm test runs command but skips golden comparison -> PASS
+    # (mock exits 0 and no golden check is done for llvm without flag)
+    rc, out = run(["test", "--config", cfg])
+    assert rc == 0
+    assert "PASS  ll" in out
+    # With --check-ir: llvm test tries to compare golden, but mock wrote no output -> FAIL
+    rc, out = run(["test", "--config", cfg, "--check-ir"])
+    assert rc == 1
+    assert "FAIL  ll" in out
+
+
+def test_list_fuzz_tests_format(harness, run):
+    """Fuzz tests in list output use different format (stage/name under FUZZ)."""
+    add_lexer(harness, "committed")
+    cfg = harness.write_config(stages=lexer_stage(["kind", "line", "column"]), fuzz={
+        "grammar": {"1": "doc/grammar1.g4"},
+        "count": 2,
+        "max_tokens": 30,
+        "exit": {"lexer": 0},
+    })
+    rc, out = run(["list", "--fuzz", "--fuzz-count", "2", "--fuzz-seed", "7", "--config", cfg])
+    assert rc == 0
+    assert "=== LEXER ===" in out
+    assert "  committed" in out
+    assert "=== FUZZ ===" in out
+    assert "lexer/fuzz_0000" in out
+
+
 def test_preprocess_json_no_keep_drop_rejected(harness, run):
     """Json preprocess step without keep or drop is rejected."""
     harness.add_test("a", src="0;", tokens=RAW_TOKENS)
