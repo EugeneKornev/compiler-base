@@ -10,7 +10,7 @@ enum TokenType(val kind: String):
   case MINUS extends TokenType("MINUS")
   case STAR extends TokenType("MULT")   
   case SLASH extends TokenType("DIV")   
-  case ASSIGN extends TokenType("EQ")
+  case ASSIGN extends TokenType("ASSIGN") 
   case LPAREN extends TokenType("LPAREN")
   case RPAREN extends TokenType("RPAREN")
   case SEMICOLON extends TokenType("SEMI")

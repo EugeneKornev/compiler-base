@@ -1,4 +1,4 @@
-scalaVersion := "3.3.1"
+scalaVersion := "3.8.4"
 
 name := "syspro-compiler"
 version := "0.1.0"
