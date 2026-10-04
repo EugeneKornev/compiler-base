@@ -27,7 +27,7 @@
       ]
     },
     "compiler": {
-      "cmd": ["{root}/build/splc", "-g", "{grammar}", "-o", "{exe}", "{input}"]
+      "cmd": ["bash", "-c", "{root}/build/splc -g {grammar} -o {exe}.ll {input} && clang {exe}.ll -L{root}/build/libruntime -lsplruntime -o {exe} -Wno-override-module"]
     },
     "run": {
       "cmd": ["{exe}"],
