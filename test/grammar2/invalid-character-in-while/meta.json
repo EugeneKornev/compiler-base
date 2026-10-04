@@ -7,6 +7,6 @@
     "lexer"
   ],
   "exit": {
-    "parser": "nonzero"
+    "lexer": "nonzero"
   }
 }
