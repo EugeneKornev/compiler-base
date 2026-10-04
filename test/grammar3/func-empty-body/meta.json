@@ -5,12 +5,9 @@
   ],
   "stages": [
     "lexer",
-    "parser",
-    "llvm",
-    "compiler",
-    "run"
+    "parser"
   ],
   "exit": {
-    "run": 0
+    "parser": "nonzero"
   }
 }

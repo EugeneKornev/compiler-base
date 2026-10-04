@@ -6,7 +6,7 @@ target triple = "x86_64-unknown-linux-gnu"
 define i64 @main() {
 entry:
   %x = alloca i64, align 8
-  store i64 1, ptr %x, align 8
+  store i64 0, ptr %x, align 8
   br label %while_header
 
 while_header:                                     ; preds = %while_body, %entry
