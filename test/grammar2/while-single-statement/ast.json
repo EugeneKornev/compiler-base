@@ -36,7 +36,7 @@
     },
     {
       "line": 3,
-      "column": 5,
+      "column": 7,
       "kind": "Assign",
       "elems": [
       {
@@ -65,6 +65,19 @@
         ]
       }
       ]
+    }
+    ]
+  },
+  {
+    "line": 4,
+    "column": 1,
+    "kind": "Return",
+    "elems": [
+    {
+      "line": 4,
+      "column": 8,
+      "kind": "Ident",
+      "elems": []
     }
     ]
   }

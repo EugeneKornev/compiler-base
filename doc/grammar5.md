@@ -12,10 +12,10 @@ topDeclaration ::= externDeclaration
                  | structDeclaration
 
 externDeclaration ::=
-    "extern" "def" IDENT "(" [ typedParamList ] ")" ":" type ";"
+    "extern" "def" IDENT "(" [ typedParamList ] ")" ":" returnType ";"
 
 funcDeclaration ::=
-    "def" IDENT "(" [ typedParamList ] ")" ":" type block
+    "def" IDENT "(" [ typedParamList ] ")" ":" returnType block
 
 typedParamList ::= IDENT ":" type { "," IDENT ":" type }
 
@@ -27,6 +27,13 @@ type ::= "Int8" | "Int16" | "Int32" | "Int64"
        | "String"
        | IDENT                          ; struct type (name)
        | type "[" INTEGER_LITERAL "]"   ; array type
+
+
+; returnType is the return type of functions and extern declarations. Void is
+; allowed only here: it is not part of `type`, so variable declarations,
+; parameter types, struct fields, and array element types reject it syntactically.
+returnType ::= "Void"
+           | type
 
 
 statement ::=
@@ -47,7 +54,7 @@ structDeclaration ::=
 
 fieldDeclaration ::= IDENT ":" type ";"
 
-returnStatement ::= "return" expression ";"
+returnStatement ::= "return" [ expression ] ";"
 
 declarationStatement ::=
     "val" IDENT ":" type "=" expression ";"
@@ -146,123 +153,3 @@ DIGIT ::= "0" | NON_ZERO_DIGIT
 
 NON_ZERO_DIGIT ::=
     "1" | "2" | ... | "9"
-```
-
-> Comments and whitespaces are not explicit in above grammar.
-> It is assumed that all terms in grammar rules (except lexical tokens)
-> can have arbitrary number of whitespaces and/or comments between them.
-
-### Comments
-
-SysProLang uses C-style comments:
-
-- Single-line: `//` ... end-of-line
-- Multi-line: `/*` ... `*/`
-
-### Keywords
-
-- `return`
-- `val`
-- `var`
-- `if`
-- `else`
-- `while`
-- `break`
-- `continue`
-- `true`
-- `false`
-- `def`
-- `extern`
-- `Int8`
-- `Int16`
-- `Int32`
-- `Int64`
-- `Bool`
-- `String`
-- `cast`
-- `struct`
-
-### Semantic rules
-
-All semantic rules from grammar 4 apply, plus:
-
-- **Struct definitions** use `struct Name { field: Type; ... }`. Struct names must
-  start with an uppercase letter.
-- **Struct fields** can be any type: `Int8`, `Int16`, `Int32`, `Int64`, `Bool`,
-  `String`, or another struct type. Nested structs are embedded by value.
-- **Field access** uses dot notation: `expr.field`. The field must exist in the
-  struct type.
-- **Structs are value types**: assignment, passing to functions, and returning from
-  functions all copy the entire struct by value. A struct assignment
-  (`a = b` where both are structs) copies all fields (LLVM `memcpy`).
-- **Passing structs to functions** is by value: the entire struct is copied.
-- **Returning structs from functions** is by value (LLVM handles the ABI).
-- **Passing structs to `extern` C functions** is not allowed (only primitive types and strings).
-- **Arrays** are declared as `var arr: Type[N];` where `N` is a compile-time integer
-  constant. The element type can be any type.
-- **Array subscript** uses bracket notation: `arr[index]`. Indexing is zero-based.
-  Out-of-bounds access is undefined behavior.
-- **Arrays are value types**: an array assignment (`a = b`) copies all elements by
-  value (LLVM `memcpy`). Arrays are stack-allocated in their declaring scope and
-  cannot be passed to or returned from functions.
-- **Variables can be declared without an initializer**: `var x: Int64;` means the variable
-  is zero-initialized.
-- **Assignment targets** can be complex lvalues (field access, array subscript, or
-  chains thereof), not just simple identifiers.
-- **Error recovery**: see [`doc/error-handling.md`](error-handling.md) for the
-  recommended error recovery strategy.
-
-## Token kinds (new in grammar 5)
-
-These `"kind"` values appear in `tokens.json` golden files, in addition to those from grammar 1–4:
-
-| Token kind | Grammar source | Notes |
-|---|---|---|
-| `STRUCT` | `struct` | Keyword |
-| `LBRACKET` | `[` | Array subscript / type opening bracket |
-| `RBRACKET` | `]` | Array subscript / type closing bracket |
-| `DOT` | `.` | Field access operator |
-
-All tokens from grammar 1–4 also apply.
-
-### Example
-
-> TODO
-
-## AST node kinds (new in grammar 5)
-
-These `"kind"` values appear in `ast.json` golden files, in addition to those from grammar 1–4:
-
-| AST kind | `elems[]` children | Notes |
-|---|---|---|
-| `StructDecl` | `[name, fields...]` | Name is an `Ident` node and each field is a `Declare` node |
-| `FieldAccess` | `[base, name]` | Dot-access to a struct field, name is an `Ident` |
-| `Subscript` | `[base, index]` | Array index access |
-
-### Type annotations
-
-> TODO
-
-### Declaration without initializer (grammar 5)
-
-Grammar 5 allows variable declarations without an initializer:
-```
-var x: Int64;
-```
-In the AST, `Declare.elems` will be `[]` (empty) when there is no initializer.
-
-### Assignment target in grammar 5
-
-The assignment target changes from a simple `Ident` to a `postfixExpression`,
-which can be:
-- An `Ident` (simple variable)
-- A `FieldAccess` (e.g., `point.x = 10`)
-- A `Subscript` (e.g., `arr[0] = 5`)
-- A chain of field accesses and subscripts (e.g., `arr[0].x = 1`)
-
-The AST `Assign` node always has `elems[0]` = target and `elems[1]` = value,
-regardless of the target's complexity.
-
-### Example
-
-> TODO

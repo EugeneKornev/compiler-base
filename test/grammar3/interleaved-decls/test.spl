@@ -2,14 +2,29 @@ def bar() {
     return 42;
 }
 
+<<<<<<< HEAD
 extern def foo(x);
+=======
+extern def println_int(x);
+>>>>>>> main
 
 def baz(y) {
     return y;
 }
 
+<<<<<<< HEAD
 extern def qux();
 
 def main() {
     return 0;
 }
+=======
+extern def putchar(x);
+
+def main() {
+    putchar(66);
+    putchar(10);
+    println_int(baz(42));
+    return 0;
+}
+>>>>>>> main
