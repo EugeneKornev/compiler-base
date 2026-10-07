@@ -502,15 +502,12 @@ def test_compiler_compile_failure(harness, run):
     rc, out = run(["test", "--config", cfg])
     assert rc == 1
     assert "FAIL  cbad" in out
-<<<<<<< HEAD
-=======
     assert "exit: expected 0, got 3" in out
     # Explicit "run" stage: run_exec reports the compile failure first.
     harness.add_test("cbad2", src="// exit: 3\n", meta={"stages": ["compiler", "run"]})
     rc, out = run(["test", "--config", cfg, "--test", "cbad2"])
     assert rc == 1
     assert "FAIL  cbad2" in out
->>>>>>> main
     assert "compile failed (exit 3)" in out
 
 
@@ -547,11 +544,7 @@ def test_compiler_exit_contract(harness, run):
 
 def test_compiler_update_regenerates_and_exit_warning(harness, run):
     stages = compiler_config(compile_exe("import sys;print('hello');sys.exit(5)"), ["python3", "{exe}"])
-<<<<<<< HEAD
-    harness.add_test("hw", src="0;", meta={"exit": 0, "stages": ["compiler"]})
-=======
     harness.add_test("hw", src="0;", meta={"exit": {"run": 0}, "stages": ["compiler", "run"]})
->>>>>>> main
     cfg = harness.write_config(stages=stages)
     rc, out = run(["update", "--config", cfg])
     assert rc == 0

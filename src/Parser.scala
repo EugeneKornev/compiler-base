@@ -2,49 +2,49 @@ class Parser(tokens: List[Token]):
   var hasErrors = false
   private var pos = 0
   private var symbols = Map[String, String]()
-  
-  private def current: Token = 
+
+  private def current: Token =
     if pos < tokens.size then tokens(pos) else tokens.last
-    
+
   private def advance(): Token =
     val t = current
     if pos < tokens.size - 1 then pos += 1
     t
-    
+
   private def consume(expectedKinds: String*): Token =
     val t = current
     if expectedKinds.contains(t.tokenType.kind) then
       advance()
     else
-      hasErrors = true 
+      hasErrors = true
       Token(TokenType.ERROR, "", t.line, t.column)
 
   def parseProgram(): Program =
     val line = current.line
     val col = current.column
     var statements = List[ASTNode]()
-    
+
     while current.tokenType.kind != "EOF" do
       val startPos = pos
       statements = statements :+ parseStatement()
       if pos == startPos then advance()
-      
+
     if statements.isEmpty || statements.last.kind != "Return" then
       hasErrors = true
-      
+
     Program(statements, line, col)
 
   private def parseStatement(): ASTNode =
     current.tokenType.kind match
       case "VAR" | "VAL" => parseDeclare()
       case "RETURN"      => parseReturn()
-      case "IDENT" => 
+      case "IDENT" =>
         val next = if pos + 1 < tokens.size then tokens(pos + 1) else tokens.last
         if next.tokenType.kind == "ASSIGN" then
           parseAssign()
         else
           parseExprStmt()
-      case _ => 
+      case _ =>
         parseExprStmt()
 
   private def parseDeclare(): ASTNode =
@@ -56,30 +56,23 @@ class Parser(tokens: List[Token]):
     else symbols += (idToken.lexeme -> mut)
 
     val ident = Ident(idToken.lexeme, idToken.line, idToken.column)
-    
+
     if current.tokenType.kind != "ASSIGN" then
       hasErrors = true
+
       if current.tokenType.kind == "SEMI" then
         val errLine = current.line
         val errCol = current.column
-        advance() 
-        
-        if current.tokenType.kind == "RETURN" then
-          advance() 
-          val error = ErrorNode(current.line, current.column)
-          parseExpression() 
-          consume("SEMI") 
-          return Declare(mut, ident, error, mutToken.line, mutToken.column)
-          
+        advance()
         return Declare(mut, ident, ErrorNode(errLine, errCol), mutToken.line, mutToken.column)
-      
+
       val error = ErrorNode(current.line, current.column)
       while current.tokenType.kind != "SEMI" && current.tokenType.kind != "EOF" do advance()
       if current.tokenType.kind == "SEMI" then advance()
       return Declare(mut, ident, error, mutToken.line, mutToken.column)
 
     consume("ASSIGN")
-    
+
     if current.tokenType.kind == "SEMI" || current.tokenType.kind == "EOF" then
       hasErrors = true
       val error = ErrorNode(current.line, current.column)
@@ -92,17 +85,17 @@ class Parser(tokens: List[Token]):
 
   private def parseAssign(): ASTNode =
     val idToken = consume("IDENT")
-    
+
     symbols.get(idToken.lexeme) match
       case None => hasErrors = true
       case Some("val") => hasErrors = true
       case _ =>
-      
+
     val ident = Ident(idToken.lexeme, idToken.line, idToken.column)
-    consume("ASSIGN")
+    val eqToken = consume("ASSIGN")
     val expr = parseExpression()
     consume("SEMI")
-    Assign(ident, expr, idToken.line, idToken.column)
+    Assign(ident, expr, eqToken.line, eqToken.column)
 
   private def parseReturn(): ASTNode =
     val retToken = consume("RETURN")
@@ -151,7 +144,7 @@ class Parser(tokens: List[Token]):
   private def parsePrimary(): ASTNode =
     val t = current
     t.tokenType.kind match
-      case "INT" => 
+      case "INT" =>
         advance()
         IntLiteral(t.lexeme, t.line, t.column)
       case "IDENT" =>
@@ -161,8 +154,12 @@ class Parser(tokens: List[Token]):
       case "LPAREN" =>
         advance()
         val expr = parseExpression()
-        consume("RPAREN")
-        expr 
+        if current.tokenType.kind == "RPAREN" then
+          advance()
+          expr
+        else
+          hasErrors = true
+          ErrorNode(current.line, current.column)
       case _ =>
         hasErrors = true
         ErrorNode(t.line, t.column)

@@ -3,72 +3,59 @@ import scala.util.Using
 import java.io.{File, PrintWriter}
 
 object Main:
+  private val Modes = Set("--lex", "--parse")
+
+  private def die(msg: String): Nothing =
+    System.err.println(msg)
+    sys.exit(1)
+
   def main(args: Array[String]): Unit =
-    if args.isEmpty then
-      System.err.println("Usage: syspro-compiler [--lex | --parse] <file.spl> [-o <output.json>]")
-      sys.exit(1)
+    val mode = args.find(Modes.contains).getOrElse(
+      die("Usage: syspro-compiler [--lex | --parse] <file.spl> [-o <output.json>]"))
 
-    var isLex = false
-    var isParse = false
-    var inputPath = ""
-    var outputPath: Option[String] = None
+    val oIdx = args.indexOf("-o")
+    val outputPath: Option[String] =
+      if oIdx >= 0 && oIdx + 1 < args.length then Some(args(oIdx + 1)) else None
 
-    val argsList = args.toList
-    isLex = argsList.contains("--lex")
-    isParse = argsList.contains("--parse")
+    val positional = args.indices
+      .filter(i => !Modes.contains(args(i)) && args(i) != "-o" && !(oIdx >= 0 && i == oIdx + 1))
+      .map(args(_))
+      .toList
 
-    val outIndex = argsList.indexOf("-o")
-    if outIndex != -1 && outIndex + 1 < argsList.length then
-      outputPath = Some(argsList(outIndex + 1))
+    val inputPath = positional.headOption.getOrElse(
+      die("Error: Could not determine input file from arguments: " + args.mkString(" ")))
 
-    inputPath = argsList.find { arg =>
-      arg != "--lex" && arg != "--parse" && arg != "-o" && Some(arg) != outputPath
-    }.getOrElse("")
-
-    if inputPath.isEmpty then
-      System.err.println("Error: Could not determine input file from arguments: " + args.mkString(" "))
-      sys.exit(1)
-
-    val sourceCode = Using(Source.fromFile(inputPath)) { source =>
-      source.mkString
-    }.getOrElse {
-      System.err.println(s"Error: Cannot read file $inputPath")
-      sys.exit(1)
-    }
+    val sourceCode = Using(Source.fromFile(inputPath))(_.mkString)
+      .getOrElse(die(s"Error: Cannot read file $inputPath"))
 
     val lexer = Lexer(sourceCode)
     var tokens = List[Token]()
-    
     var t = lexer.nextToken()
     while t.tokenType != TokenType.EOF do
       tokens = tokens :+ t
       t = lexer.nextToken()
-    tokens = tokens :+ t 
+    tokens = tokens :+ t
 
-    if lexer.hasErrors then
-      sys.exit(1)
+    mode match
+      case "--lex" =>
+        writeOut(outputPath, tokens.map(tokenToJson).mkString("[\n  ", ",\n  ", "\n]"))
+        if lexer.hasErrors then sys.exit(1)
 
-    var parserErrors = false
-    val outputContent = if isParse then
-      val parser = Parser(tokens)
-      val ast = parser.parseProgram()
-      parserErrors = parser.hasErrors
-      ast.toJson
-    else
-      tokens.map(tokenToJson).mkString("[\n  ", ",\n  ", "\n]")
+      case _ => 
+        val parser = Parser(tokens)
+        val ast = parser.parseProgram()
+        writeOut(outputPath, ast.toJson)
+        if lexer.hasErrors || parser.hasErrors then sys.exit(1)
 
-    outputPath match
-      case Some(path) =>
-        val file = new File(path)
-        Option(file.getParentFile).foreach(_.mkdirs()) 
+  private def writeOut(path: Option[String], content: String): Unit =
+    path match
+      case Some(p) =>
+        val file = new File(p)
+        Option(file.getParentFile).foreach(_.mkdirs())
         val pw = new PrintWriter(file)
-        pw.write(outputContent)
-        pw.close()
+        try pw.write(content) finally pw.close()
       case None =>
-        println(outputContent)
-
-    if lexer.hasErrors || parserErrors then
-      sys.exit(1)
+        println(content)
 
   private def tokenToJson(t: Token): String =
     val kindStr = s""""${t.kind}""""

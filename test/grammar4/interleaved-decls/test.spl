@@ -2,23 +2,12 @@ def bar(): Int64 {
     return 42;
 }
 
-<<<<<<< HEAD
-extern def foo(x: Int64): Int64;
-=======
 extern def println_int(x: Int64): Void;
->>>>>>> main
 
 def baz(y: Int64): Int64 {
     return y;
 }
 
-<<<<<<< HEAD
-extern def qux(): Int64;
-
-def main(): Int64 {
-    return 0;
-}
-=======
 extern def putchar(c: Int8): Void;
 
 def main(): Int64 {
@@ -27,4 +16,3 @@ def main(): Int64 {
     println_int(baz(42));
     return bar();
 }
->>>>>>> main
