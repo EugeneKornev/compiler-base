@@ -18,20 +18,6 @@
       "preprocess": [
         {"type": "json", "keep": ["kind", "line", "column", "elems"]}
       ]
-    },
-    "llvm": {
-      "cmd": ["sbt", "--batch", "--error", "run --llvm {input} -o {llvm_out}"],
-      "out": "{llvm_out}",
-      "preprocess": [
-        {"type": "llvm"}
-      ]
-    },
-    "compiler": {
-      "cmd": ["sbt", "--batch", "--error", "run --compile {exe} {input}"]
-    },
-    "run": {
-      "cmd": ["{exe}"],
-      "out": "stdout"
     }
   },
   "llvm_dis": "llvm-dis",
