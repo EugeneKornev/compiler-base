@@ -20,7 +20,9 @@ class CodeGen:
 
   def generate(program: Program): String =
     sb.append("; ModuleID = 'spl'\n")
-    sb.append("source_filename = \"spl\"\n\n")
+    sb.append("source_filename = \"spl\"\n")
+    sb.append("target datalayout = \"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128\"\n")
+    sb.append("target triple = \"x86_64-unknown-linux-gnu\"\n\n")
     sb.append("define i64 @main() {\nentry:\n")
     program.elems.foreach(stmt)
     if !terminated then emit("ret i64 0")
@@ -46,8 +48,8 @@ class CodeGen:
             error(d, s"variable '$name' is already declared")
           else
             vars += (name -> d.mut)
-            emit(s"%v.$name = alloca i64, align 8")
-            emit(s"store i64 $v, ptr %v.$name, align 8")
+            emit(s"%$name = alloca i64, align 8")
+            emit(s"store i64 $v, ptr %$name, align 8")
 
       case a: Assign =>
         val v = expr(a.expr)
@@ -59,7 +61,7 @@ class CodeGen:
               case Some("val") =>
                 error(a, s"cannot assign to immutable variable '$name'")
               case Some(_) =>
-                emit(s"store i64 $v, ptr %v.$name, align 8")
+                emit(s"store i64 $v, ptr %$name, align 8")
           case other =>
             error(other, "invalid assignment target")
 
@@ -79,7 +81,7 @@ class CodeGen:
     case Ident(name, _, _) =>
       if vars.contains(name) then
         val t = fresh()
-        emit(s"$t = load i64, ptr %v.$name, align 8")
+        emit(s"$t = load i64, ptr %$name, align 8")
         t
       else
         error(n, s"undefined variable '$name'")

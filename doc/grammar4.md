@@ -1,139 +1,156 @@
-# SysProLang
+grammar grammar4;
 
-Version: 4
+// Grammarinator (ANTLR v4) grammar for SysProLang v4 — Primitive types, String, cast.
+//
+// Adds explicit integer types (Int8, Int16, Int32, Int64), Bool type, String type
+// with string literals ("hello"), and explicit cast<Type>(expr) for type conversions.
+// Everything from grammars 1–3 is retained with type annotations added.
+//
+// Unlike the .md reference, whitespace and comments are modeled explicitly here:
+// the WS, LINE_COMMENT and BLOCK_COMMENT lexical rules declare the tokens that
+// the fuzzer's serializer (see test/fuzz/whitespace.py) inserts *arbitrarily*
+// between terms when generating samples. No parser rule references these rules
+// directly; the serializer emits them between tokens. Because the compiler's
+// lexer runs a single-line comment to end-of-line, a generated line comment
+// must always end with a newline (whitespace.py guarantees this).
 
-## Grammar
+program : topDeclaration* EOF;
 
-```bnf
-program ::= { topDeclaration } EOF
+topDeclaration
+    : externDeclaration
+    | funcDeclaration
+    ;
 
-topDeclaration ::= externDeclaration
-                 | funcDeclaration
+// extern declaration for C interop with typed parameters and return type.
+externDeclaration : 'extern' 'def' IDENT '(' typedParamList? ')' ':' returnType ';';
 
-externDeclaration ::=
-    "extern" "def" IDENT "(" [ typedParamList ] ")" ":" returnType ";"
+// Function declaration with typed parameters and return type.
+funcDeclaration : 'def' IDENT '(' typedParamList? ')' ':' returnType block;
 
-funcDeclaration ::=
-    "def" IDENT "(" [ typedParamList ] ")" ":" returnType block
+// Type annotation on each parameter.
+typedParamList : IDENT ':' type (',' IDENT ':' type)*;
 
-typedParamList ::= IDENT ":" type { "," IDENT ":" type }
+// Primitive and built-in types. Void is deliberately excluded: it is only
+// reachable through `returnType` (return position), so any other use is a
+// syntax error.
+type : INT8 | INT16 | INT32 | INT64 | BOOL | STRING;
 
+// Return type of functions and extern declarations. Listed as a separate
+// top-level alternative so the fuzzer generates Void functions with
+// meaningful probability.
+returnType : VOID | type;
 
-; Type definitions
+statement
+    : returnStatement
+    | declarationStatement
+    | assignmentStatement
+    | expressionStatement
+    | ifStatement
+    | whileStatement
+    | breakStatement
+    | continueStatement
+    | block
+    ;
 
-type ::= "Int8" | "Int16" | "Int32" | "Int64"
-       | "Bool"
-       | "String"
+block : '{' statement* '}';
 
+returnStatement : 'return' expression? ';';
 
-; returnType is the return type of functions and extern declarations. Void is
-; allowed only here: it is not part of `type`, so variable declarations,
-; parameter types, and any other type position reject it syntactically.
-returnType ::= "Void"
-           | type
+// Type annotations are required on all declarations.
+declarationStatement : ('val' | 'var') IDENT ':' type '=' expression ';';
 
+assignmentStatement : IDENT '=' expression ';';
 
-statement ::=
-    returnStatement
-  | declarationStatement
-  | assignmentStatement
-  | expressionStatement
-  | ifStatement
-  | whileStatement
-  | breakStatement
-  | continueStatement
-  | block
+expressionStatement : expression ';';
 
-block ::= "{" { statement } "}"
+// if/else/if-else chain — explicit alternatives so Grammarinator
+// explores both branches evenly.
+ifStatement
+    : 'if' '(' expression ')' statement 'else' statement
+    | 'if' '(' expression ')' statement
+    ;
 
-returnStatement ::= "return" [ expression ] ";"
+whileStatement : 'while' '(' expression ')' statement;
 
-declarationStatement ::=
-    "val" IDENT ":" type "=" expression ";"
-  | "var" IDENT ":" type "=" expression ";"
+breakStatement : 'break' ';';
 
-assignmentStatement ::= IDENT "=" expression ";"
+continueStatement : 'continue' ';';
 
-expressionStatement ::= expression ";"
+// Expression definitions go from lowest operator precedence
+// to the highest, allowing for straightforward expression parsing.
+expression : logicalOrExpression;
 
-ifStatement ::=
-    "if" "(" expression ")" statement
-    [ "else" statement ]
+logicalOrExpression
+    : logicalAndExpression ('||' logicalAndExpression)*
+    ;
 
-whileStatement ::= "while" "(" expression ")" statement
+logicalAndExpression
+    : equalityExpression ('&&' equalityExpression)*
+    ;
 
-breakStatement ::= "break" ";"
+equalityExpression
+    : relationalExpression (('==' | '!=') relationalExpression)*
+    ;
 
-continueStatement ::= "continue" ";"
+relationalExpression
+    : additiveExpression (('<' | '>' | '<=' | '>=') additiveExpression)*
+    ;
 
-; Expression definitions go from lowest operator precedence
-; to the highest, allowing for straightforward expression parsing.
-; Comparison operators produce Bool values.
-; Logical operators && and || are short-circuit.
-; Function call has the highest precedence (tight binding).
-; Cast expression binds like a primary expression.
-expression ::= logicalOrExpression
+additiveExpression
+    : multiplicativeExpression (('+' | '-') multiplicativeExpression)*
+    ;
 
-logicalOrExpression ::=
-    logicalAndExpression { "||" logicalAndExpression }
+multiplicativeExpression
+    : unaryExpression (('*' | '/') unaryExpression)*
+    ;
 
-logicalAndExpression ::=
-    equalityExpression { "&&" equalityExpression }
+unaryExpression
+    : '!' unaryExpression
+    | '-' unaryExpression
+    | callExpression
+    ;
 
-equalityExpression ::=
-    relationalExpression { ("==" | "!=") relationalExpression }
+// Function call has the highest precedence.
+// Any primary expression can be followed by zero or more call arguments.
+callExpression
+    : primaryExpression ('(' argumentList? ')')*
+    ;
 
-relationalExpression ::=
-    additiveExpression { ("<" | ">" | "<=" | ">=") additiveExpression }
+argumentList : expression (',' expression)*;
 
-additiveExpression ::=
-    multiplicativeExpression { ("+" | "-") multiplicativeExpression }
+primaryExpression
+    : INTEGER_LITERAL
+    | STRING_LITERAL
+    | IDENT
+    | 'true'
+    | 'false'
+    | '(' expression ')'
+    | 'cast' '<' type '>' '(' expression ')'
+    ;
 
-multiplicativeExpression ::=
-    unaryExpression { ("*" | "/") unaryExpression }
+// Lexical tokens
 
-unaryExpression ::=
-    "!" unaryExpression
-  | "-" unaryExpression
-  | callExpression
+fragment NON_ZERO_DIGIT : [1-9];
+fragment DIGIT : [0-9];
 
-callExpression ::=
-    primaryExpression { "(" [ argumentList ] ")" }
+// Type keywords — defined before IDENT so they take priority.
+INT8   : 'Int8';
+INT16  : 'Int16';
+INT32  : 'Int32';
+INT64  : 'Int64';
+BOOL   : 'Bool';
+STRING : 'String';
+VOID   : 'Void';
 
-argumentList ::= expression { "," expression }
+INTEGER_LITERAL : '0' | NON_ZERO_DIGIT DIGIT*;
 
-primaryExpression ::=
-    INTEGER_LITERAL
-  | STRING_LITERAL
-  | IDENT
-  | "true"
-  | "false"
-  | "(" expression ")"
-  | "cast" "<" type ">" "(" expression ")"
+STRING_LITERAL : '"' (~["\\] | '\\' .)* '"';
 
+IDENT : [a-zA-Z_] [a-zA-Z0-9_]*;
 
-; Lexical tokens
-
-INTEGER_LITERAL ::=
-    "0"
-  | NON_ZERO_DIGIT { DIGIT }
-
-STRING_LITERAL ::=
-    '"' { CHARACTER | ESCAPE_SEQUENCE } '"'
-
-ESCAPE_SEQUENCE ::=
-    "\\" ( 'n' | 't' | '\\' | '"' )
-
-CHARACTER ::= (any character except newline, backslash, or double quote)
-
-IDENT ::= NON_DIGIT { (NON_DIGIT | DIGIT) }
-
-NON_DIGIT ::=
-    "a" | "b" | ... | "z"
-  | "A" | "B" | ... | "Z"
-  | "_"
-
-DIGIT ::= "0" | NON_ZERO_DIGIT
-
-NON_ZERO_DIGIT ::=
-    "1" | "2" | ... | "9"
+// Whitespace and comments. Declared for documentation and for the Grammarinator
+// serializer (test/fuzz/whitespace.py), which emits these between terms; no
+// parser rule references them.
+WS : [ \t\n\r]+;
+LINE_COMMENT : '//' ~[\r\n]*;
+BLOCK_COMMENT : '/*' .*? '*/';

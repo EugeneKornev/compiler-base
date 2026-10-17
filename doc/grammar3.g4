@@ -1,9 +1,10 @@
-grammar grammar3;
+grammar grammar2;
 
-// Grammarinator (ANTLR v4) grammar for SysProLang v3 — Functions.
+// Grammarinator (ANTLR v4) grammar for SysProLang v2 — Control flow.
 //
-// Adds function declarations (def) and extern declarations for C interop.
-// Everything from grammars 1 and 2 is retained.
+// Adds if/else/while/break/continue, boolean constants (true/false),
+// comparison operators (==, !=, <, >, <=, >=) and logical operators (&&, ||, !).
+// Everything from grammar 1 is retained.
 //
 // Unlike the .md reference, whitespace and comments are modeled explicitly here:
 // the WS, LINE_COMMENT and BLOCK_COMMENT lexical rules declare the tokens that
@@ -13,22 +14,7 @@ grammar grammar3;
 // lexer runs a single-line comment to end-of-line, a generated line comment
 // must always end with a newline (whitespace.py guarantees this).
 
-program : topDeclaration* EOF;
-
-topDeclaration
-    : externDeclaration
-    | funcDeclaration
-    ;
-
-// extern declaration for C interop.
-// Example: extern def foo(a, b);
-externDeclaration : 'extern' 'def' IDENT '(' paramList? ')' ';';
-
-// Function declaration with optional parameters.
-// Example: def add(a, b) { return a + b; }
-funcDeclaration : 'def' IDENT '(' paramList? ')' block;
-
-paramList : IDENT (',' IDENT)*;
+program : statement* EOF;
 
 statement
     : returnStatement
@@ -98,16 +84,8 @@ multiplicativeExpression
 unaryExpression
     : '!' unaryExpression
     | '-' unaryExpression
-    | callExpression
+    | primaryExpression
     ;
-
-// Function call has the highest precedence.
-// Any primary expression can be followed by zero or more call arguments.
-callExpression
-    : primaryExpression ('(' argumentList? ')')*
-    ;
-
-argumentList : expression (',' expression)*;
 
 primaryExpression
     : INTEGER_LITERAL
