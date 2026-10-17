@@ -1,262 +1,156 @@
-# SysProLang
-
-Version: 4
-
-## Grammar
-
-```bnf
-program ::= { topDeclaration } EOF
-
-topDeclaration ::= externDeclaration
-                 | funcDeclaration
-
-externDeclaration ::=
-    "extern" "def" IDENT "(" [ typedParamList ] ")" ":" returnType ";"
-
-funcDeclaration ::=
-    "def" IDENT "(" [ typedParamList ] ")" ":" returnType block
-
-typedParamList ::= IDENT ":" type { "," IDENT ":" type }
-
-
-; Type definitions
-
-type ::= "Int8" | "Int16" | "Int32" | "Int64"
-       | "Bool"
-       | "String"
-
-
-; returnType is the return type of functions and extern declarations. Void is
-; allowed only here: it is not part of `type`, so variable declarations,
-; parameter types, and any other type position reject it syntactically.
-returnType ::= "Void"
-           | type
-
-
-statement ::=
-    returnStatement
-  | declarationStatement
-  | assignmentStatement
-  | expressionStatement
-  | ifStatement
-  | whileStatement
-  | breakStatement
-  | continueStatement
-  | block
-
-block ::= "{" { statement } "}"
-
-returnStatement ::= "return" [ expression ] ";"
-
-declarationStatement ::=
-    "val" IDENT ":" type "=" expression ";"
-  | "var" IDENT ":" type "=" expression ";"
-
-assignmentStatement ::= IDENT "=" expression ";"
-
-expressionStatement ::= expression ";"
-
-ifStatement ::=
-    "if" "(" expression ")" statement
-    [ "else" statement ]
-
-whileStatement ::= "while" "(" expression ")" statement
-
-breakStatement ::= "break" ";"
-
-continueStatement ::= "continue" ";"
-
-; Expression definitions go from lowest operator precedence
-; to the highest, allowing for straightforward expression parsing.
-; Comparison operators produce Bool values.
-; Logical operators && and || are short-circuit.
-; Function call has the highest precedence (tight binding).
-; Cast expression binds like a primary expression.
-expression ::= logicalOrExpression
-
-logicalOrExpression ::=
-    logicalAndExpression { "||" logicalAndExpression }
-
-logicalAndExpression ::=
-    equalityExpression { "&&" equalityExpression }
-
-equalityExpression ::=
-    relationalExpression { ("==" | "!=") relationalExpression }
-
-relationalExpression ::=
-    additiveExpression { ("<" | ">" | "<=" | ">=") additiveExpression }
-
-additiveExpression ::=
-    multiplicativeExpression { ("+" | "-") multiplicativeExpression }
-
-multiplicativeExpression ::=
-    unaryExpression { ("*" | "/") unaryExpression }
-
-unaryExpression ::=
-    "!" unaryExpression
-  | "-" unaryExpression
-  | callExpression
-
-callExpression ::=
-    primaryExpression { "(" [ argumentList ] ")" }
-
-argumentList ::= expression { "," expression }
-
-primaryExpression ::=
-    INTEGER_LITERAL
-  | STRING_LITERAL
-  | IDENT
-  | "true"
-  | "false"
-  | "(" expression ")"
-  | "cast" "<" type ">" "(" expression ")"
-
-
-; Lexical tokens
-
-INTEGER_LITERAL ::=
-    "0"
-  | NON_ZERO_DIGIT { DIGIT }
-
-STRING_LITERAL ::=
-    '"' { CHARACTER | ESCAPE_SEQUENCE } '"'
-
-ESCAPE_SEQUENCE ::=
-    "\\" ( 'n' | 't' | '\\' | '"' )
-
-CHARACTER ::= (any character except newline, backslash, or double quote)
-
-IDENT ::= NON_DIGIT { (NON_DIGIT | DIGIT) }
-
-NON_DIGIT ::=
-    "a" | "b" | ... | "z"
-  | "A" | "B" | ... | "Z"
-  | "_"
-
-DIGIT ::= "0" | NON_ZERO_DIGIT
-
-NON_ZERO_DIGIT ::=
-    "1" | "2" | ... | "9"
-```
-
-> Comments and whitespaces are not explicit in above grammar.
-> It is assumed that all terms in grammar rules (except lexical tokens)
-> can have arbitrary number of whitespaces and/or comments between them.
-
-### Comments
-
-SysProLang uses C-style comments:
-
-- Single-line: `//` ... end-of-line
-- Multi-line: `/*` ... `*/`
-
-### Keywords
-
-- `return`
-- `val`
-- `var`
-- `if`
-- `else`
-- `while`
-- `break`
-- `continue`
-- `true`
-- `false`
-- `def`
-- `extern`
-- `Int8`
-- `Int16`
-- `Int32`
-- `Int64`
-- `Bool`
-- `String`
-- `Void`
-- `cast`
-
-### Semantic rules
-
-All semantic rules from grammar 3 apply, plus:
-
-- **Type annotations are mandatory** on all variable declarations, function parameters,
-  and function return types. The syntax is `var name: Type = expr;`.
-- **The `Void` type** may be used only as a function or `extern` return type:
-  `def noop(): Void { ... }`. A `Void` function returns no value. Its body may
-  end without a `return` statement (implicit `return;` at the closing `}`), and it
-  may use the bare `return;` (no expression) to exit early. Grammar 3 requires every
-  function to end with `return`; from grammar 4 on, this requirement applies only to
-  functions whose return type is not `Void`.
-- **Void is not a value type.** A call to a `Void` function produces no value: it
-  cannot be assigned to a variable, used in an expression, or returned from a
-  non-`Void` function. Since `Void` is not part of the `type` production, writing
-  it in a variable declaration, a parameter type, or any other type position is
-  a syntax error.
-- **No implicit conversions**: values of different types cannot be mixed in expressions.
-  Use `cast<Type>(expr)` to explicitly convert between types.
-- **`cast<Type>(expr)** supports:
-  - Integer widening: `Int8` → `Int16` → `Int32` → `Int64` (LLVM: `sext`)
-  - Integer narrowing: `Int64` → `Int32` → `Int16` → `Int8` (LLVM: `trunc`)
-  - `Bool` to integer: `Bool` → `Int8`/`Int16`/`Int32`/`Int64` (LLVM: `zext` --- zero extension, not `sext`)
-  - Integer to `Bool`: `Int8`/`Int16`/`Int32`/`Int64` → `Bool` (LLVM: `icmp ne %val, 0` or `trunc` to `i1`)
-- **String literals** are of type `String`. A string literal is a null-terminated
-  byte array compiled as a global constant. `String` maps to `ptr` in LLVM IR.
-- **String variables** are pointers to the string data. Assigning a string literal
-  to a `String` variable stores the pointer to the global constant.
-- **String comparison** with `==` and `!=` compares string contents, not pointers.
-  During codegen, emit a call to `strcmp` from the C standard library:
-  ```llvm
-  declare i32 @strcmp(ptr, ptr)
-  ```
-  Compare the return value against `0` to get a `Bool` result.
-- **String operations**: The built-in runtime library provides `print_string`
-  and `println_string` for output. String concatenation, indexing, and length
-  are not part of the core language.
-- **The `Bool` type** is distinct from `Int8`. `true` and `false` are `Bool` values.
-  Comparison operators return `Bool`. Logical operators `&&`, `||`, `!` require
-  `Bool` operands and produce `Bool`.
-- **Integer literals** have the type of their declared context. A literal `42` in
-  `var x: Int8 = 42;` is `Int8`. In `var x: Int64 = 42;` it is `Int64`.
-- **Operators** (`+`, `-`, `*`, `/`, comparisons) require both operands to have the
-  same type. Use `cast` if they differ.
-- **Extern functions** must specify parameter and return types: `extern def foo(x: Int64): Int64;`
-- **Error recovery**: see [`doc/error-handling.md`](error-handling.md) for the
-  recommended error recovery strategy.
-
-## Token kinds (new in grammar 4)
-
-These `"kind"` values appear in `tokens.json` golden files, in addition to those from grammar 1–3:
-
-| Token kind | Grammar source | Notes |
-|---|---|---|
-| `INT8` | `Int8` | Type keyword |
-| `INT16` | `Int16` | Type keyword |
-| `INT32` | `Int32` | Type keyword |
-| `INT64` | `Int64` | Type keyword |
-| `BOOL` | `Bool` | Type keyword |
-| `STRING` | `String` | Type keyword |
-| `VOID` | `Void` | Type keyword (return position only) |
-| `CAST` | `cast` | Type conversion keyword |
-| `COLON` | `:` | Type annotation separator |
-| `STR` | `STRING_LITERAL` | String literal content |
-
-All tokens from grammar 1–3 also apply.
-
-### Example
-
-> TODO
-
-## AST node kinds (new in grammar 4)
-
-These `"kind"` values appear in `ast.json` golden files, in addition to those from grammar 1–3:
-
-| AST kind | `elems[]` children | Notes |
-|---|---|---|
-| `StringLiteral` | `[]` | |
-| `Cast` | `[value]` | Has additional `type` property with the target type name |
-
-### Type annotations
-
-> TODO
-
-### Example
-
-> TODO
+grammar grammar4;
+
+// Grammarinator (ANTLR v4) grammar for SysProLang v4 — Primitive types, String, cast.
+//
+// Adds explicit integer types (Int8, Int16, Int32, Int64), Bool type, String type
+// with string literals ("hello"), and explicit cast<Type>(expr) for type conversions.
+// Everything from grammars 1–3 is retained with type annotations added.
+//
+// Unlike the .md reference, whitespace and comments are modeled explicitly here:
+// the WS, LINE_COMMENT and BLOCK_COMMENT lexical rules declare the tokens that
+// the fuzzer's serializer (see test/fuzz/whitespace.py) inserts *arbitrarily*
+// between terms when generating samples. No parser rule references these rules
+// directly; the serializer emits them between tokens. Because the compiler's
+// lexer runs a single-line comment to end-of-line, a generated line comment
+// must always end with a newline (whitespace.py guarantees this).
+
+program : topDeclaration* EOF;
+
+topDeclaration
+    : externDeclaration
+    | funcDeclaration
+    ;
+
+// extern declaration for C interop with typed parameters and return type.
+externDeclaration : 'extern' 'def' IDENT '(' typedParamList? ')' ':' returnType ';';
+
+// Function declaration with typed parameters and return type.
+funcDeclaration : 'def' IDENT '(' typedParamList? ')' ':' returnType block;
+
+// Type annotation on each parameter.
+typedParamList : IDENT ':' type (',' IDENT ':' type)*;
+
+// Primitive and built-in types. Void is deliberately excluded: it is only
+// reachable through `returnType` (return position), so any other use is a
+// syntax error.
+type : INT8 | INT16 | INT32 | INT64 | BOOL | STRING;
+
+// Return type of functions and extern declarations. Listed as a separate
+// top-level alternative so the fuzzer generates Void functions with
+// meaningful probability.
+returnType : VOID | type;
+
+statement
+    : returnStatement
+    | declarationStatement
+    | assignmentStatement
+    | expressionStatement
+    | ifStatement
+    | whileStatement
+    | breakStatement
+    | continueStatement
+    | block
+    ;
+
+block : '{' statement* '}';
+
+returnStatement : 'return' expression? ';';
+
+// Type annotations are required on all declarations.
+declarationStatement : ('val' | 'var') IDENT ':' type '=' expression ';';
+
+assignmentStatement : IDENT '=' expression ';';
+
+expressionStatement : expression ';';
+
+// if/else/if-else chain — explicit alternatives so Grammarinator
+// explores both branches evenly.
+ifStatement
+    : 'if' '(' expression ')' statement 'else' statement
+    | 'if' '(' expression ')' statement
+    ;
+
+whileStatement : 'while' '(' expression ')' statement;
+
+breakStatement : 'break' ';';
+
+continueStatement : 'continue' ';';
+
+// Expression definitions go from lowest operator precedence
+// to the highest, allowing for straightforward expression parsing.
+expression : logicalOrExpression;
+
+logicalOrExpression
+    : logicalAndExpression ('||' logicalAndExpression)*
+    ;
+
+logicalAndExpression
+    : equalityExpression ('&&' equalityExpression)*
+    ;
+
+equalityExpression
+    : relationalExpression (('==' | '!=') relationalExpression)*
+    ;
+
+relationalExpression
+    : additiveExpression (('<' | '>' | '<=' | '>=') additiveExpression)*
+    ;
+
+additiveExpression
+    : multiplicativeExpression (('+' | '-') multiplicativeExpression)*
+    ;
+
+multiplicativeExpression
+    : unaryExpression (('*' | '/') unaryExpression)*
+    ;
+
+unaryExpression
+    : '!' unaryExpression
+    | '-' unaryExpression
+    | callExpression
+    ;
+
+// Function call has the highest precedence.
+// Any primary expression can be followed by zero or more call arguments.
+callExpression
+    : primaryExpression ('(' argumentList? ')')*
+    ;
+
+argumentList : expression (',' expression)*;
+
+primaryExpression
+    : INTEGER_LITERAL
+    | STRING_LITERAL
+    | IDENT
+    | 'true'
+    | 'false'
+    | '(' expression ')'
+    | 'cast' '<' type '>' '(' expression ')'
+    ;
+
+// Lexical tokens
+
+fragment NON_ZERO_DIGIT : [1-9];
+fragment DIGIT : [0-9];
+
+// Type keywords — defined before IDENT so they take priority.
+INT8   : 'Int8';
+INT16  : 'Int16';
+INT32  : 'Int32';
+INT64  : 'Int64';
+BOOL   : 'Bool';
+STRING : 'String';
+VOID   : 'Void';
+
+INTEGER_LITERAL : '0' | NON_ZERO_DIGIT DIGIT*;
+
+STRING_LITERAL : '"' (~["\\] | '\\' .)* '"';
+
+IDENT : [a-zA-Z_] [a-zA-Z0-9_]*;
+
+// Whitespace and comments. Declared for documentation and for the Grammarinator
+// serializer (test/fuzz/whitespace.py), which emits these between terms; no
+// parser rule references them.
+WS : [ \t\n\r]+;
+LINE_COMMENT : '//' ~[\r\n]*;
+BLOCK_COMMENT : '/*' .*? '*/';
