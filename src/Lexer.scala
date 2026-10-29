@@ -7,10 +7,17 @@ class Lexer(source: String):
   private val keywords: Map[String, TokenType] = Map(
     "val" -> TokenType.VAL,
     "var" -> TokenType.VAR,
-    "return" -> TokenType.RETURN
+    "return" -> TokenType.RETURN,
+    "if" -> TokenType.IF,
+    "else" -> TokenType.ELSE,
+    "while" -> TokenType.WHILE,
+    "break" -> TokenType.BREAK,
+    "continue" -> TokenType.CONTINUE,
+    "true" -> TokenType.TRUE,
+    "false" -> TokenType.FALSE
   )
 
-  def nextToken(): Token = 
+  def nextToken(): Token =
     val commentError = skipWhitespaceAndComments()
     if commentError.isDefined then
       hasErrors = true
@@ -22,15 +29,35 @@ class Lexer(source: String):
     val startCol = col
     val c = eatToken()
 
-    c match 
+    c match
       case '+' => makeToken(TokenType.PLUS, "+", startCol)
       case '-' => makeToken(TokenType.MINUS, "-", startCol)
       case '*' => makeToken(TokenType.STAR, "*", startCol)
       case '/' => makeToken(TokenType.SLASH, "/", startCol)
-      case '=' => makeToken(TokenType.ASSIGN, "=", startCol)
       case '(' => makeToken(TokenType.LPAREN, "(", startCol)
       case ')' => makeToken(TokenType.RPAREN, ")", startCol)
+      case '{' => makeToken(TokenType.LBRACE, "{", startCol)
+      case '}' => makeToken(TokenType.RBRACE, "}", startCol)
       case ';' => makeToken(TokenType.SEMICOLON, ";", startCol)
+
+      case '=' =>
+        if matchChar('=') then makeToken(TokenType.EQ, "==", startCol)
+        else makeToken(TokenType.ASSIGN, "=", startCol)
+      case '!' =>
+        if matchChar('=') then makeToken(TokenType.NE, "!=", startCol)
+        else makeToken(TokenType.NOT, "!", startCol)
+      case '<' =>
+        if matchChar('=') then makeToken(TokenType.LE, "<=", startCol)
+        else makeToken(TokenType.LT, "<", startCol)
+      case '>' =>
+        if matchChar('=') then makeToken(TokenType.GE, ">=", startCol)
+        else makeToken(TokenType.GT, ">", startCol)
+      case '&' =>
+        if matchChar('&') then makeToken(TokenType.AND, "&&", startCol)
+        else errorToken("&", startCol)
+      case '|' =>
+        if matchChar('|') then makeToken(TokenType.OR, "||", startCol)
+        else errorToken("|", startCol)
 
       case '0' =>
         makeToken(TokenType.INT_LITERAL, "0", startCol, Some(0L))
@@ -42,8 +69,11 @@ class Lexer(source: String):
         lexIdentifier(a, startCol)
 
       case _ =>
-        hasErrors = true
-        Token(TokenType.ERROR, c.toString, line, startCol, errorMessage = Some(s"Invalid character: '$c'"))
+        errorToken(c.toString, startCol)
+
+  private def errorToken(lexeme: String, startCol: Int): Token =
+    hasErrors = true
+    Token(TokenType.ERROR, lexeme, line, startCol, errorMessage = Some(s"Invalid character: '$lexeme'"))
 
   private def lexNumber(firstChar: Char, startCol: Int): Token =
     val sb = StringBuilder(firstChar.toString)
@@ -124,8 +154,14 @@ class Lexer(source: String):
     col += 1
     c
 
+  private def matchChar(expected: Char): Boolean =
+    if !isAtEnd() && source.charAt(pos) == expected then
+      eatToken()
+      true
+    else false
+
   private def isAlpha(c: Char): Boolean = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_'
-  private def isAlphaNumeric(c: Char): Boolean = isAlpha(c) || c.isDigit
+  private def isAlphaNumeric(c: Char): Boolean = isAlpha(c) || (c >= '0' && c <= '9')
 
   private def makeToken(tpe: TokenType, lexeme: String, startCol: Int, value: Option[Long] = None): Token =
     Token(tpe, lexeme, line, startCol, value)
