@@ -1,335 +1,282 @@
-# JSON Formats and Schemas
+# SysProLang
 
-## Overview
+Version: 5
 
-The SysProLang test suite uses JSON files to store golden test data for the lexer
-and parser stages. These files are validated against JSON Schema definitions to
-ensure consistency across test cases and compiler implementations.
+## Grammar
 
-## Schema files location
+```bnf
+program ::= { topDeclaration } EOF
 
-All schema files live in `test/schemas/`:
+topDeclaration ::= externDeclaration
+                 | funcDeclaration
+                 | structDeclaration
 
-| Schema file | Validates | Description |
+externDeclaration ::=
+    "extern" "def" IDENT "(" [ typedParamList ] ")" ":" returnType ";"
+
+funcDeclaration ::=
+    "def" IDENT "(" [ typedParamList ] ")" ":" returnType block
+
+typedParamList ::= IDENT ":" type { "," IDENT ":" type }
+
+
+; Type definitions
+
+type ::= "Int8" | "Int16" | "Int32" | "Int64"
+       | "Bool"
+       | "String"
+       | IDENT                          ; struct type (name)
+       | type "[" INTEGER_LITERAL "]"   ; array type
+
+
+; returnType is the return type of functions and extern declarations. Void is
+; allowed only here: it is not part of `type`, so variable declarations,
+; parameter types, struct fields, and array element types reject it syntactically.
+returnType ::= "Void"
+           | type
+
+
+statement ::=
+    returnStatement
+  | declarationStatement
+  | assignmentStatement
+  | expressionStatement
+  | ifStatement
+  | whileStatement
+  | breakStatement
+  | continueStatement
+  | block
+
+block ::= "{" { statement } "}"
+
+structDeclaration ::=
+    "struct" IDENT "{" { fieldDeclaration } "}"
+
+fieldDeclaration ::= IDENT ":" type ";"
+
+returnStatement ::= "return" [ expression ] ";"
+
+declarationStatement ::=
+    "val" IDENT ":" type "=" expression ";"
+  | "var" IDENT ":" type "=" expression ";"
+  | "var" IDENT ":" type ";"
+  | "val" IDENT ":" type ";"
+
+assignmentStatement ::=
+    postfixExpression "=" expression ";"
+
+expressionStatement ::= expression ";"
+
+ifStatement ::=
+    "if" "(" expression ")" statement
+    [ "else" statement ]
+
+whileStatement ::= "while" "(" expression ")" statement
+
+breakStatement ::= "break" ";"
+
+continueStatement ::= "continue" ";"
+
+; Expression definitions go from lowest operator precedence
+; to the highest, allowing for straightforward expression parsing.
+; Comparison operators produce Bool values.
+; Logical operators && and || are short-circuit.
+; Function call, field access, and array subscript have the highest precedence.
+; Cast expression binds like a primary expression.
+expression ::= logicalOrExpression
+
+logicalOrExpression ::=
+    logicalAndExpression { "||" logicalAndExpression }
+
+logicalAndExpression ::=
+    equalityExpression { "&&" equalityExpression }
+
+equalityExpression ::=
+    relationalExpression { ("==" | "!=") relationalExpression }
+
+relationalExpression ::=
+    additiveExpression { ("<" | ">" | "<=" | ">=") additiveExpression }
+
+additiveExpression ::=
+    multiplicativeExpression { ("+" | "-") multiplicativeExpression }
+
+multiplicativeExpression ::=
+    unaryExpression { ("*" | "/") unaryExpression }
+
+unaryExpression ::=
+    "!" unaryExpression
+  | "-" unaryExpression
+  | postfixExpression
+
+postfixExpression ::=
+    primaryExpression { postfixOp }
+
+postfixOp ::=
+    "(" [ argumentList ] ")"     ; function call
+  | "." IDENT                    ; field access
+  | "[" expression "]"           ; array subscript
+
+argumentList ::= expression { "," expression }
+
+primaryExpression ::=
+    INTEGER_LITERAL
+  | STRING_LITERAL
+  | IDENT
+  | "true"
+  | "false"
+  | "(" expression ")"
+  | "cast" "<" type ">" "(" expression ")"
+
+
+; Lexical tokens
+
+INTEGER_LITERAL ::=
+    "0"
+  | NON_ZERO_DIGIT { DIGIT }
+
+STRING_LITERAL ::=
+    '"' { CHARACTER | ESCAPE_SEQUENCE } '"'
+
+ESCAPE_SEQUENCE ::=
+    "\\" ( 'n' | 't' | '\\' | '"' )
+
+CHARACTER ::= (any character except newline, backslash, or double quote)
+
+IDENT ::= NON_DIGIT { (NON_DIGIT | DIGIT) }
+
+NON_DIGIT ::=
+    "a" | "b" | ... | "z"
+  | "A" | "B" | ... | "Z"
+  | "_"
+
+DIGIT ::= "0" | NON_ZERO_DIGIT
+
+NON_ZERO_DIGIT ::=
+    "1" | "2" | ... | "9"
+```
+
+> Comments and whitespaces are not explicit in above grammar.
+> It is assumed that all terms in grammar rules (except lexical tokens)
+> can have arbitrary number of whitespaces and/or comments between them.
+
+### Comments
+
+SysProLang uses C-style comments:
+
+- Single-line: `//` ... end-of-line
+- Multi-line: `/*` ... `*/`
+
+### Keywords
+
+- `return`
+- `val`
+- `var`
+- `if`
+- `else`
+- `while`
+- `break`
+- `continue`
+- `true`
+- `false`
+- `def`
+- `extern`
+- `Int8`
+- `Int16`
+- `Int32`
+- `Int64`
+- `Bool`
+- `String`
+- `Void`
+- `cast`
+- `struct`
+
+### Semantic rules
+
+All semantic rules from grammar 4 apply, plus:
+
+- **The `Void` type** may be used only as a function or `extern` return type, as in
+  grammar 4: a `Void` function returns no value, may fall through its body, and may
+  use the bare `return;`. Since `Void` is not part of the `type` production, writing
+  it in a variable declaration, a parameter type, a struct field, or an array
+  element type is a syntax error. A call to a `Void` function produces no value and
+  cannot be used where a value is expected.
+- **Struct definitions** use `struct Name { field: Type; ... }`. Struct names must
+  start with an uppercase letter.
+- **Struct fields** can be any type: `Int8`, `Int16`, `Int32`, `Int64`, `Bool`,
+  `String`, or another struct type. Nested structs are embedded by value.
+- **Field access** uses dot notation: `expr.field`. The field must exist in the
+  struct type.
+- **Structs are value types**: assignment, passing to functions, and returning from
+  functions all copy the entire struct by value. A struct assignment
+  (`a = b` where both are structs) copies all fields (LLVM `memcpy`).
+- **Passing structs to functions** is by value: the entire struct is copied.
+- **Returning structs from functions** is by value (LLVM handles the ABI).
+- **Passing structs to `extern` C functions** is not allowed (only primitive types and strings).
+- **Arrays** are declared as `var arr: Type[N];` where `N` is a compile-time integer
+  constant. The element type can be any type.
+- **Array subscript** uses bracket notation: `arr[index]`. Indexing is zero-based.
+  Out-of-bounds access is undefined behavior.
+- **Arrays are value types**: an array assignment (`a = b`) copies all elements by
+  value (LLVM `memcpy`). Arrays are stack-allocated in their declaring scope and
+  cannot be passed to or returned from functions.
+- **Variables can be declared without an initializer**: `var x: Int64;` means the variable
+  is zero-initialized.
+- **Assignment targets** can be complex lvalues (field access, array subscript, or
+  chains thereof), not just simple identifiers.
+- **Error recovery**: see [`doc/error-handling.md`](error-handling.md) for the
+  recommended error recovery strategy.
+
+## Token kinds (new in grammar 5)
+
+These `"kind"` values appear in `tokens.json` golden files, in addition to those from grammar 1–4:
+
+| Token kind | Grammar source | Notes |
 |---|---|---|
-| `test/schemas/tokens.schema.json` | `tokens.json` | Token streams produced by the lexer |
-| `test/schemas/ast.schema.json` | `ast.json` | AST trees produced by the parser |
-| `test/schemas/meta.schema.json` | `meta.json` | Test case metadata |
-| `test/schemas/config.schema.json` | `test/config.json` | Test runner configuration |
+| `STRUCT` | `struct` | Keyword |
+| `LBRACKET` | `[` | Array subscript / type opening bracket |
+| `RBRACKET` | `]` | Array subscript / type closing bracket |
+| `DOT` | `.` | Field access operator |
 
-## Schema enforcement
-
-### Validation script
-
-Run `test/validate_schemas.py` to validate all JSON files against their schemas:
-
-```bash
-python3 test/validate_schemas.py
-```
-
-This script:
-1. Loads all schema definitions from `test/schemas/`.
-2. Scans recursively for `config.json`, `meta.json`, `tokens.json`, and `ast.json`
-   files under the `test/` directory.
-3. Validates each file against its respective schema using the `jsonschema` Python
-   package.
-4. Prints a checkmark (✓) for each valid file, or a cross (✗) with error details.
-5. Exits with code 0 if all files are valid, 1 otherwise.
-
-### Dependency
-
-Install the `jsonschema` package:
-
-```bash
-pip install jsonschema
-```
-
-### CI enforcement
-
-The CI workflow validates all schema files on every push. A PR with invalid JSON
-files will be blocked.
-
----
-
-## Token JSON format (`tokens.json`)
-
-### Schema rules
-
-- The file is a **JSON array** (top-level type: `array`).
-- Every element is a **token object** with **required** properties:
-  - `kind` (string): token kind identifier (e.g., `"IDENT"`, `"INT"`, `"PLUS"`,
-    `"SEMI"`, `"EOF"`, etc.)
-  - `line` (integer >= 1): source line where the token starts (1-based).
-  - `column` (integer >= 1): source column where the token starts (1-based).
-- No other properties are kept during golden comparison (the test runner's lexer
-  stage preprocessor applies `{"keep": ["kind", "line", "column"]}`).
-- The array must have at least 1 element (the `EOF` token is always present).
-- The `kind` values are uppercase names like `IDENT`, `INT`, `PLUS`, `SEMI`, `EOF`,
-  `IF`, `WHILE`, `RETURN`, `DEF`, `COLON`, `INT64`, `STRUCT`, `DOT`, etc.
-- See each grammar `.md` file for the full list of token kinds introduced at each
-  grammar version.
-
-### Token comparison
-
-During testing, both the golden `tokens.json` and the compiler's output are passed
-through a JSON filter that drops all fields except `kind`, `line`, `column`. This
-means the `value` field (which contains the raw token text in compiler output) is
-**not compared**, allowing different compilers to use different string representations.
+All tokens from grammar 1–4 also apply.
 
 ### Example
 
-Source:
+> TODO
 
-```scala
-var x = 10;
-return x / 2;
-```
+## AST node kinds (new in grammar 5)
 
-```json
-[
-{"kind": "VAR", "value": "var", "line": 1, "column": 1},
-{"kind": "IDENT", "value": "x", "line": 1, "column": 5},
-{"kind": "ASSIGN", "value": "=", "line": 1, "column": 7},
-{"kind": "INT", "value": "10", "line": 1, "column": 9},
-{"kind": "SEMI", "value": ";", "line": 1, "column": 11},
-{"kind": "RETURN", "value": "return", "line": 2, "column": 1},
-{"kind": "IDENT", "value": "x", "line": 2, "column": 8},
-{"kind": "DIV", "value": "/", "line": 2, "column": 10},
-{"kind": "INT", "value": "2", "line": 2, "column": 12},
-{"kind": "SEMI", "value": ";", "line": 2, "column": 13},
-{"kind": "EOF", "value": "", "line": 2, "column": 14}
-]
-```
+These `"kind"` values appear in `ast.json` golden files, in addition to those from grammar 1–4:
 
-### Token kind reference
-
-See each grammar `.md` file for the complete list of token kinds (`"kind"` values)
-introduced at each grammar version:
-
-- [`doc/grammar1.md`](grammar1.md#token-kinds) — base tokens
-- [`doc/grammar2.md`](grammar2.md#token-kinds-new-in-grammar-2) — control flow, boolean, comparison, logical
-- [`doc/grammar3.md`](grammar3.md#token-kinds-new-in-grammar-3) — function definitions, extern
-- [`doc/grammar4.md`](grammar4.md#token-kinds-new-in-grammar-4) — type keywords, cast, string
-- [`doc/grammar5.md`](grammar5.md#token-kinds-new-in-grammar-5) — struct, array subscript, field access
-
----
-
-## AST JSON format (`ast.json`)
-
-### Schema rules
-
-The schema defines a recursive `astNode` object with:
-
-**Required properties** (every node must have these):
-
-| Property | Type | Description |
+| AST kind | `elems[]` children | Notes |
 |---|---|---|
-| `line` | integer (>= 1) | Source line number where the node starts (1-based) |
-| `column` | integer (>= 1) | Source column where the node starts (1-based) |
-| `kind` | string | AST node kind (e.g., `"Program"`, `"Declare"`, `"IntLiteral"`, `"BinOp"`, etc.) |
-| `elems` | array of `astNode` | Ordered list of child nodes (may be `[]`) |
+| `StructDecl` | `[name, fields...]` | Name is an `Ident` node and each field is a `Declare` node |
+| `FieldAccess` | `[base, name]` | Dot-access to a struct field, name is an `Ident` |
+| `Subscript` | `[base, index]` | Array index access |
 
-**Additional properties** are allowed (not required, not restricted). These include
-named attributes like `value`, `mut`, `type`, etc.
+### Type annotations
 
-### AST comparison
+> TODO
 
-During testing, both the golden `ast.json` and the compiler's output are passed
-through a JSON filter that keeps only `kind`, `line`, `column`, `elems`.
-All extra named fields (like `value`, `mut`, `type`, `name`, `op`, `message`,
-`field`) are **dropped during comparison**. This means:
+### Declaration without initializer (grammar 5)
 
-- The structure of the tree (what `elems` contains) is compared.
-- Named extra properties serve as human-readable annotations but are not
-  enforced in golden comparisons.
+Grammar 5 allows variable declarations without an initializer:
+```
+var x: Int64;
+```
+In the AST, `Declare.elems` will be `[]` (empty) when there is no initializer.
 
-### The `elems[]` array convention
+### Assignment target in grammar 5
 
-The `elems[]` array contains all child nodes in a fixed order. Named relationships
-(left vs right, condition vs body, etc.) are **positional**:
+The assignment target changes from a simple `Ident` to a `postfixExpression`,
+which can be:
+- An `Ident` (simple variable)
+- A `FieldAccess` (e.g., `point.x = 10`)
+- A `Subscript` (e.g., `arr[0] = 5`)
+- A chain of field accesses and subscripts (e.g., `arr[0].x = 1`)
 
-| Node kind | `elems[]` order | Number of children |
-|---|---|---|
-| `Program` | top-level statements | N |
-| `Block` | statements | N |
-| `Return` | `[value]` | 1 (or 0 if missing) |
-| `Declare` | `[name, expr?]` | 1 or 2 |
-| `Assign` | `[name, expr]` | 2 |
-| `If` | `[cond, thenBody, elseBody?]` | 2 or 3 |
-| `While` | `[cond, body]` | 2 |
-| `Break` | `[]` | 0 |
-| `Continue` | `[]` | 0 |
-| `IntLiteral` | `[]` | 0 |
-| `BoolLiteral` | `[]` | 0 |
-| `StringLiteral` | `[]` | 0 |
-| `Ident` | `[]` | 0 |
-| `BinOp` | `[left, right]` | 2 |
-| `Unary` | `[operand]` | 1 |
-| `Call` | `[callee, args...]` | 1 + N |
-| `FuncDecl` | `[name, params..., body]` | N_params + 2 |
-| `ExternDecl` | `[name, params...]` | N_params + 1 |
-| `Param` | `[name]` | 1 |
-| `Cast` | `[value]` | 1 |
-| `StructDecl` | `[name, fields...]` | N_fields + 1 |
-| `FieldAccess` | `[base, name]` | 2 |
-| `Subscript` | `[base, index]` | 2 |
-| `Error` | `[]` | 0 |
+The AST `Assign` node always has `elems[0]` = target and `elems[1]` = value,
+regardless of the target's complexity.
 
 ### Example
 
-Source:
-
-```scala
-var x = 10;
-return x / 2;
-```
-
-```json
-{
-  "line": 1,
-  "column": 1,
-  "kind": "Program",
-  "elems": [
-    {
-      "line": 1,
-      "column": 1,
-      "kind": "Declare",
-      "mut": "var",
-      "elems": [
-        {
-          "line": 1,
-          "column": 5,
-          "kind": "Ident",
-          "value": "x"
-          "elems": [],
-        },
-        {
-          "line": 1,
-          "column": 9,
-          "kind": "IntLiteral",
-          "value": 10,
-          "elems": []
-        }
-      ],
-    },
-    {
-      "line": 2,
-      "column": 1,
-      "kind": "Return",
-      "elems": [
-        {
-          "line": 2,
-          "column": 10,
-          "kind": "BinOp",
-          "value": "/"
-          "elems": [
-            {
-              "line": 2,
-              "column": 8,
-              "kind": "Ident",
-              "value": "x"
-              "elems": [],
-            },
-            {
-              "line": 2,
-              "column": 12,
-              "kind": "IntLiteral",
-              "value": 2,
-              "elems": []
-            }
-          ],
-        }
-      ]
-    }
-  ],
-}
-```
-
----
-
-## Meta JSON format (`meta.json`)
-
-The `meta.json` file describes a test case's metadata. See
-[`test/schemas/meta.schema.json`](../test/schemas/meta.schema.json) for the full
-schema.
-
-### Required properties
-
-- `grammar`: grammar version constraint (string, list, or per-stage dict).
-- `stages`: list of stage names to run (e.g., `["lexer", "parser"]`).
-- `exit`: expected exit code (integer, `"nonzero"`, or per-stage dict).
-
-### Example
-
-```json
-{
-  "$schema": "../../schemas/meta.schema.json",
-  "grammar": ">=2",
-  "stages": ["lexer", "parser"],
-  "exit": 0
-}
-```
-
-The `$schema` key is optional but recommended for editor LSP support.
-
----
-
-## Config JSON format (`config.json`)
-
-The `test/config.json` file configures the test runner. It defines:
-
-- Build command
-- Default grammar version
-- Available grammar versions
-- Per-stage commands and output paths
-- Preprocessing pipelines
-- Fuzz testing parameters
-
-See [`test/config.json`](../test/config.json) and
-[`test/schemas/config.schema.json`](../test/schemas/config.schema.json) for details.
-
----
-
-## Preprocessing and golden comparison
-
-Both `tokens.json` and `ast.json` go through a preprocessing step before
-diffing against golden files, defined in `test/config.json`:
-
-```json
-{
-  "lexer": {
-    "preprocess": [{"type": "json", "keep": ["kind", "line", "column"]}]
-  },
-  "parser": {
-    "preprocess": [{"type": "json", "keep": ["kind", "line", "column", "elems"]}]
-  }
-}
-```
-
-The `json` preprocessor recursively filters each object tree, keeping only the
-listed scalar fields while preserving all nested objects and arrays. This makes
-golden comparison robust to differences in extra fields that different compilers
-may or may not emit.
-
-### What gets compared
-
-| Stage | Golden file | Compared fields |
-|---|---|---|
-| lexer | `tokens.json` | `kind`, `line`, `column` |
-| parser | `ast.json` | `kind`, `line`, `column`, `elems` |
-| llvm | `out.ll` | Full text (after LLVM name normalization) |
-| run | `stdout` | Full text (optional tolerance) |
-
-> LLVM IR golden comparison (`out.ll`) is opt-in with `--check-ir`.
-> By default, only lexer, parser, and run stages are checked.
-
-## Grammar-by-grammar AST and token reference
-
-For a detailed, grammar-by-grammar breakdown of which token kinds and AST node
-kinds are introduced, see:
-
-- [`doc/grammar1.md`](grammar1.md) — Token kinds and AST nodes for grammar 1
-- [`doc/grammar2.md`](grammar2.md) — Token kinds and AST nodes new in grammar 2
-- [`doc/grammar3.md`](grammar3.md) — Token kinds and AST nodes new in grammar 3
-- [`doc/grammar4.md`](grammar4.md) — Token kinds and AST nodes new in grammar 4
-- [`doc/grammar5.md`](grammar5.md) — Token kinds and AST nodes new in grammar 5
+> TODO
