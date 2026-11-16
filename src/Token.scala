@@ -9,6 +9,8 @@ enum TokenType(val kind: String):
   case CONTINUE extends TokenType("CONTINUE")
   case TRUE extends TokenType("TRUE")
   case FALSE extends TokenType("FALSE")
+  case DEF extends TokenType("DEF")
+  case EXTERN extends TokenType("EXTERN")
 
   case IDENT extends TokenType("IDENT")
   case INT_LITERAL extends TokenType("INT")
@@ -35,6 +37,7 @@ enum TokenType(val kind: String):
   case LBRACE extends TokenType("LBRACE")
   case RBRACE extends TokenType("RBRACE")
   case SEMICOLON extends TokenType("SEMI")
+  case COMMA extends TokenType("COMMA")
 
   case EOF extends TokenType("EOF")
   case ERROR extends TokenType("ERROR")

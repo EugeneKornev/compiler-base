@@ -52,17 +52,114 @@ class Parser(tokenList: List[Token]):
   def parseProgram(): Program =
     val line = current.line
     val col = current.column
-    var statements = List[ASTNode]()
+    var decls = List[ASTNode]()
 
     while !at("EOF") do
       val startPos = pos
-      statements = statements :+ parseStatement()
+      current.tokenType.kind match
+        case "EXTERN" => decls = decls :+ parseExternDeclaration()
+        case "DEF"    => decls = decls :+ parseFuncDeclaration()
+        case _ =>
+          hasErrors = true
+          decls = decls :+ ErrorNode(current.line, current.column)
+          skipToTopLevel()
       if pos == startPos then advance()
 
-    if !statements.lastOption.exists(alwaysReturns) then
-      hasErrors = true
+    val program = Program(decls, line, col)
+    checkProgram(program)
+    program
 
-    Program(statements, line, col)
+  private def skipToTopLevel(): Unit =
+    while !at("DEF") && !at("EXTERN") && !at("EOF") do advance()
+
+  
+  private def parseHeader(): (Ident, List[Ident]) =
+    val idToken = consume("IDENT")
+    val name = Ident(idToken.lexeme, idToken.line, idToken.column)
+    consume("LPAREN")
+    var params = List[Ident]()
+    var seen = Set[String]()
+
+    def param(): Unit =
+      val t = advance()
+      if seen.contains(t.lexeme) then hasErrors = true  
+      seen += t.lexeme
+      params = params :+ Ident(t.lexeme, t.line, t.column)
+
+    if at("IDENT") then
+      param()
+      var ok = true
+      while ok && at("COMMA") do
+        advance()
+        if at("IDENT") then param()
+        else
+          hasErrors = true
+          ok = false
+    else if !at("RPAREN") then
+      hasErrors = true
+    consume("RPAREN")
+    (name, params)
+
+  private def parseExternDeclaration(): ASTNode =
+    val extToken = advance()
+    consume("DEF")
+    val (name, params) = parseHeader()
+    expectSemi()
+    ExternDecl(name, params, extToken.line, extToken.column)
+
+  private def parseFuncDeclaration(): ASTNode =
+    val defToken = advance()
+    val (name, params) = parseHeader()
+
+    if !at("LBRACE") then
+      hasErrors = true
+      val err = ErrorNode(current.line, current.column)
+      synchronize()
+      return FuncDecl(name, params, err, defToken.line, defToken.column)
+
+    val savedScopes = scopes
+    val savedLoop = loopDepth
+    loopDepth = 0
+    scopes = List(Map())
+    
+    val body = parseBlockWith(params.map(p => p.name -> "var").toMap)
+    scopes = savedScopes
+    loopDepth = savedLoop
+
+    if !alwaysReturns(body) then hasErrors = true  
+    FuncDecl(name, params, body, defToken.line, defToken.column)
+
+  
+  private def checkProgram(program: Program): Unit =
+    var sigs = Map[String, Int]()
+    var hasMain = false
+    program.elems.foreach {
+      case d: ExternDecl =>
+        if d.name.name.nonEmpty then
+          if sigs.contains(d.name.name) then hasErrors = true
+          else sigs = sigs.updated(d.name.name, d.params.size)
+      case d: FuncDecl =>
+        if d.name.name.nonEmpty then
+          if sigs.contains(d.name.name) then hasErrors = true
+          else sigs = sigs.updated(d.name.name, d.params.size)
+          if d.name.name == "main" then hasMain = true
+      case _ =>
+    }
+    if !hasMain then hasErrors = true
+
+    def walk(n: ASTNode): Unit =
+      n match
+        case c: Call =>
+          c.callee match
+            case Ident(nm, _, _) =>
+              sigs.get(nm) match
+                case Some(arity) if arity == c.args.size =>
+                case _ => hasErrors = true
+            case _ => hasErrors = true
+        case _ =>
+      n.elems.foreach(walk)
+
+    program.elems.foreach(walk)
 
   private def alwaysReturns(n: ASTNode): Boolean = n match
     case _: Return => true
@@ -90,9 +187,11 @@ class Parser(tokenList: List[Token]):
       popScope()
       s
 
-  private def parseBlock(): ASTNode =
+  private def parseBlock(): ASTNode = parseBlockWith(Map())
+
+  private def parseBlockWith(initial: Map[String, String]): ASTNode =
     val lb = advance()
-    pushScope()
+    scopes = initial :: scopes
     var stmts = List[ASTNode]()
     while !at("RBRACE") && !at("EOF") do
       val startPos = pos
@@ -242,7 +341,32 @@ class Parser(tokenList: List[Token]):
       val expr = parseUnary()
       UnaryOp(opToken.lexeme, expr, opToken.line, opToken.column)
     else
-      parsePrimary()
+      parseCall()
+
+  private def parseCall(): ASTNode =
+    var calleeValid = true
+    var left: ASTNode =
+      if at("IDENT") && peekKind(1) == "LPAREN" then
+        
+        val t = advance()
+        Ident(t.lexeme, t.line, t.column)
+      else
+        calleeValid = !at("LPAREN") && !at("INT") && !at("TRUE") && !at("FALSE")
+        parsePrimary()
+
+    while at("LPAREN") do
+      val lp = advance()
+      if !calleeValid then hasErrors = true  
+      var args = List[ASTNode]()
+      if !at("RPAREN") then
+        args = args :+ parseExpression()
+        while at("COMMA") do
+          advance()
+          args = args :+ parseExpression()
+      if at("RPAREN") then advance() else hasErrors = true
+      left = Call(left, args, lp.line, lp.column)
+      calleeValid = false  
+    left
 
   private def parsePrimary(): ASTNode =
     val t = current
