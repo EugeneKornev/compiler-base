@@ -75,7 +75,10 @@ object Main:
     val llFile = Files.createTempFile("spl-", ".ll")
     try
       Files.writeString(llFile, ir)
-      val cmd = Seq("clang", llFile.toString, "-o", exePath, "-Wno-override-module")
+      val runtime = File("libruntime/spl_runtime.c")
+      val cmd = Seq("clang", llFile.toString) ++
+        (if runtime.exists then Seq(runtime.getPath) else Nil) ++
+        Seq("-o", exePath, "-Wno-override-module")
       val rc =
         try cmd.!
         catch case e: IOException => die(s"Error: cannot run clang: ${e.getMessage}")

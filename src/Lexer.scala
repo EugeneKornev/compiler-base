@@ -14,7 +14,9 @@ class Lexer(source: String):
     "break" -> TokenType.BREAK,
     "continue" -> TokenType.CONTINUE,
     "true" -> TokenType.TRUE,
-    "false" -> TokenType.FALSE
+    "false" -> TokenType.FALSE,
+    "def" -> TokenType.DEF,
+    "extern" -> TokenType.EXTERN
   )
 
   def nextToken(): Token =
@@ -34,11 +36,13 @@ class Lexer(source: String):
       case '-' => makeToken(TokenType.MINUS, "-", startCol)
       case '*' => makeToken(TokenType.STAR, "*", startCol)
       case '/' => makeToken(TokenType.SLASH, "/", startCol)
+      case '%' => makeToken(TokenType.MOD, "%", startCol)
       case '(' => makeToken(TokenType.LPAREN, "(", startCol)
       case ')' => makeToken(TokenType.RPAREN, ")", startCol)
       case '{' => makeToken(TokenType.LBRACE, "{", startCol)
       case '}' => makeToken(TokenType.RBRACE, "}", startCol)
       case ';' => makeToken(TokenType.SEMICOLON, ";", startCol)
+      case ',' => makeToken(TokenType.COMMA, ",", startCol)
 
       case '=' =>
         if matchChar('=') then makeToken(TokenType.EQ, "==", startCol)

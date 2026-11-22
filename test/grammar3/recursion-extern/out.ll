@@ -5,37 +5,35 @@ target triple = "x86_64-unknown-linux-gnu"
 
 define i64 @fib(i64 %0) {
 entry:
-  %n = alloca i64, align 8
-  store i64 %0, ptr %n, align 8
-  %n1 = load i64, ptr %n, align 8
-  %cmptmp = icmp sle i64 %n1, 1
-  %zexttmp = zext i1 %cmptmp to i64
-  %ifcond = icmp ne i64 %zexttmp, 0
-  br i1 %ifcond, label %then, label %ifmerge
-
-then:                                             ; preds = %entry
-  %n2 = load i64, ptr %n, align 8
-  ret i64 %n2
-  br label %ifmerge
-
-ifmerge:                                          ; preds = %then, %entry
-  %n3 = load i64, ptr %n, align 8
-  %subtmp = sub i64 %n3, 1
-  %calltmp = call i64 @fib(i64 %subtmp)
-  %n4 = load i64, ptr %n, align 8
-  %subtmp5 = sub i64 %n4, 2
-  %calltmp6 = call i64 @fib(i64 %subtmp5)
-  %addtmp = add i64 %calltmp, %calltmp6
-  ret i64 %addtmp
+  %v.n.1 = alloca i64, align 8
+  store i64 %0, ptr %v.n.1, align 8
+  %t.2 = load i64, ptr %v.n.1, align 8
+  %t.3 = icmp sle i64 %t.2, 1
+  %t.4 = zext i1 %t.3 to i64
+  %t.5 = icmp ne i64 %t.4, 0
+  br i1 %t.5, label %if.then.1, label %if.end.2
+if.then.1:
+  %t.6 = load i64, ptr %v.n.1, align 8
+  ret i64 %t.6
+if.end.2:
+  %t.7 = load i64, ptr %v.n.1, align 8
+  %t.8 = sub i64 %t.7, 1
+  %calltmp = call i64 @fib(i64 %t.8)
+  %t.9 = load i64, ptr %v.n.1, align 8
+  %t.10 = sub i64 %t.9, 2
+  %calltmp1 = call i64 @fib(i64 %t.10)
+  %t.11 = add i64 %calltmp, %calltmp1
+  ret i64 %t.11
 }
 
 declare i64 @getchar()
 
 define i64 @main() {
 entry:
-  %result = alloca i64, align 8
+  %v.result.12 = alloca i64, align 8
   %calltmp = call i64 @fib(i64 10)
-  store i64 %calltmp, ptr %result, align 8
-  %result1 = load i64, ptr %result, align 8
-  ret i64 %result1
+  store i64 %calltmp, ptr %v.result.12, align 8
+  %t.13 = load i64, ptr %v.result.12, align 8
+  ret i64 %t.13
 }
+

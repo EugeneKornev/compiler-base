@@ -55,19 +55,65 @@ class CodeGen:
     case _: Block => stmt(n)
     case _        => withScope(stmt(n))
 
+  private var sigs: Map[String, Int] = Map()
+  private var callCounter = 0
+
   def generate(program: Program): String =
-    program.elems.foreach(stmt)
-    if !terminated then emit("ret i64 0")
+    program.elems.foreach {
+      case e: ExternDecl => sigs = sigs.updated(e.name.name, e.params.size)
+      case f: FuncDecl   => sigs = sigs.updated(f.name.name, f.params.size)
+      case _             =>
+    }
 
     val out = new StringBuilder
     out.append("; ModuleID = 'spl'\n")
     out.append("source_filename = \"spl\"\n")
     out.append("target datalayout = \"e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128\"\n")
     out.append("target triple = \"x86_64-unknown-linux-gnu\"\n\n")
-    out.append("define i64 @main() {\nentry:\n")
+
+    program.elems.foreach {
+      case e: ExternDecl => out.append(genExtern(e))
+      case f: FuncDecl   => out.append(genFunc(f))
+      case other         => error(other, s"unexpected top-level node '${other.kind}'")
+    }
+    out.toString
+
+  private def genExtern(e: ExternDecl): String =
+    val sig = e.params.map(_ => "i64").mkString(", ")
+    s"declare i64 @${e.name.name}($sig)\n\n"
+
+  private def genFunc(f: FuncDecl): String =
+    sb.clear()
+    allocas.clear()
+    scopes = List(Map())
+    loops = Nil
+    terminated = false
+    curBlock = "entry"
+    callCounter = 0
+
+    f.params.zipWithIndex.foreach { (p, i) =>
+      if scopes.head.contains(p.name) then
+        error(p, s"duplicate parameter '${p.name}'")
+      else
+        tmpCounter += 1
+        val ptr = s"%v.${p.name}.$tmpCounter"
+        scopes = scopes.head.updated(p.name, VarInfo("var", ptr)) :: scopes.tail
+        allocas.append(s"  $ptr = alloca i64, align 8\n")
+        emit(s"store i64 %$i, ptr $ptr, align 8")
+    }
+
+    f.body match
+      case Block(stmts, _, _) => stmts.foreach(stmt)
+      case other              => stmt(other)
+
+    if !terminated then emit("ret i64 0")
+
+    val sig = f.params.indices.map(i => s"i64 %$i").mkString(", ")
+    val out = new StringBuilder
+    out.append(s"define i64 @${f.name.name}($sig) {\nentry:\n")
     out.append(allocas)
     out.append(sb)
-    out.append("}\n")
+    out.append("}\n\n")
     out.toString
 
   private def stmt(n: ASTNode): Unit =
@@ -280,12 +326,31 @@ class CodeGen:
             case "-" => "sub"
             case "*" => "mul"
             case "/" => "sdiv"
+            case "%" => "srem"
             case _ =>
               error(n, s"unknown operator '$op'")
               "add"
           val t = fresh()
           emit(s"$t = $instr i64 $a, $b")
           t
+
+    case Call(Ident(name, _, _), args, _, _) =>
+      val vals = args.map(expr) 
+      sigs.get(name) match
+        case Some(arity) if arity == args.size =>
+        case Some(arity) =>
+          error(n, s"function '$name' expects $arity argument(s), got ${args.size}")
+        case None =>
+          error(n, s"call to undefined function '$name'")
+      val t = if callCounter == 0 then "%calltmp" else s"%calltmp$callCounter"
+      callCounter += 1
+      val argStr = vals.map(v => s"i64 $v").mkString(", ")
+      emit(s"$t = call i64 @$name($argStr)")
+      t
+
+    case Call(_, _, _, _) =>
+      error(n, "callee must be an identifier")
+      "0"
 
     case _ =>
       error(n, s"cannot generate code for node '${n.kind}'")

@@ -1,0 +1,29 @@
+extern def putchar(x);
+
+def printInt(n) {
+    if (n < 0) {
+        putchar(45);
+        printInt(-n);
+    } else {
+        if (n >= 10) {
+            printInt(n / 10);
+        }
+        putchar(48 + n % 10);
+    }
+    return 0;
+}
+
+def gcd(a, b) {
+    while (b > 0) {
+        val t = a % b;
+        a = b;
+        b = t;
+    }
+    return a;
+}
+
+def main() {
+    printInt(gcd(462, 1071));
+    putchar(10);
+    return 0;
+}

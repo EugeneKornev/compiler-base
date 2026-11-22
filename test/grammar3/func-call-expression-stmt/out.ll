@@ -19,3 +19,4 @@ entry:
   %calltmp = call i64 @foo()
   ret i64 %calltmp
 }
+

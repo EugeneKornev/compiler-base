@@ -11,8 +11,9 @@ entry:
 
 define i64 @foo(i64 %0) {
 entry:
-  %x = alloca i64, align 8
-  store i64 %0, ptr %x, align 8
-  %x1 = load i64, ptr %x, align 8
-  ret i64 %x1
+  %v.x.1 = alloca i64, align 8
+  store i64 %0, ptr %v.x.1, align 8
+  %t.2 = load i64, ptr %v.x.1, align 8
+  ret i64 %t.2
 }
+

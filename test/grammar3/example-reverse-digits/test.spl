@@ -1,0 +1,30 @@
+extern def putchar(x);
+
+def printInt(n) {
+    if (n < 0) {
+        putchar(45);
+        printInt(-n);
+    } else {
+        if (n >= 10) {
+            printInt(n / 10);
+        }
+        putchar(48 + n % 10);
+    }
+    return 0;
+}
+
+def reverse(n) {
+    var r = 0;
+    var v = n;
+    while (v > 0) {
+        r = r * 10 + v % 10;
+        v = v / 10;
+    }
+    return r;
+}
+
+def main() {
+    printInt(reverse(1234));
+    putchar(10);
+    return 0;
+}

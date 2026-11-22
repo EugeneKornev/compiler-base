@@ -74,3 +74,15 @@ case class Block(statements: List[ASTNode], line: Int, column: Int) extends ASTN
 case class ErrorNode(line: Int, column: Int) extends ASTNode:
   def kind = "Error"
   def elems = List()
+
+case class ExternDecl(name: Ident, params: List[Ident], line: Int, column: Int) extends ASTNode:
+  def kind = "ExternDecl"
+  def elems = name :: params
+
+case class FuncDecl(name: Ident, params: List[Ident], body: ASTNode, line: Int, column: Int) extends ASTNode:
+  def kind = "FuncDecl"
+  def elems = (name :: params) :+ body
+
+case class Call(callee: ASTNode, args: List[ASTNode], line: Int, column: Int) extends ASTNode:
+  def kind = "Call"
+  def elems = callee :: args

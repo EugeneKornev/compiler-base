@@ -5,17 +5,17 @@ target triple = "x86_64-unknown-linux-gnu"
 
 define i64 @add(i64 %0, i64 %1) {
 entry:
-  %a = alloca i64, align 8
-  store i64 %0, ptr %a, align 8
-  %b = alloca i64, align 8
-  store i64 %1, ptr %b, align 8
-  %result = alloca i64, align 8
-  %a1 = load i64, ptr %a, align 8
-  %b2 = load i64, ptr %b, align 8
-  %addtmp = add i64 %a1, %b2
-  store i64 %addtmp, ptr %result, align 8
-  %result3 = load i64, ptr %result, align 8
-  ret i64 %result3
+  %v.a.1 = alloca i64, align 8
+  %v.b.2 = alloca i64, align 8
+  %v.result.6 = alloca i64, align 8
+  store i64 %0, ptr %v.a.1, align 8
+  store i64 %1, ptr %v.b.2, align 8
+  %t.3 = load i64, ptr %v.a.1, align 8
+  %t.4 = load i64, ptr %v.b.2, align 8
+  %t.5 = add i64 %t.3, %t.4
+  store i64 %t.5, ptr %v.result.6, align 8
+  %t.7 = load i64, ptr %v.result.6, align 8
+  ret i64 %t.7
 }
 
 define i64 @main() {
@@ -23,3 +23,4 @@ entry:
   %calltmp = call i64 @add(i64 2, i64 3)
   ret i64 %calltmp
 }
+

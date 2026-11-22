@@ -12,10 +12,10 @@ declare i64 @println_int(i64)
 
 define i64 @baz(i64 %0) {
 entry:
-  %y = alloca i64, align 8
-  store i64 %0, ptr %y, align 8
-  %y1 = load i64, ptr %y, align 8
-  ret i64 %y1
+  %v.y.1 = alloca i64, align 8
+  store i64 %0, ptr %v.y.1, align 8
+  %t.2 = load i64, ptr %v.y.1, align 8
+  ret i64 %t.2
 }
 
 declare i64 @putchar(i64)
@@ -28,3 +28,4 @@ entry:
   %calltmp3 = call i64 @println_int(i64 %calltmp2)
   ret i64 0
 }
+
