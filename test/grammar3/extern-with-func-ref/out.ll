@@ -12,10 +12,11 @@ declare i64 @foo(i64)
 
 define i64 @main() {
 entry:
-  %a = alloca i64, align 8
+  %v.a.1 = alloca i64, align 8
   %calltmp = call i64 @noop()
   %calltmp1 = call i64 @foo(i64 %calltmp)
-  store i64 %calltmp1, ptr %a, align 8
-  %a2 = load i64, ptr %a, align 8
-  ret i64 %a2
+  store i64 %calltmp1, ptr %v.a.1, align 8
+  %t.2 = load i64, ptr %v.a.1, align 8
+  ret i64 %t.2
 }
+

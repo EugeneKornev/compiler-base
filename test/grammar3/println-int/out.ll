@@ -7,25 +7,22 @@ declare i64 @println_int(i64)
 
 define i64 @fact(i64 %0) {
 entry:
-  %n = alloca i64, align 8
-  store i64 %0, ptr %n, align 8
-  %n1 = load i64, ptr %n, align 8
-  %cmptmp = icmp sle i64 %n1, 1
-  %zexttmp = zext i1 %cmptmp to i64
-  %ifcond = icmp ne i64 %zexttmp, 0
-  br i1 %ifcond, label %then, label %ifmerge
-
-then:                                             ; preds = %entry
+  %v.n.1 = alloca i64, align 8
+  store i64 %0, ptr %v.n.1, align 8
+  %t.2 = load i64, ptr %v.n.1, align 8
+  %t.3 = icmp sle i64 %t.2, 1
+  %t.4 = zext i1 %t.3 to i64
+  %t.5 = icmp ne i64 %t.4, 0
+  br i1 %t.5, label %if.then.1, label %if.end.2
+if.then.1:
   ret i64 1
-  br label %ifmerge
-
-ifmerge:                                          ; preds = %then, %entry
-  %n2 = load i64, ptr %n, align 8
-  %n3 = load i64, ptr %n, align 8
-  %subtmp = sub i64 %n3, 1
-  %calltmp = call i64 @fact(i64 %subtmp)
-  %multmp = mul i64 %n2, %calltmp
-  ret i64 %multmp
+if.end.2:
+  %t.6 = load i64, ptr %v.n.1, align 8
+  %t.7 = load i64, ptr %v.n.1, align 8
+  %t.8 = sub i64 %t.7, 1
+  %calltmp = call i64 @fact(i64 %t.8)
+  %t.9 = mul i64 %t.6, %calltmp
+  ret i64 %t.9
 }
 
 define i64 @main() {
@@ -34,3 +31,4 @@ entry:
   %calltmp1 = call i64 @println_int(i64 %calltmp)
   ret i64 0
 }
+

@@ -1,0 +1,34 @@
+extern def putchar(x);
+
+def printInt(n) {
+    if (n < 0) {
+        putchar(45);
+        printInt(-n);
+    } else {
+        if (n >= 10) {
+            printInt(n / 10);
+        }
+        putchar(48 + n % 10);
+    }
+    return 0;
+}
+
+def fastPow(base, exp) {
+    var result = 1;
+    var b = base;
+    var e = exp;
+    while (e > 0) {
+        if (e % 2 == 1) {
+            result = result * b;
+        }
+        b = b * b;
+        e = e / 2;
+    }
+    return result;
+}
+
+def main() {
+    printInt(fastPow(3, 13));
+    putchar(10);
+    return 0;
+}

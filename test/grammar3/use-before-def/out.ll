@@ -11,9 +11,10 @@ entry:
 
 define i64 @helper(i64 %0) {
 entry:
-  %x = alloca i64, align 8
-  store i64 %0, ptr %x, align 8
-  %x1 = load i64, ptr %x, align 8
-  %addtmp = add i64 %x1, 1
-  ret i64 %addtmp
+  %v.x.1 = alloca i64, align 8
+  store i64 %0, ptr %v.x.1, align 8
+  %t.2 = load i64, ptr %v.x.1, align 8
+  %t.3 = add i64 %t.2, 1
+  ret i64 %t.3
 }
+

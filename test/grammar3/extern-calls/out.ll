@@ -11,3 +11,4 @@ entry:
   %calltmp1 = call i64 @putchar(i64 105)
   ret i64 0
 }
+
